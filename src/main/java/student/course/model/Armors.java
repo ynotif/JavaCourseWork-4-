@@ -1,15 +1,14 @@
 package student.course.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "armor")
 @Entity(name = "armor")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 public class Armors {
     @Id
     @Column(name = "armorId")
