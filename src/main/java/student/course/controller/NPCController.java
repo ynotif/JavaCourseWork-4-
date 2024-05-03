@@ -26,7 +26,7 @@ public class NPCController {
         return ResponseEntity.ok(npcService.getAllNPCs());
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<NPC>> getNPC(@PathVariable Long id) {
         return ResponseEntity.ok(npcService.getNPCById(id));
     }

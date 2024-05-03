@@ -1,9 +1,12 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Table(name = "units")
 @Entity(name = "units")
@@ -97,18 +100,34 @@ public class Units {
     private int unitSoulsQuantity;
 
     //Для дропа
-    @JoinColumn(name = "armorId")
-    @ManyToOne
-    private Armors armor;
+    @ManyToMany
+    @JoinTable(
+            name = "units_armors",
+            joinColumns = @JoinColumn(name = "unitId"),
+            inverseJoinColumns = @JoinColumn(name = "armorId")
+    )
+    private Set<Armors> armor;
 
-    @JoinColumn(name = "weaponId")
-    @ManyToOne
-    private Weapons weapon;
+    @ManyToMany
+    @JoinTable(
+            name = "units_weapons",
+            joinColumns = @JoinColumn(name = "unitId"),
+            inverseJoinColumns = @JoinColumn(name = "weaponId")
+    )
+    private Set<Weapons> weapon;
 
-    @JoinColumn(name = "soulId")
-    @ManyToOne
-    private Souls soul;
+    @ManyToMany
+    @JoinTable(
+            name = "units_souls",
+            joinColumns = @JoinColumn(name = "unitId"),
+            inverseJoinColumns = @JoinColumn(name = "soulId")
+    )
+    private Set<Souls> soul;
 
     @Column(name = "unitSomeInformation")
     private String unitSomeInformation;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Locations> locations;
 }

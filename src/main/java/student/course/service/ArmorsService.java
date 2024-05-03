@@ -13,4 +13,7 @@ public interface ArmorsService {
 
     Optional<Armors> getArmorById(Long id);
 
+    void updateArmor(Armors armors);
+
+    void deleteArmorById(Long id);
 }

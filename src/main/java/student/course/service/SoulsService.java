@@ -13,4 +13,7 @@ public interface SoulsService {
 
     Optional<Souls> getSoulById(Long id);
 
+    void updateSoul(Souls souls);
+
+    void deleteSoul(Long id);
 }

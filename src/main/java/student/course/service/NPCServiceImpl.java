@@ -29,4 +29,18 @@ public class NPCServiceImpl implements NPCService {
     public Optional<NPC> getNPCById(Long id) {
         return npcRepository.findById(id);
     }
+
+    @Override
+    public void updateNPC(NPC npc) {
+        Optional<NPC> optionalNPC = getNPCById(npc.getNpcId());
+        if (optionalNPC.isPresent()) {
+            npcRepository.save(npc);
+        }
+    }
+
+    @Override
+    public void deleteNPC(Long id) {
+        Optional<NPC> optionalNPC = getNPCById(id);
+        optionalNPC.ifPresent(npcRepository::delete);
+    }
 }

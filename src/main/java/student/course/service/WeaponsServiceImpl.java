@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class WeaponServiceImpl implements WeaponsService{
+public class WeaponsServiceImpl implements WeaponsService{
 
     private final WeaponsRepository weaponsRepository;
 
@@ -27,5 +27,15 @@ public class WeaponServiceImpl implements WeaponsService{
     @Override
     public Optional<Weapons> getWeaponById(Long id) {
         return weaponsRepository.findById(id);
+    }
+
+    @Override
+    public void updateWeapon(Weapons weapons) {
+        weaponsRepository.save(weapons);
+    }
+
+    @Override
+    public void deleteWeaponById(Long id) {
+        weaponsRepository.deleteById(id);
     }
 }

@@ -26,7 +26,7 @@ public class SoulsController {
         return ResponseEntity.ok(soulsService.getAllSouls());
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Souls>> getSoulById(@PathVariable Long id) {
         return ResponseEntity.ok(soulsService.getSoulById(id));
     }

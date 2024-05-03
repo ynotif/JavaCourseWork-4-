@@ -14,4 +14,7 @@ public interface BossesService {
 
     Optional<Bosses> getBosseById(Long id);
 
+    void updateBosse(Bosses bosses);
+
+    void deleteBosseById(Long id);
 }

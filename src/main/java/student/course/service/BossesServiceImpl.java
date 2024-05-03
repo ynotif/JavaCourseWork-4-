@@ -1,6 +1,7 @@
 package student.course.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import student.course.model.Bosses;
 import student.course.repository.BossesRepository;
@@ -12,7 +13,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BossesServiceImpl implements BossesService {
 
+    @Autowired
     private BossesRepository bossesRepository;
+
     @Override
     public Bosses createBosse(Bosses bosses) {
         return bossesRepository.save(bosses);
@@ -27,4 +30,16 @@ public class BossesServiceImpl implements BossesService {
     public Optional<Bosses> getBosseById(Long id) {
         return bossesRepository.findById(id);
     }
+
+    @Override
+    public void updateBosse(Bosses bosses) {
+        bossesRepository.save(bosses);
+    }
+
+
+    @Override
+    public void deleteBosseById(Long id) {
+        bossesRepository.deleteById(id);
+    }
+
 }

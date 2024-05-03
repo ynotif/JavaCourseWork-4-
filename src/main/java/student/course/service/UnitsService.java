@@ -13,4 +13,7 @@ public interface UnitsService {
 
     Optional<Units> getUnitById(Long id);
 
+    void updateUnit(Units units);
+
+    void deleteUnit(Long id);
 }

@@ -28,4 +28,18 @@ public class UnitsServiceImpl implements UnitsService {
     public Optional<Units> getUnitById(Long id) {
         return unitsRepository.findById(id);
     }
+
+    @Override
+    public void updateUnit(Units units) {
+        Optional<Units> optionalUnits = getUnitById(units.getUnitId());
+        if (optionalUnits.isPresent()) {
+            unitsRepository.save(units);
+        }
+    }
+
+    @Override
+    public void deleteUnit(Long id) {
+        Optional<Units> optionalUnits = getUnitById(id);
+        optionalUnits.ifPresent(unitsRepository::delete);
+    }
 }

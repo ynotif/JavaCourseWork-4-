@@ -1,10 +1,13 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity(name = "bosses")
 @Table(name = "bosses")
@@ -254,5 +257,9 @@ public class Bosses {
 
     @Column(name = "bossHistory")
     private String bossHistory;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<Locations> locations;
 
 }

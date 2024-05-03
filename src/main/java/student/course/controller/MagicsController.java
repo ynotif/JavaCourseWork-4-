@@ -26,7 +26,7 @@ public class MagicsController {
         return ResponseEntity.ok(magicsService.getAllMagics());
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Magics>> getMagics(@PathVariable Long id) {
         return ResponseEntity.ok(magicsService.getMagicById(id));
     }

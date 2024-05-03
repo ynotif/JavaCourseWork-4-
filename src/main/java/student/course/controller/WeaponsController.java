@@ -26,7 +26,7 @@ public class WeaponsController {
        return ResponseEntity.ok(weaponsService.getAllWeapons());
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Weapons>> getWeaponById(@PathVariable Long id) {
         return ResponseEntity.ok(weaponsService.getWeaponById(id));
     }

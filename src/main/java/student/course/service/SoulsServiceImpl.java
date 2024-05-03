@@ -28,4 +28,18 @@ public class SoulsServiceImpl implements SoulsService {
     public Optional<Souls> getSoulById(Long id) {
         return soulsRepository.findById(id);
     }
+
+    @Override
+    public void updateSoul(Souls souls) {
+        Optional<Souls> optionalSouls = getSoulById(souls.getSoulId());
+        if (optionalSouls.isPresent()) {
+            soulsRepository.save(souls);
+        }
+    }
+
+    @Override
+    public void deleteSoul(Long id) {
+        Optional<Souls> optionalSouls = getSoulById(id);
+        optionalSouls.ifPresent(soulsRepository::delete);
+    }
 }

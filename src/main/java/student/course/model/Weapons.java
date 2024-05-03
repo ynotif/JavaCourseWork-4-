@@ -1,9 +1,12 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Table(name = "weapons")
 @Entity(name = "weapons")
@@ -121,4 +124,8 @@ public class Weapons {
 
     @Column(name = "weaponSomeInformation")
     private String weaponSomeInformation;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Units> units;
 }

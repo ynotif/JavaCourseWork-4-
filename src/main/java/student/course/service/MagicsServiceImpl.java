@@ -29,4 +29,18 @@ public class MagicsServiceImpl implements MagicsService {
     public Optional<Magics> getMagicById(Long id) {
         return magicsRepository.findById(id);
     }
+
+    @Override
+    public void updateMagic(Magics magics) {
+        Optional<Magics> optionalMagics = getMagicById(magics.getMagicId());
+        if (optionalMagics.isPresent()) {
+            magicsRepository.save(magics);
+        }
+    }
+
+    @Override
+    public void deleteMagicById(Long id) {
+        Optional<Magics> optionalMagics = getMagicById(id);
+        optionalMagics.ifPresent(magicsRepository::delete);
+    }
 }

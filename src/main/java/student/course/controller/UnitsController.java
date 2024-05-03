@@ -26,7 +26,7 @@ public class UnitsController {
         return ResponseEntity.ok(unitsService.getAllUnits());
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Units>> getUnitById(@PathVariable Long id) {
         return ResponseEntity.ok(unitsService.getUnitById(id));
     }

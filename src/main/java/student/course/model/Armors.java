@@ -1,7 +1,12 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
+import java.util.Set;
 
 @Table(name = "armor")
 @Entity(name = "armor")
@@ -15,6 +20,9 @@ public class Armors {
     @GeneratedValue(generator = "armor_id_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "armor_id_seq", sequenceName = "armor_id_seq", initialValue = 1, allocationSize = 1)
     private Long armorId;
+
+    @Column(name = "armorName")
+    private String armorName;
 
     @Column(name = "armorPhysicalNormalDamageResistance")
     private double armorPhysicalNormalDamageResistance;
@@ -40,6 +48,9 @@ public class Armors {
     @Column(name = "armorDarknessDamageResistance")
     private double unitDarknessDamageResistance;
 
+    @Column(name = "armorType")
+    private String armorType;
+
     @Column(name = "armorBalance")
     private int armorBalance;
 
@@ -55,5 +66,14 @@ public class Armors {
     @Column(name = "armorBuyCost")
     private int armorBuyCost;
 
+    @Column(name = "armorSomeInformation")
+    private String armorSomeInformation;
 
+    @JsonIgnore
+    @ManyToMany
+    private Set<Locations> locations;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<Units> units;
 }

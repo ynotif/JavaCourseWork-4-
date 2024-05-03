@@ -13,4 +13,7 @@ public interface NPCService {
 
     Optional<NPC> getNPCById(Long id);
 
+    void updateNPC(NPC npc);
+
+    void deleteNPC(Long id);
 }

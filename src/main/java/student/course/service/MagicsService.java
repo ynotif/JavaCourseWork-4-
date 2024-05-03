@@ -12,4 +12,7 @@ public interface MagicsService {
 
     Optional<Magics> getMagicById(Long id);
 
+    void updateMagic(Magics magics);
+
+    void deleteMagicById(Long id);
 }

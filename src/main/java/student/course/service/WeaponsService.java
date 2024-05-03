@@ -13,4 +13,7 @@ public interface WeaponsService {
 
     Optional<Weapons> getWeaponById(Long id);
 
+    void updateWeapon(Weapons weapons);
+
+    void deleteWeaponById(Long id);
 }

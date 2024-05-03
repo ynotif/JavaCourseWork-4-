@@ -13,4 +13,15 @@ public interface LocationsService {
 
     Optional<Locations> getLocationById(Long id);
 
+    void updateLocation(Locations location);
+
+    void deleteLocationById(Long id);
+
+    Locations addArmorToLocation(Long locationId, Long armorId);
+
+    Locations removeArmorFromLocation(Long locationId, Long armorId);
+
+    Locations addBossToLocation(Long locationId, Long bossId);
+
+    Locations removeBossFromLocation(Long locationId, Long bossId);
 }
