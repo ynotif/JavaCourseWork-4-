@@ -76,4 +76,12 @@ public class Armors {
     @JsonIgnore
     @ManyToMany
     private Set<Units> units;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<Bosses> bosses;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<NPC> npc;
 }

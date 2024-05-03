@@ -128,4 +128,16 @@ public class Weapons {
     @ManyToMany
     @JsonIgnore
     private Set<Units> units;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Locations> locations;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Bosses> bosses;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<NPC> npc;
 }

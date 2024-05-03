@@ -243,17 +243,29 @@ public class Bosses {
     private int bossSoulsQuantity;
 
     //Для дропа
-    @JoinColumn(name = "armorId")
-    @ManyToOne
-    private Armors armor;
+    @ManyToMany
+    @JoinTable(
+            name = "bosses_armors",
+            joinColumns = @JoinColumn(name = "bossId"),
+            inverseJoinColumns = @JoinColumn(name = "armorId")
+    )
+    private Set<Armors> armor;
 
-    @JoinColumn(name = "weaponId")
-    @ManyToOne
-    private Weapons weapon;
+    @ManyToMany
+    @JoinTable(
+            name = "bosses_weapons",
+            joinColumns = @JoinColumn(name = "bossId"),
+            inverseJoinColumns = @JoinColumn(name = "weaponId")
+    )
+    private Set<Weapons> weapon;
 
-    @JoinColumn(name = "soulId")
-    @ManyToOne
-    private Souls soul;
+    @ManyToMany
+    @JoinTable(
+            name = "bosses_souls",
+            joinColumns = @JoinColumn(name = "bossId"),
+            inverseJoinColumns = @JoinColumn(name = "soulId")
+    )
+    private Set<Souls> soul;
 
     @Column(name = "bossHistory")
     private String bossHistory;

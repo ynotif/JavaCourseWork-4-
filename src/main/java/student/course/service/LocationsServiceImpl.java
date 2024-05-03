@@ -38,9 +38,7 @@ public class LocationsServiceImpl implements LocationsService {
     public void updateLocation(Locations locations){
         Optional<Locations> optionalLocations = getLocationById(locations.getLocationId());
         if(optionalLocations.isPresent()){
-            Locations location = optionalLocations.get();
-
-            locationsRepository.save(location);
+            locationsRepository.save(locations);
         }
     }
 

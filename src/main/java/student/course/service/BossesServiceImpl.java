@@ -3,7 +3,9 @@ package student.course.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import student.course.model.Armors;
 import student.course.model.Bosses;
+import student.course.repository.ArmorsRepository;
 import student.course.repository.BossesRepository;
 
 import java.util.List;
@@ -15,6 +17,8 @@ public class BossesServiceImpl implements BossesService {
 
     @Autowired
     private BossesRepository bossesRepository;
+    @Autowired
+    private ArmorsRepository armorsRepository;
 
     @Override
     public Bosses createBosse(Bosses bosses) {
@@ -33,13 +37,38 @@ public class BossesServiceImpl implements BossesService {
 
     @Override
     public void updateBosse(Bosses bosses) {
-        bossesRepository.save(bosses);
+        Optional<Bosses> optionalBosses = getBosseById(bosses.getBossId());
+        if (optionalBosses.isPresent()) {
+            bossesRepository.save(bosses);
+        }
     }
 
 
     @Override
     public void deleteBosseById(Long id) {
-        bossesRepository.deleteById(id);
+        Optional<Bosses> bosses = bossesRepository.findById(id);
+        bosses.ifPresent(bossesRepository::delete);
+    }
+
+    @Override
+    public Bosses addArmorToBosses(Long bossesId, Long armorId) {
+        Bosses bosses = bossesRepository.findById(bossesId)
+                .orElseThrow(() -> new RuntimeException("Bosses not found"));
+        Armors armors = armorsRepository.findById(armorId)
+                .orElseThrow(() -> new RuntimeException("Armors not found"));
+        bosses.getArmor().add(armors);
+        return bossesRepository.save(bosses);
+    }
+
+    @Override
+    public Bosses removeArmorFromBosses(Long bossesId, Long armorId) {
+        Bosses bosses = bossesRepository.findById(bossesId)
+                .orElseThrow(() -> new RuntimeException("Bosses not found"));
+        Armors armors = armorsRepository.findById(armorId)
+                .orElseThrow(() -> new RuntimeException("Armors not found"));
+
+        bosses.getArmor().remove(armors);
+        return bossesRepository.save(bosses);
     }
 
 }

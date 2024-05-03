@@ -1,9 +1,12 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -66,4 +69,11 @@ public class Magics {
     @Column(name = "magicSomeInformation")
     private String magicSomeInformation;
 
+    @ManyToMany
+    @JsonIgnore
+    private Set<NPC> npc;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Locations> locations;
 }

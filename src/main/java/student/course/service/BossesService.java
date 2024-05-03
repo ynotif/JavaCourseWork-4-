@@ -17,4 +17,8 @@ public interface BossesService {
     void updateBosse(Bosses bosses);
 
     void deleteBosseById(Long id);
+
+    Bosses addArmorToBosses(Long bossesId, Long armorId);
+
+    Bosses removeArmorFromBosses(Long bossesId, Long armorId);
 }

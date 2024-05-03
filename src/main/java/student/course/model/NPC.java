@@ -1,9 +1,12 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Table(name = "npc")
 @Entity(name = "npc")
@@ -33,17 +36,37 @@ public class NPC {
     @Column(name = "npcSoulsForKill")
     private int npcSoulsForKill;
 
-    @ManyToOne
-    @JoinColumn(name = "weaponId")
-    private Weapons weapon;
+    @ManyToMany
+    @JoinTable(
+            name = "NPC_weapons",
+            joinColumns = @JoinColumn(name = "npcId"),
+            inverseJoinColumns = @JoinColumn(name = "weaponId")
+    )
+    private Set<Weapons> weapon;
 
-    @ManyToOne
-    @JoinColumn(name = "armorId")
-    private Armors armor;
+    @ManyToMany
+    @JoinTable(
+            name = "NPC_armors",
+            joinColumns = @JoinColumn(name = "npcId"),
+            inverseJoinColumns = @JoinColumn(name = "armorId")
+    )
+    private Set<Armors> armor;
 
-    @ManyToOne
-    @JoinColumn(name = "magicId")
-    private Magics magic;
+    @ManyToMany
+    @JoinTable(
+            name = "NPC_magic",
+            joinColumns = @JoinColumn(name = "npcId"),
+            inverseJoinColumns = @JoinColumn(name = "magicId")
+    )
+    private Set<Magics> magic;
+
+    @ManyToMany
+    @JoinTable(
+            name = "NPC_souls",
+            joinColumns = @JoinColumn(name = "npcId"),
+            inverseJoinColumns = @JoinColumn(name = "soulId")
+    )
+    private Set<Souls> soul;
 
     @Column(name = "npcEstusQuantity")
     private int npcEstusQuantity;
@@ -51,6 +74,8 @@ public class NPC {
     @Column(name = "npcSomeInformation")
     private String npcSomeInformation;
 
-
+    @ManyToMany
+    @JsonIgnore
+    private Set<Locations> locations;
 
 }

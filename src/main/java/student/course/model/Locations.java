@@ -39,16 +39,24 @@ public class Locations {
     @Column(name = "locationNewMagic")
     private int locationNewMagic; // Количество новой магии
 
-    @OneToMany
-    @JoinColumn(name = "magicId")
-    private List<Magics> magic; // Сама магия
+    @ManyToMany
+    @JoinTable(
+            name = "locations_magics",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "magicId")
+    )
+    private Set<Magics> magic; // Сама магия
 
     @Column(name = "locationUniqueWeaponsQuantity")
     private int locationUniqueWeaponsQuantity; // Количество уникального оружия
 
-    @OneToMany
-    @JoinColumn(name = "weaponId")
-    private List<Weapons> weapon; // Само оружие
+    @ManyToMany
+    @JoinTable(
+            name = "locations_weapons",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "weaponId")
+    )
+    private Set<Weapons> weapon; // Само оружие
 
     @Column(name = "locationsUniqueBossesQuantity")
     private int locationsUniqueBossesQuantity; // Количество уникальный боссов
@@ -78,9 +86,13 @@ public class Locations {
     @Column(name = "locationNPCQuantity")
     private int locationNPCQuantity; // Количество уникальный НПС
 
-    @OneToMany
-    @JoinColumn(name = "npcId")
-    private List<NPC> npc; // Сами НПС
+    @ManyToMany
+    @JoinTable(
+            name = "locations_NPC",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "npcId")
+    )
+    private Set<NPC> npc; // Сами НПС
 
     @Column(name = "locationLizardsQuantity")
     private int locationLizardsQuantity; // Количество ящерок
