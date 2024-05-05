@@ -2,9 +2,7 @@ package student.course.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -12,7 +10,8 @@ import java.util.Set;
 @Entity(name = "npc")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 public class NPC {
 
     @Id
@@ -36,6 +35,12 @@ public class NPC {
     @Column(name = "npcSoulsForKill")
     private int npcSoulsForKill;
 
+    @Column(name = "npcEstusQuantity")
+    private int npcEstusQuantity;
+
+    @Column(name = "npcSomeInformation")
+    private String npcSomeInformation;
+
     @ManyToMany
     @JoinTable(
             name = "NPC_weapons",
@@ -54,7 +59,7 @@ public class NPC {
 
     @ManyToMany
     @JoinTable(
-            name = "NPC_magic",
+            name = "NPC_magics",
             joinColumns = @JoinColumn(name = "npcId"),
             inverseJoinColumns = @JoinColumn(name = "magicId")
     )
@@ -67,12 +72,6 @@ public class NPC {
             inverseJoinColumns = @JoinColumn(name = "soulId")
     )
     private Set<Souls> soul;
-
-    @Column(name = "npcEstusQuantity")
-    private int npcEstusQuantity;
-
-    @Column(name = "npcSomeInformation")
-    private String npcSomeInformation;
 
     @ManyToMany
     @JsonIgnore

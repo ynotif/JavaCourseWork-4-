@@ -2,9 +2,7 @@ package student.course.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -12,7 +10,8 @@ import java.util.Set;
 @Entity(name = "weapons")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 public class Weapons {
     @Id
     @Column(name = "weaponId")
@@ -29,7 +28,7 @@ public class Weapons {
     @Column(name = "weaponSpellManaCost")
     private int weaponSpellManaCost;
 
-    @Column(name = "weaponSpellDoes")
+    @Column(name = "weaponSpe llDoes")
     private String weaponSpellDoes;
 
     @Column(name = "weaponPhysicalNormalDamage")
@@ -119,11 +118,16 @@ public class Weapons {
     @Column(name = "weaponBuyCost")
     private int weaponBuyCost;
 
-    @Column(name = "weaponsSoulForCraft")
-    private String weaponsSoulForCraft; // Душа необходимая для крафта уникального оружия
-
     @Column(name = "weaponSomeInformation")
     private String weaponSomeInformation;
+
+    @ManyToMany
+    @JoinTable(
+            name = "weapons_souls",
+            joinColumns = @JoinColumn(name = "weaponId"),
+            inverseJoinColumns = @JoinColumn(name = "soulId")
+    )
+    private Set<Souls> soul; // Душа необходимая для крафта уникального оружия
 
     @ManyToMany
     @JsonIgnore

@@ -15,7 +15,7 @@ public class SoulsServiceImpl implements SoulsService {
     private final SoulsRepository soulsRepository;
 
     @Override
-    public Souls addSoul(Souls souls) {
+    public Souls createSoul(Souls souls) {
         return soulsRepository.save(souls);
     }
 
@@ -38,7 +38,7 @@ public class SoulsServiceImpl implements SoulsService {
     }
 
     @Override
-    public void deleteSoul(Long id) {
+    public void deleteSoulById(Long id) {
         Optional<Souls> optionalSouls = getSoulById(id);
         optionalSouls.ifPresent(soulsRepository::delete);
     }

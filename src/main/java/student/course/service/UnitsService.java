@@ -15,5 +15,17 @@ public interface UnitsService {
 
     void updateUnit(Units units);
 
-    void deleteUnit(Long id);
+    void deleteUnitById(Long id);
+
+    Units addArmorToUnit(Long unitId, Long armorId);
+
+    Units removeArmorFromUnit(Long unitId, Long armorId);
+
+    Units addWeaponToUnit(Long unitId, Long weaponId);
+
+    Units removeWeaponFromUnit(Long unitId, Long weaponId);
+
+    Units addSoulToUnit(Long unitId, Long soulId);
+
+    Units removeSoulFromUnit(Long unitId, Long soulId);
 }

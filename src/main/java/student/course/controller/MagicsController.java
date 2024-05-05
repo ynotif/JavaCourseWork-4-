@@ -17,8 +17,22 @@ public class MagicsController {
     private final MagicsService magicsService;
 
     @PostMapping
-    public ResponseEntity<Magics> addMagics(Magics magic) {
+    public ResponseEntity<Magics> addMagics(@RequestBody Magics magic) {
         return ResponseEntity.ok(magicsService.createMagic(magic));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Magics> updateMagics(@PathVariable Long id, @RequestBody Magics updateMagic) {
+        Optional<Magics> optionalMagics = magicsService.getMagicById(id);
+        if (optionalMagics.isPresent()) {
+
+            magicsService.updateMagic(updateMagic);
+
+            return ResponseEntity.ok(updateMagic);
+        }
+
+        return ResponseEntity.notFound().build();
+
     }
 
     @GetMapping
@@ -31,4 +45,13 @@ public class MagicsController {
         return ResponseEntity.ok(magicsService.getMagicById(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMagics(@PathVariable Long id) {
+        Optional<Magics> optionalMagics = magicsService.getMagicById(id);
+        if (optionalMagics.isPresent()) {
+            magicsService.deleteMagicById(id);
+            return ResponseEntity.ok("Magics deleted.");
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

@@ -2,12 +2,8 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import student.course.model.Armors;
-import student.course.model.Bosses;
-import student.course.model.Locations;
-import student.course.repository.ArmorsRepository;
-import student.course.repository.BossesRepository;
-import student.course.repository.LocationsRepository;
+import student.course.model.*;
+import student.course.repository.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +15,10 @@ public class LocationsServiceImpl implements LocationsService {
     private final LocationsRepository locationsRepository;
     private final ArmorsRepository armorsRepository;
     private final BossesRepository bossesRepository;
+    private final UnitsRepository unitsRepository;
+    private final MagicsRepository magicsRepository;
+    private final NPCRepository npcRepository;
+    private final WeaponsRepository weaponsRepository;
 
     @Override
     public Locations createLocation(Locations location) {
@@ -84,6 +84,94 @@ public class LocationsServiceImpl implements LocationsService {
                 .orElseThrow(() -> new RuntimeException("Boss not found"));
 
         locations.getBoss().remove(bosses);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations addUnitToLocation(Long locationId, Long unitId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        Units unit = unitsRepository.findById(unitId)
+                .orElseThrow(() -> new RuntimeException("Unit not found"));
+
+        locations.getUnit().add(unit);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations removeUnitFromLocation(Long locationId, Long unitId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        Units unit = unitsRepository.findById(unitId)
+                .orElseThrow(() -> new RuntimeException("Unit not found"));
+
+        locations.getUnit().remove(unit);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations addMagicToLocation(Long locationId, Long magicId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        Magics magic = magicsRepository.findById(magicId)
+                .orElseThrow(() -> new RuntimeException("Magic not found"));
+
+        locations.getMagic().add(magic);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations removeMagicFromLocation(Long locationId, Long magicId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        Magics magic = magicsRepository.findById(magicId)
+                .orElseThrow(() -> new RuntimeException("Magic not found"));
+
+        locations.getMagic().remove(magic);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations addWeaponToLocation(Long locationId, Long weaponId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        Weapons weapons = weaponsRepository.findById(weaponId)
+                .orElseThrow(() -> new RuntimeException("Weapon not found"));
+
+        locations.getWeapon().add(weapons);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations removeWeaponFromLocation(Long locationId, Long weaponId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        Weapons weapons = weaponsRepository.findById(weaponId)
+                .orElseThrow(() -> new RuntimeException("Weapon not found"));
+
+        locations.getWeapon().remove(weapons);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations addNPCToLocation(Long locationId, Long npcId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        NPC npc = npcRepository.findById(npcId)
+                .orElseThrow(() -> new RuntimeException("NPC not found"));
+
+        locations.getNpc().add(npc);
+        return locationsRepository.save(locations);
+    }
+
+    @Override
+    public Locations removeNPCFromLocation(Long locationId, Long npcId) {
+        Locations locations = locationsRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+        NPC npc = npcRepository.findById(npcId)
+                .orElseThrow(() -> new RuntimeException("NPC not found"));
+
+        locations.getNpc().remove(npc);
         return locationsRepository.save(locations);
     }
 

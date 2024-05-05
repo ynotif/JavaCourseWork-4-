@@ -39,4 +39,8 @@ public class Souls {
     @ManyToMany
     @JsonIgnore
     private Set<NPC> npc;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Weapons> weapons;
 }

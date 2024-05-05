@@ -16,7 +16,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class Bosses {
-
     @Id
     @Column(name = "bossId")
     @GeneratedValue(generator = "boss_id_seq", strategy = GenerationType.SEQUENCE)
@@ -242,6 +241,9 @@ public class Bosses {
     @Column(name = "bossSoulsQuantity")
     private int bossSoulsQuantity;
 
+    @Column(name = "bossHistory")
+    private String bossHistory;
+
     //Для дропа
     @ManyToMany
     @JoinTable(
@@ -266,9 +268,6 @@ public class Bosses {
             inverseJoinColumns = @JoinColumn(name = "soulId")
     )
     private Set<Souls> soul;
-
-    @Column(name = "bossHistory")
-    private String bossHistory;
 
     @JsonIgnore
     @ManyToMany

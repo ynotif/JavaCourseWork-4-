@@ -20,10 +20,6 @@ public class Units {
     @SequenceGenerator(name = "unit_id_seq", sequenceName = "unit_id_seq", allocationSize = 1, initialValue = 1)
     private Long unitId;
 
-    @ManyToOne
-    @JoinColumn(name = "locationId")
-    private Locations location;
-
     @Column(name = "unitHitPoints")
     private double unitHitPoints;
 
@@ -99,6 +95,9 @@ public class Units {
     @Column(name = "unitSoulsQuantity")
     private int unitSoulsQuantity;
 
+    @Column(name = "unitSomeInformation")
+    private String unitSomeInformation;
+
     //Для дропа
     @ManyToMany
     @JoinTable(
@@ -123,9 +122,6 @@ public class Units {
             inverseJoinColumns = @JoinColumn(name = "soulId")
     )
     private Set<Souls> soul;
-
-    @Column(name = "unitSomeInformation")
-    private String unitSomeInformation;
 
     @ManyToMany
     @JsonIgnore

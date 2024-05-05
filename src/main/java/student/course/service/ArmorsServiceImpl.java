@@ -36,7 +36,6 @@ public class ArmorsServiceImpl implements ArmorsService {
     public void updateArmor(Armors armor) {
         Optional<Armors> optionalArmors = getArmorById(armor.getArmorId());
         if (optionalArmors.isPresent()) {
-
             armorsRepository.save(armor);
         }
     }

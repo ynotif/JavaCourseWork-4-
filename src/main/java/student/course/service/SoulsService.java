@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface SoulsService {
 
-    Souls addSoul(Souls souls);
+    Souls createSoul(Souls souls);
 
     List<Souls> getAllSouls();
 
@@ -15,5 +15,5 @@ public interface SoulsService {
 
     void updateSoul(Souls souls);
 
-    void deleteSoul(Long id);
+    void deleteSoulById(Long id);
 }

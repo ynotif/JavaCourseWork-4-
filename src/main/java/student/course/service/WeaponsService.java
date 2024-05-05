@@ -16,4 +16,8 @@ public interface WeaponsService {
     void updateWeapon(Weapons weapons);
 
     void deleteWeaponById(Long id);
+
+    Weapons addSoulToWeapon(Long weaponId, Long soulId);
+
+    Weapons removeSoulFromWeapon(Long weaponId, Long soulId);
 }

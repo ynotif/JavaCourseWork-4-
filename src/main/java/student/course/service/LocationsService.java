@@ -24,4 +24,20 @@ public interface LocationsService {
     Locations addBossToLocation(Long locationId, Long bossId);
 
     Locations removeBossFromLocation(Long locationId, Long bossId);
+
+    Locations addUnitToLocation(Long locationId, Long unitId);
+
+    Locations removeUnitFromLocation(Long locationId, Long unitId);
+
+    Locations addMagicToLocation(Long locationId, Long magicId);
+
+    Locations removeMagicFromLocation(Long locationId, Long magicId);
+
+    Locations addWeaponToLocation(Long locationId, Long weaponId);
+
+    Locations removeWeaponFromLocation(Long locationId, Long weaponId);
+
+    Locations addNPCToLocation(Long locationId, Long npcId);
+
+    Locations removeNPCFromLocation(Long locationId, Long npcId);
 }
