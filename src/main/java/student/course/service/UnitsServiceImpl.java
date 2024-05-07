@@ -2,6 +2,7 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import student.course.exceptions.UnitNotFoundException;
 import student.course.model.Armors;
 import student.course.model.Souls;
 import student.course.model.Units;
@@ -34,12 +35,18 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     @Override
-    public Optional<Units> getUnitById(Long id) {
-        return unitsRepository.findById(id);
+    public Optional<Units> getUnitById(Long id) throws UnitNotFoundException {
+        Optional<Units> unitsOptional = unitsRepository.findById(id);
+        if(unitsOptional.isPresent()) {
+            return unitsOptional;
+        }
+        else{
+            throw new UnitNotFoundException(id);
+        }
     }
 
     @Override
-    public void updateUnit(Units units) {
+    public void updateUnit(Units units) throws UnitNotFoundException {
         Optional<Units> optionalUnits = getUnitById(units.getUnitId());
         if (optionalUnits.isPresent()) {
             unitsRepository.save(units);
@@ -47,7 +54,7 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     @Override
-    public void deleteUnitById(Long id) {
+    public void deleteUnitById(Long id) throws UnitNotFoundException {
         Optional<Units> optionalUnits = getUnitById(id);
         optionalUnits.ifPresent(unitsRepository::delete);
     }

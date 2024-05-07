@@ -3,6 +3,7 @@ package student.course.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import student.course.exceptions.ArmorNotFoundException;
 import student.course.model.Armors;
 import student.course.service.ArmorsService;
 
@@ -22,7 +23,7 @@ public class ArmorsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Armors> updateArmor(@RequestBody Armors armorUpdate, @PathVariable Long id) {
+    public ResponseEntity<Armors> updateArmor(@RequestBody Armors armorUpdate, @PathVariable Long id) throws ArmorNotFoundException {
         Optional<Armors> optionalArmors = armorsService.getArmorById(id);
 
         if (optionalArmors.isPresent()) {
@@ -41,12 +42,12 @@ public class ArmorsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Armors>> getArmorById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Armors>> getArmorById(@PathVariable Long id) throws ArmorNotFoundException {
         return ResponseEntity.ok(armorsService.getArmorById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteArmor(@PathVariable Long id) {
+    public ResponseEntity<String> deleteArmor(@PathVariable Long id) throws ArmorNotFoundException {
         armorsService.deleteArmorById(id);
         return ResponseEntity.ok("Armor deleted successfully!");
     }

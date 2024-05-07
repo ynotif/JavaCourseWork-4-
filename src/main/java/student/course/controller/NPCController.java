@@ -3,6 +3,7 @@ package student.course.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import student.course.exceptions.*;
 import student.course.model.*;
 import student.course.repository.NPCRepository;
 import student.course.service.*;
@@ -27,7 +28,7 @@ public class NPCController {
     }
 
     @PostMapping("/{npcId}/weapons/{weaponId}")
-    public ResponseEntity<NPC> addWeaponToNPC(@PathVariable Long npcId, @PathVariable Long weaponId){
+    public ResponseEntity<NPC> addWeaponToNPC(@PathVariable Long npcId, @PathVariable Long weaponId) throws NPCNotFoundException, WeaponNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if(optionalNPC.isPresent() && optionalWeapons.isPresent()){
@@ -41,7 +42,7 @@ public class NPCController {
     }
 
     @PostMapping("/{npcId}/armors/{armorId}")
-    public ResponseEntity<NPC> addArmorToNPC(@PathVariable Long npcId, @PathVariable Long armorId){
+    public ResponseEntity<NPC> addArmorToNPC(@PathVariable Long npcId, @PathVariable Long armorId) throws ArmorNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         if(optionalNPC.isPresent() && optionalArmors.isPresent()){
@@ -55,7 +56,7 @@ public class NPCController {
     }
 
     @PostMapping("/{npcId}/magics/{magicId}")
-    public ResponseEntity<NPC> addMagicToNPC(@PathVariable Long npcId, @PathVariable Long magicId){
+    public ResponseEntity<NPC> addMagicToNPC(@PathVariable Long npcId, @PathVariable Long magicId) throws LocationNotFoundException, MagicNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
         if(optionalNPC.isPresent() && optionalMagics.isPresent()){
@@ -69,7 +70,7 @@ public class NPCController {
     }
 
     @PostMapping("/{npcId}/souls/{soulId}")
-    public ResponseEntity<NPC> addSoulToNPC(@PathVariable Long npcId, @PathVariable Long soulId){
+    public ResponseEntity<NPC> addSoulToNPC(@PathVariable Long npcId, @PathVariable Long soulId) throws NPCNotFoundException, SoulNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
         if(optionalNPC.isPresent() && optionalSouls.isPresent()){
@@ -83,7 +84,7 @@ public class NPCController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NPC> updateNPC(@PathVariable Long id, @RequestBody NPC updateNPC) {
+    public ResponseEntity<NPC> updateNPC(@PathVariable Long id, @RequestBody NPC updateNPC) throws NPCNotFoundException {
         Optional<NPC> npc = npcService.getNPCById(id);
         if (npc.isPresent()) {
             npcService.updateNPC(updateNPC);
@@ -99,12 +100,12 @@ public class NPCController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<NPC>> getNPC(@PathVariable Long id) {
+    public ResponseEntity<Optional<NPC>> getNPC(@PathVariable Long id) throws NPCNotFoundException {
         return ResponseEntity.ok(npcService.getNPCById(id));
     }
 
     @DeleteMapping("/{npcId}/weapons/{weaponId}")
-    public ResponseEntity<NPC> removeWeaponFromNPC(@PathVariable Long npcId, @PathVariable Long weaponId){
+    public ResponseEntity<NPC> removeWeaponFromNPC(@PathVariable Long npcId, @PathVariable Long weaponId) throws NPCNotFoundException, WeaponNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if(optionalNPC.isPresent() && optionalWeapons.isPresent()){
@@ -117,7 +118,7 @@ public class NPCController {
     }
 
     @DeleteMapping("/{npcId}/armors/{armorId}")
-    public ResponseEntity<NPC> removeArmorFromNPC(@PathVariable Long npcId, @PathVariable Long armorId){
+    public ResponseEntity<NPC> removeArmorFromNPC(@PathVariable Long npcId, @PathVariable Long armorId) throws ArmorNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         if(optionalNPC.isPresent() && optionalArmors.isPresent()){
@@ -130,7 +131,7 @@ public class NPCController {
     }
 
     @DeleteMapping("/{npcId}/magics/{magicId}")
-    public ResponseEntity<NPC> removeMagicFromNPC(@PathVariable Long npcId, @PathVariable Long magicId){
+    public ResponseEntity<NPC> removeMagicFromNPC(@PathVariable Long npcId, @PathVariable Long magicId) throws MagicNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
         if(optionalNPC.isPresent() && optionalMagics.isPresent()){
@@ -143,7 +144,7 @@ public class NPCController {
     }
 
     @DeleteMapping("/{npcId}/souls/{soulId}")
-    public ResponseEntity<NPC> removeSoulFromNPC(@PathVariable Long npcId, @PathVariable Long soulId){
+    public ResponseEntity<NPC> removeSoulFromNPC(@PathVariable Long npcId, @PathVariable Long soulId) throws NPCNotFoundException, SoulNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
         if(optionalNPC.isPresent() && optionalSouls.isPresent()){
@@ -156,7 +157,7 @@ public class NPCController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteNPCById(@PathVariable Long id){
+    public ResponseEntity<String> deleteNPCById(@PathVariable Long id) throws NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(id);
         if(optionalNPC.isPresent()){
             npcService.deleteNPCById(id);

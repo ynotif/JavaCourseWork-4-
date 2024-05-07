@@ -1,6 +1,7 @@
 package student.course.service;
 
 
+import student.course.exceptions.BosseNotFoundException;
 import student.course.model.Bosses;
 
 import java.util.List;
@@ -12,9 +13,9 @@ public interface BossesService {
 
     List<Bosses> getAllBosses();
 
-    Optional<Bosses> getBosseById(Long id);
+    Optional<Bosses> getBosseById(Long id) throws BosseNotFoundException;
 
-    void updateBosse(Bosses bosses);
+    void updateBosse(Bosses bosses) throws BosseNotFoundException;
 
     void deleteBosseById(Long id);
 

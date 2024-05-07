@@ -2,6 +2,7 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import student.course.exceptions.LocationNotFoundException;
 import student.course.model.*;
 import student.course.repository.*;
 
@@ -31,18 +32,24 @@ public class LocationsServiceImpl implements LocationsService {
     }
 
     @Override
-    public Optional<Locations> getLocationById(Long id) {
-        return locationsRepository.findById(id);
+    public Optional<Locations> getLocationById(Long id) throws LocationNotFoundException {
+        Optional<Locations> optionalLocation = locationsRepository.findById(id);
+        if(optionalLocation.isPresent()) {
+            return optionalLocation;
+        }
+        else{
+            throw new LocationNotFoundException(id);
+        }
     }
 
-    public void updateLocation(Locations locations){
+    public void updateLocation(Locations locations) throws LocationNotFoundException {
         Optional<Locations> optionalLocations = getLocationById(locations.getLocationId());
         if(optionalLocations.isPresent()){
             locationsRepository.save(locations);
         }
     }
 
-    public void deleteLocationById(Long locationId){
+    public void deleteLocationById(Long locationId) throws LocationNotFoundException {
         Optional<Locations> optionalLocations = getLocationById(locationId);
         optionalLocations.ifPresent(locationsRepository::delete);
     }

@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import student.course.bdsetters.BosseSetter;
+import student.course.exceptions.ArmorNotFoundException;
+import student.course.exceptions.BosseNotFoundException;
+import student.course.exceptions.SoulNotFoundException;
+import student.course.exceptions.WeaponNotFoundException;
 import student.course.model.Armors;
 import student.course.model.Bosses;
 import student.course.model.Souls;
@@ -33,7 +37,7 @@ public class BossesController {
     }
 
     @PostMapping("/{bossId}/armors/{armorId}")
-    public ResponseEntity<Bosses> addArmorToBoss(@PathVariable Long bossId, @PathVariable Long armorId) {
+    public ResponseEntity<Bosses> addArmorToBoss(@PathVariable Long bossId, @PathVariable Long armorId) throws ArmorNotFoundException, BosseNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         if (optionalBosses.isPresent() && optionalArmors.isPresent()) {
@@ -47,7 +51,7 @@ public class BossesController {
     }
 
     @PostMapping("/{bossId}/weapons/{weaponId}")
-    public ResponseEntity<Bosses> addWeaponToBoss(@PathVariable Long bossId, @PathVariable Long weaponId){
+    public ResponseEntity<Bosses> addWeaponToBoss(@PathVariable Long bossId, @PathVariable Long weaponId) throws BosseNotFoundException, WeaponNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if (optionalBosses.isPresent() && optionalWeapons.isPresent()) {
@@ -61,7 +65,7 @@ public class BossesController {
     }
 
     @PostMapping("/{bossId}/souls/{soulId}")
-    public ResponseEntity<Bosses> addSoulToBoss(@PathVariable Long bossId, @PathVariable Long soulId){
+    public ResponseEntity<Bosses> addSoulToBoss(@PathVariable Long bossId, @PathVariable Long soulId) throws BosseNotFoundException, SoulNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
         if(optionalBosses.isPresent() && optionalSouls.isPresent()) {
@@ -75,7 +79,7 @@ public class BossesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Bosses> updateBoss(@PathVariable Long id, @RequestBody Bosses updateBosse) {
+    public ResponseEntity<Bosses> updateBoss(@PathVariable Long id, @RequestBody Bosses updateBosse) throws BosseNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(id);
 
         if (optionalBosses.isPresent()) {
@@ -94,7 +98,7 @@ public class BossesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Bosses>> getBossById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Bosses>> getBossById(@PathVariable Long id) throws BosseNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(id);
         if (optionalBosses.isPresent()) {
             return ResponseEntity.ok(bossesService.getBosseById(id));
@@ -105,7 +109,7 @@ public class BossesController {
     }
 
     @DeleteMapping("/{bossId}/armors/{armorId}")
-    public ResponseEntity<Bosses> removeArmorFromBoss(@PathVariable Long bossId, @PathVariable Long armorId) {
+    public ResponseEntity<Bosses> removeArmorFromBoss(@PathVariable Long bossId, @PathVariable Long armorId) throws ArmorNotFoundException, BosseNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         if (optionalBosses.isPresent() && optionalArmors.isPresent()) {
@@ -118,7 +122,7 @@ public class BossesController {
     }
 
     @DeleteMapping("/{bossId}/weapons/{weaponId}")
-    public ResponseEntity<Bosses> removeWeaponFromBoss(@PathVariable Long bossId, @PathVariable Long weaponId){
+    public ResponseEntity<Bosses> removeWeaponFromBoss(@PathVariable Long bossId, @PathVariable Long weaponId) throws BosseNotFoundException, WeaponNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if(optionalBosses.isPresent() && optionalWeapons.isPresent()){
@@ -131,7 +135,7 @@ public class BossesController {
     }
 
     @DeleteMapping("/{bossId}/souls/{soulId}")
-    public ResponseEntity<Bosses> removeSoulFromBoss(@PathVariable Long bossId, @PathVariable Long soulId){
+    public ResponseEntity<Bosses> removeSoulFromBoss(@PathVariable Long bossId, @PathVariable Long soulId) throws BosseNotFoundException, SoulNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
         if(optionalBosses.isPresent() && optionalSouls.isPresent()){
@@ -144,7 +148,7 @@ public class BossesController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBossById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteBossById(@PathVariable Long id) throws BosseNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(id);
         if (optionalBosses.isPresent()) {
             bossesService.deleteBosseById(id);

@@ -3,6 +3,7 @@ package student.course.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import student.course.exceptions.SoulNotFoundException;
 import student.course.model.Souls;
 import student.course.service.SoulsService;
 
@@ -23,7 +24,7 @@ public class SoulsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Souls> updateSouls(@PathVariable Long id, @RequestBody Souls updatedSoul) {
+    public ResponseEntity<Souls> updateSouls(@PathVariable Long id, @RequestBody Souls updatedSoul) throws SoulNotFoundException {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
             soulsService.updateSoul(updatedSoul);
@@ -38,12 +39,12 @@ public class SoulsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Souls>> getSoulById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Souls>> getSoulById(@PathVariable Long id) throws SoulNotFoundException {
         return ResponseEntity.ok(soulsService.getSoulById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSoulById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteSoulById(@PathVariable Long id) throws SoulNotFoundException {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
             soulsService.deleteSoulById(id);

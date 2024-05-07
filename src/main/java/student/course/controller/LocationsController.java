@@ -3,6 +3,7 @@ package student.course.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import student.course.exceptions.*;
 import student.course.model.*;
 import student.course.service.*;
 
@@ -28,7 +29,7 @@ public class LocationsController {
     }
 
     @PostMapping("/{locationId}/units/{unitId}")
-    public ResponseEntity<Locations> addUnitToLocation(@PathVariable Long locationId, @PathVariable Long unitId) {
+    public ResponseEntity<Locations> addUnitToLocation(@PathVariable Long locationId, @PathVariable Long unitId) throws LocationNotFoundException, UnitNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         if(optionalLocations.isPresent() && optionalUnits.isPresent()) {
@@ -42,7 +43,7 @@ public class LocationsController {
     }
 
     @PostMapping("/{locationId}/magics/{magicId}")
-    public ResponseEntity<Locations> addMagicToLocation(@PathVariable Long locationId, @PathVariable Long magicId) {
+    public ResponseEntity<Locations> addMagicToLocation(@PathVariable Long locationId, @PathVariable Long magicId) throws LocationNotFoundException, MagicNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
         if(optionalLocations.isPresent() && optionalMagics.isPresent()) {
@@ -56,7 +57,7 @@ public class LocationsController {
     }
 
     @PostMapping("/{locationId}/weapons/{weaponId}")
-    public ResponseEntity<Locations> addWeaponToLocation(@PathVariable Long locationId, @PathVariable Long weaponId){
+    public ResponseEntity<Locations> addWeaponToLocation(@PathVariable Long locationId, @PathVariable Long weaponId) throws LocationNotFoundException, WeaponNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if(optionalLocations.isPresent() && optionalWeapons.isPresent()) {
@@ -70,7 +71,7 @@ public class LocationsController {
     }
 
     @PostMapping("/{locationId}/bosses/{bosseId}")
-    public ResponseEntity<Locations> addBossToLocation(@PathVariable Long locationId, @PathVariable Long bosseId) {
+    public ResponseEntity<Locations> addBossToLocation(@PathVariable Long locationId, @PathVariable Long bosseId) throws BosseNotFoundException, LocationNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(locationId);
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bosseId);
         if (optionalLocation.isPresent() && optionalBosses.isPresent()) {
@@ -84,7 +85,7 @@ public class LocationsController {
     }
 
     @PostMapping("/{locationId}/armors/{armorId}")
-    public ResponseEntity<Locations> addArmorToLocation(@PathVariable Long locationId, @PathVariable Long armorId) {
+    public ResponseEntity<Locations> addArmorToLocation(@PathVariable Long locationId, @PathVariable Long armorId) throws ArmorNotFoundException, LocationNotFoundException {
         Optional<Armors> optionalArmor = armorsService.getArmorById(armorId);
         Optional<Locations> optionalLocation = locationsService.getLocationById(locationId);
         if (optionalArmor.isPresent() && optionalLocation.isPresent()) {
@@ -98,7 +99,7 @@ public class LocationsController {
     }
 
    @PostMapping("/{locationId}/npc/{npcId}")
-   public ResponseEntity<Locations> addNPCToLocation(@PathVariable Long locationId, @PathVariable Long npcId) {
+   public ResponseEntity<Locations> addNPCToLocation(@PathVariable Long locationId, @PathVariable Long npcId) throws LocationNotFoundException, NPCNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(locationId);
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         if (optionalLocation.isPresent() && optionalNPC.isPresent()) {
@@ -112,7 +113,7 @@ public class LocationsController {
    }
 
    @PutMapping("/{id}")
-   public ResponseEntity<Locations> updateLocation(@PathVariable Long id, @RequestBody Locations updateLocation) {
+   public ResponseEntity<Locations> updateLocation(@PathVariable Long id, @RequestBody Locations updateLocation) throws LocationNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(id);
         if (optionalLocation.isPresent()) {
 
@@ -131,12 +132,12 @@ public class LocationsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Locations>> findLocationById(@PathVariable Long id){
+    public ResponseEntity<Optional<Locations>> findLocationById(@PathVariable Long id) throws LocationNotFoundException{
         return ResponseEntity.ok(locationsService.getLocationById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteLocation(@PathVariable Long id){
+    public ResponseEntity<String> deleteLocation(@PathVariable Long id) throws LocationNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(id);
         if (optionalLocation.isPresent()) {
             locationsService.deleteLocationById(id);
@@ -147,7 +148,7 @@ public class LocationsController {
         }
     }
     @DeleteMapping("/{locationId}/units/{unitId}")
-    public ResponseEntity<Locations> removeUnitFromLocation(@PathVariable Long locationId, @PathVariable Long unitId) {
+    public ResponseEntity<Locations> removeUnitFromLocation(@PathVariable Long locationId, @PathVariable Long unitId) throws LocationNotFoundException, UnitNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         if(optionalLocations.isPresent() && optionalUnits.isPresent()) {
@@ -160,7 +161,7 @@ public class LocationsController {
     }
 
     @DeleteMapping("/{locationId}/magics/{magicId}")
-    public ResponseEntity<Locations> removeMagicFromLocation(@PathVariable Long locationId, @PathVariable Long magicId) {
+    public ResponseEntity<Locations> removeMagicFromLocation(@PathVariable Long locationId, @PathVariable Long magicId) throws LocationNotFoundException, MagicNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
         if(optionalLocations.isPresent() && optionalMagics.isPresent()) {
@@ -173,7 +174,7 @@ public class LocationsController {
     }
 
     @DeleteMapping("/{locationId}/weapons/{weaponId}")
-    public ResponseEntity<Locations> removeWeaponFromLocation(@PathVariable Long locationId, @PathVariable Long weaponId){
+    public ResponseEntity<Locations> removeWeaponFromLocation(@PathVariable Long locationId, @PathVariable Long weaponId) throws LocationNotFoundException, WeaponNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if(optionalLocations.isPresent() && optionalWeapons.isPresent()) {
@@ -186,7 +187,7 @@ public class LocationsController {
     }
 
     @DeleteMapping("/{locationId}/bosses/{bosseId}")
-    public ResponseEntity<Locations> removeBossFromLocation(@PathVariable Long locationId, @PathVariable Long bosseId) {
+    public ResponseEntity<Locations> removeBossFromLocation(@PathVariable Long locationId, @PathVariable Long bosseId) throws BosseNotFoundException, LocationNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bosseId);
         if(optionalLocations.isPresent() && optionalBosses.isPresent()) {
@@ -199,7 +200,7 @@ public class LocationsController {
     }
 
     @DeleteMapping("/{locationId}/armors/{armorId}")
-    public ResponseEntity<Locations> removeArmorFromLocation(@PathVariable Long locationId, @PathVariable Long armorId) {
+    public ResponseEntity<Locations> removeArmorFromLocation(@PathVariable Long locationId, @PathVariable Long armorId) throws ArmorNotFoundException, LocationNotFoundException {
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         if (optionalArmors.isPresent() && optionalLocations.isPresent()) {
@@ -212,7 +213,7 @@ public class LocationsController {
     }
 
     @DeleteMapping("/{locationId}/npc/{npcId}")
-    public ResponseEntity<Locations> removeNPCFromLocation(@PathVariable Long locationId, @PathVariable Long npcId) {
+    public ResponseEntity<Locations> removeNPCFromLocation(@PathVariable Long locationId, @PathVariable Long npcId) throws LocationNotFoundException, NPCNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(locationId);
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         if (optionalLocation.isPresent() && optionalNPC.isPresent()) {

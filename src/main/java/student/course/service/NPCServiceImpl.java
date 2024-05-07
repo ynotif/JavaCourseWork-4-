@@ -2,6 +2,7 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import student.course.exceptions.NPCNotFoundException;
 import student.course.model.*;
 import student.course.repository.*;
 
@@ -30,12 +31,18 @@ public class NPCServiceImpl implements NPCService {
     }
 
     @Override
-    public Optional<NPC> getNPCById(Long id) {
-        return npcRepository.findById(id);
+    public Optional<NPC> getNPCById(Long id) throws NPCNotFoundException {
+        Optional<NPC> npcOptional = npcRepository.findById(id);
+        if(npcOptional.isPresent()){
+            return npcOptional;
+        }
+        else{
+            throw new NPCNotFoundException(id);
+        }
     }
 
     @Override
-    public void updateNPC(NPC npc) {
+    public void updateNPC(NPC npc) throws NPCNotFoundException {
         Optional<NPC> optionalNPC = getNPCById(npc.getNpcId());
         if (optionalNPC.isPresent()) {
             npcRepository.save(npc);
@@ -43,7 +50,7 @@ public class NPCServiceImpl implements NPCService {
     }
 
     @Override
-    public void deleteNPCById(Long id) {
+    public void deleteNPCById(Long id) throws NPCNotFoundException {
         Optional<NPC> optionalNPC = getNPCById(id);
         optionalNPC.ifPresent(npcRepository::delete);
     }

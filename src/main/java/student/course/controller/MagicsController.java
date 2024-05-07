@@ -3,6 +3,7 @@ package student.course.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import student.course.exceptions.MagicNotFoundException;
 import student.course.model.Magics;
 import student.course.service.MagicsService;
 
@@ -22,7 +23,7 @@ public class MagicsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Magics> updateMagics(@PathVariable Long id, @RequestBody Magics updateMagic) {
+    public ResponseEntity<Magics> updateMagics(@PathVariable Long id, @RequestBody Magics updateMagic) throws MagicNotFoundException {
         Optional<Magics> optionalMagics = magicsService.getMagicById(id);
         if (optionalMagics.isPresent()) {
 
@@ -41,12 +42,12 @@ public class MagicsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Magics>> getMagics(@PathVariable Long id) {
+    public ResponseEntity<Optional<Magics>> getMagics(@PathVariable Long id) throws MagicNotFoundException {
         return ResponseEntity.ok(magicsService.getMagicById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteMagics(@PathVariable Long id) {
+    public ResponseEntity<String> deleteMagics(@PathVariable Long id) throws MagicNotFoundException {
         Optional<Magics> optionalMagics = magicsService.getMagicById(id);
         if (optionalMagics.isPresent()) {
             magicsService.deleteMagicById(id);

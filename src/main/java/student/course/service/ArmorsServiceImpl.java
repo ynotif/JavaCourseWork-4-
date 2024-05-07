@@ -2,6 +2,7 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import student.course.exceptions.ArmorNotFoundException;
 import student.course.model.Armors;
 import student.course.bdsetters.ArmorSetter;
 import student.course.model.Locations;
@@ -28,12 +29,18 @@ public class ArmorsServiceImpl implements ArmorsService {
     }
 
     @Override
-    public Optional<Armors> getArmorById(Long id) {
-        return armorsRepository.findById(id);
+    public Optional<Armors> getArmorById(Long id) throws ArmorNotFoundException {
+        Optional<Armors> armor = armorsRepository.findById(id);
+        if (armor.isPresent()) {
+            return armor;
+        }
+        else {
+            throw new ArmorNotFoundException(id);
+        }
     }
 
     @Override
-    public void updateArmor(Armors armor) {
+    public void updateArmor(Armors armor) throws ArmorNotFoundException {
         Optional<Armors> optionalArmors = getArmorById(armor.getArmorId());
         if (optionalArmors.isPresent()) {
             armorsRepository.save(armor);
@@ -41,7 +48,7 @@ public class ArmorsServiceImpl implements ArmorsService {
     }
 
     @Override
-    public void deleteArmorById(Long id) {
+    public void deleteArmorById(Long id) throws ArmorNotFoundException {
         Optional<Armors> existingArmor = getArmorById(id);
         existingArmor.ifPresent(armorsRepository::delete);
     }

@@ -1,5 +1,6 @@
 package student.course.service;
 
+import student.course.exceptions.LocationNotFoundException;
 import student.course.model.Locations;
 
 import java.util.List;
@@ -11,11 +12,11 @@ public interface LocationsService {
 
     List<Locations> getAllLocations();
 
-    Optional<Locations> getLocationById(Long id);
+    Optional<Locations> getLocationById(Long id) throws LocationNotFoundException;
 
-    void updateLocation(Locations location);
+    void updateLocation(Locations location) throws LocationNotFoundException;
 
-    void deleteLocationById(Long id);
+    void deleteLocationById(Long id) throws LocationNotFoundException;
 
     Locations addArmorToLocation(Long locationId, Long armorId);
 

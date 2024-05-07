@@ -2,6 +2,7 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import student.course.exceptions.SoulNotFoundException;
 import student.course.model.Souls;
 import student.course.repository.SoulsRepository;
 
@@ -25,12 +26,18 @@ public class SoulsServiceImpl implements SoulsService {
     }
 
     @Override
-    public Optional<Souls> getSoulById(Long id) {
-        return soulsRepository.findById(id);
+    public Optional<Souls> getSoulById(Long id) throws SoulNotFoundException {
+        Optional<Souls> optionalSouls = soulsRepository.findById(id);
+        if(optionalSouls.isPresent()) {
+            return optionalSouls;
+        }
+        else{
+            throw new SoulNotFoundException(id);
+        }
     }
 
     @Override
-    public void updateSoul(Souls souls) {
+    public void updateSoul(Souls souls) throws SoulNotFoundException {
         Optional<Souls> optionalSouls = getSoulById(souls.getSoulId());
         if (optionalSouls.isPresent()) {
             soulsRepository.save(souls);
@@ -38,7 +45,7 @@ public class SoulsServiceImpl implements SoulsService {
     }
 
     @Override
-    public void deleteSoulById(Long id) {
+    public void deleteSoulById(Long id) throws SoulNotFoundException {
         Optional<Souls> optionalSouls = getSoulById(id);
         optionalSouls.ifPresent(soulsRepository::delete);
     }

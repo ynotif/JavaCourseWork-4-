@@ -1,5 +1,6 @@
 package student.course.service;
 
+import student.course.exceptions.UnitNotFoundException;
 import student.course.model.Units;
 
 import java.util.List;
@@ -11,11 +12,11 @@ public interface UnitsService {
 
     List<Units> getAllUnits();
 
-    Optional<Units> getUnitById(Long id);
+    Optional<Units> getUnitById(Long id) throws UnitNotFoundException;
 
-    void updateUnit(Units units);
+    void updateUnit(Units units) throws UnitNotFoundException;
 
-    void deleteUnitById(Long id);
+    void deleteUnitById(Long id) throws UnitNotFoundException;
 
     Units addArmorToUnit(Long unitId, Long armorId);
 

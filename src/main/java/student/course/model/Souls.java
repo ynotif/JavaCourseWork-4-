@@ -6,8 +6,8 @@ import lombok.*;
 
 import java.util.Set;
 
-@Table(name = "soul")
-@Entity(name = "soul")
+@Table(name = "souls")
+@Entity(name = "souls")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter

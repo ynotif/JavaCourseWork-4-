@@ -3,6 +3,7 @@ package student.course.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import student.course.exceptions.BosseNotFoundException;
 import student.course.model.Armors;
 import student.course.model.Bosses;
 import student.course.model.Souls;
@@ -39,12 +40,18 @@ public class BossesServiceImpl implements BossesService {
     }
 
     @Override
-    public Optional<Bosses> getBosseById(Long id) {
-        return bossesRepository.findById(id);
+    public Optional<Bosses> getBosseById(Long id) throws BosseNotFoundException {
+        Optional<Bosses> bosses = bossesRepository.findById(id);
+        if (bosses.isPresent()) {
+            return bosses;
+        }
+        else{
+            throw new BosseNotFoundException(id);
+        }
     }
 
     @Override
-    public void updateBosse(Bosses bosses) {
+    public void updateBosse(Bosses bosses) throws BosseNotFoundException {
         Optional<Bosses> optionalBosses = getBosseById(bosses.getBossId());
         if (optionalBosses.isPresent()) {
             bossesRepository.save(bosses);

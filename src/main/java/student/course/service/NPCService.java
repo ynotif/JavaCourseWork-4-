@@ -1,5 +1,6 @@
 package student.course.service;
 
+import student.course.exceptions.NPCNotFoundException;
 import student.course.model.NPC;
 
 import java.util.List;
@@ -11,11 +12,11 @@ public interface NPCService {
 
     List<NPC> getAllNPCs();
 
-    Optional<NPC> getNPCById(Long id);
+    Optional<NPC> getNPCById(Long id) throws NPCNotFoundException;
 
-    void updateNPC(NPC npc);
+    void updateNPC(NPC npc) throws NPCNotFoundException;
 
-    void deleteNPCById(Long id);
+    void deleteNPCById(Long id) throws NPCNotFoundException;
 
     NPC addWeaponToNPC(Long npcId, Long weaponId);
 

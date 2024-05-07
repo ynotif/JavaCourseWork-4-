@@ -3,6 +3,10 @@ package student.course.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import student.course.exceptions.ArmorNotFoundException;
+import student.course.exceptions.SoulNotFoundException;
+import student.course.exceptions.UnitNotFoundException;
+import student.course.exceptions.WeaponNotFoundException;
 import student.course.model.Armors;
 import student.course.model.Souls;
 import student.course.model.Units;
@@ -31,7 +35,7 @@ public class UnitsController {
     }
 
     @PostMapping("/{unitId}/armors/{armorId}")
-    public ResponseEntity<Units> addArmorToUnit(@PathVariable Long unitId, @PathVariable Long armorId) {
+    public ResponseEntity<Units> addArmorToUnit(@PathVariable Long unitId, @PathVariable Long armorId) throws ArmorNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         if(optionalUnits.isPresent() && optionalArmors.isPresent()) {
@@ -45,7 +49,7 @@ public class UnitsController {
     }
 
     @PostMapping("/{unitId}/weapons/{weaponId}")
-    public ResponseEntity<Units> addWeaponToUnit(@PathVariable Long unitId, @PathVariable Long weaponId){
+    public ResponseEntity<Units> addWeaponToUnit(@PathVariable Long unitId, @PathVariable Long weaponId) throws UnitNotFoundException, WeaponNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if(optionalUnits.isPresent() && optionalWeapons.isPresent()) {
@@ -59,7 +63,7 @@ public class UnitsController {
     }
 
     @PostMapping("/{unitId}/souls/{soulId}")
-    public ResponseEntity<Units> addSoulToUnit(@PathVariable Long unitId, @PathVariable Long soulId){
+    public ResponseEntity<Units> addSoulToUnit(@PathVariable Long unitId, @PathVariable Long soulId) throws SoulNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
         if(optionalUnits.isPresent() && optionalSouls.isPresent()) {
@@ -73,7 +77,7 @@ public class UnitsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Units> updateUnit(@PathVariable Long id, @RequestBody Units updateUnit) {
+    public ResponseEntity<Units> updateUnit(@PathVariable Long id, @RequestBody Units updateUnit) throws UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
         if (optionalUnits.isPresent()) {
             unitsService.updateUnit(updateUnit);
@@ -88,12 +92,12 @@ public class UnitsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Units>> getUnitById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Units>> getUnitById(@PathVariable Long id) throws UnitNotFoundException {
         return ResponseEntity.ok(unitsService.getUnitById(id));
     }
 
     @DeleteMapping("/{unitId}/armors/{armorId}")
-    public ResponseEntity<Units> removeArmorFromUnit(@PathVariable Long unitId, @PathVariable Long armorId) {
+    public ResponseEntity<Units> removeArmorFromUnit(@PathVariable Long unitId, @PathVariable Long armorId) throws ArmorNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         if(optionalUnits.isPresent() && optionalArmors.isPresent()) {
@@ -106,7 +110,7 @@ public class UnitsController {
     }
 
     @DeleteMapping("/{unitId}/weapons/{weaponId}")
-    public ResponseEntity<Units> removeWeaponFromUnit(@PathVariable Long unitId, @PathVariable Long weaponId){
+    public ResponseEntity<Units> removeWeaponFromUnit(@PathVariable Long unitId, @PathVariable Long weaponId) throws UnitNotFoundException, WeaponNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if(optionalUnits.isPresent() && optionalWeapons.isPresent()) {
@@ -119,7 +123,7 @@ public class UnitsController {
     }
 
     @DeleteMapping("/{unitId}/souls/{soulId}")
-    public ResponseEntity<Units> removeSoulFromUnit(@PathVariable Long unitId, @PathVariable Long soulId){
+    public ResponseEntity<Units> removeSoulFromUnit(@PathVariable Long unitId, @PathVariable Long soulId) throws SoulNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
         if(optionalUnits.isPresent() && optionalSouls.isPresent()) {
@@ -132,7 +136,7 @@ public class UnitsController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUnitById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUnitById(@PathVariable Long id) throws UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
         if(optionalUnits.isPresent()) {
             unitsService.deleteUnitById(id);

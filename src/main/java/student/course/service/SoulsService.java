@@ -1,5 +1,6 @@
 package student.course.service;
 
+import student.course.exceptions.SoulNotFoundException;
 import student.course.model.Souls;
 
 import java.util.List;
@@ -11,9 +12,9 @@ public interface SoulsService {
 
     List<Souls> getAllSouls();
 
-    Optional<Souls> getSoulById(Long id);
+    Optional<Souls> getSoulById(Long id) throws SoulNotFoundException;
 
-    void updateSoul(Souls souls);
+    void updateSoul(Souls souls) throws SoulNotFoundException;
 
-    void deleteSoulById(Long id);
+    void deleteSoulById(Long id) throws SoulNotFoundException;
 }

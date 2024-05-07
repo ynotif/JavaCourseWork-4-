@@ -1,5 +1,6 @@
 package student.course.service;
 
+import student.course.exceptions.ArmorNotFoundException;
 import student.course.model.Armors;
 
 import java.util.List;
@@ -11,9 +12,9 @@ public interface ArmorsService {
 
     List<Armors> getAllArmors();
 
-    Optional<Armors> getArmorById(Long id);
+    Optional<Armors> getArmorById(Long id) throws ArmorNotFoundException;
 
-    void updateArmor(Armors armors);
+    void updateArmor(Armors armors) throws ArmorNotFoundException;
 
-    void deleteArmorById(Long id);
+    void deleteArmorById(Long id) throws ArmorNotFoundException;
 }

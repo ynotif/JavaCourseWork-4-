@@ -2,6 +2,7 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import student.course.exceptions.WeaponNotFoundException;
 import student.course.model.Souls;
 import student.course.model.Weapons;
 import student.course.repository.SoulsRepository;
@@ -28,12 +29,18 @@ public class WeaponsServiceImpl implements WeaponsService{
     }
 
     @Override
-    public Optional<Weapons> getWeaponById(Long id) {
-        return weaponsRepository.findById(id);
+    public Optional<Weapons> getWeaponById(Long id) throws WeaponNotFoundException {
+        Optional<Weapons> weaponsOptional = weaponsRepository.findById(id);
+        if(weaponsOptional.isPresent()) {
+            return weaponsOptional;
+        }
+        else{
+            throw new WeaponNotFoundException(id);
+        }
     }
 
     @Override
-    public void updateWeapon(Weapons weapons) {
+    public void updateWeapon(Weapons weapons) throws WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = getWeaponById(weapons.getWeaponId());
         if (optionalWeapons.isPresent()) {
             weaponsRepository.save(weapons);
@@ -41,7 +48,7 @@ public class WeaponsServiceImpl implements WeaponsService{
     }
 
     @Override
-    public void deleteWeaponById(Long weaponId) {
+    public void deleteWeaponById(Long weaponId) throws WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = getWeaponById(weaponId);
         optionalWeapons.ifPresent(weaponsRepository::delete);
     }

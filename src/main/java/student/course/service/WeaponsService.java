@@ -1,5 +1,6 @@
 package student.course.service;
 
+import student.course.exceptions.WeaponNotFoundException;
 import student.course.model.Weapons;
 
 import java.util.List;
@@ -11,11 +12,11 @@ public interface WeaponsService {
 
     List<Weapons> getAllWeapons();
 
-    Optional<Weapons> getWeaponById(Long id);
+    Optional<Weapons> getWeaponById(Long id) throws WeaponNotFoundException;
 
-    void updateWeapon(Weapons weapons);
+    void updateWeapon(Weapons weapons) throws WeaponNotFoundException;
 
-    void deleteWeaponById(Long id);
+    void deleteWeaponById(Long id) throws WeaponNotFoundException;
 
     Weapons addSoulToWeapon(Long weaponId, Long soulId);
 
