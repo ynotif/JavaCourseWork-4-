@@ -14,7 +14,7 @@ public interface LocationsService {
 
     Optional<Locations> getLocationById(Long id) throws LocationNotFoundException;
 
-    void updateLocation(Locations location) throws LocationNotFoundException;
+    void updateLocation(Locations location, Long id) throws LocationNotFoundException;
 
     void deleteLocationById(Long id) throws LocationNotFoundException;
 

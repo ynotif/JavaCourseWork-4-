@@ -14,7 +14,7 @@ public interface WeaponsService {
 
     Optional<Weapons> getWeaponById(Long id) throws WeaponNotFoundException;
 
-    void updateWeapon(Weapons weapons) throws WeaponNotFoundException;
+    void updateWeapon(Weapons weapons, Long id) throws WeaponNotFoundException;
 
     void deleteWeaponById(Long id) throws WeaponNotFoundException;
 

@@ -87,7 +87,7 @@ public class NPCController {
     public ResponseEntity<NPC> updateNPC(@PathVariable Long id, @RequestBody NPC updateNPC) throws NPCNotFoundException {
         Optional<NPC> npc = npcService.getNPCById(id);
         if (npc.isPresent()) {
-            npcService.updateNPC(updateNPC);
+            npcService.updateNPC(updateNPC, id);
 
             return ResponseEntity.ok(npc.get());
         }

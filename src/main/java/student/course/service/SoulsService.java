@@ -14,7 +14,7 @@ public interface SoulsService {
 
     Optional<Souls> getSoulById(Long id) throws SoulNotFoundException;
 
-    void updateSoul(Souls souls) throws SoulNotFoundException;
+    void updateSoul(Souls souls, Long id) throws SoulNotFoundException;
 
     void deleteSoulById(Long id) throws SoulNotFoundException;
 }

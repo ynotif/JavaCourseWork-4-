@@ -28,7 +28,9 @@ public class ArmorsController {
 
         if (optionalArmors.isPresent()) {
 
-            armorsService.updateArmor(armorUpdate);
+            armorsService.updateArmor(armorUpdate, id);
+
+            armorUpdate.setArmorId(id);
 
             return ResponseEntity.ok(armorUpdate);
         } else {

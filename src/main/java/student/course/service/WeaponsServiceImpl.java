@@ -1,7 +1,10 @@
 package student.course.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import student.course.bdsetters.WeaponSetter;
 import student.course.exceptions.WeaponNotFoundException;
 import student.course.model.Souls;
 import student.course.model.Weapons;
@@ -18,11 +21,15 @@ public class WeaponsServiceImpl implements WeaponsService{
     private final WeaponsRepository weaponsRepository;
     private final SoulsRepository soulsRepository;
 
+    private final WeaponSetter weaponSetter = new WeaponSetter();
+
+    @CacheEvict(cacheNames = "Weapons", allEntries = true)
     @Override
     public Weapons createWeapon(Weapons weapons) {
         return weaponsRepository.save(weapons);
     }
 
+    @Cacheable(cacheNames = "Weapons")
     @Override
     public List<Weapons> getAllWeapons() {
         return weaponsRepository.findAll();
@@ -39,20 +46,25 @@ public class WeaponsServiceImpl implements WeaponsService{
         }
     }
 
+    @CacheEvict(cacheNames = "Weapons", allEntries = true)
     @Override
-    public void updateWeapon(Weapons weapons) throws WeaponNotFoundException {
-        Optional<Weapons> optionalWeapons = getWeaponById(weapons.getWeaponId());
-        if (optionalWeapons.isPresent()) {
-            weaponsRepository.save(weapons);
-        }
+    public void updateWeapon(Weapons updateWeapon, Long id) throws WeaponNotFoundException {
+        Weapons weapon = weaponsRepository.findById(id)
+                .orElseThrow(() -> new WeaponNotFoundException(id));
+
+        weaponSetter.update(weapon, updateWeapon, id);
+
+        weaponsRepository.save(weapon);
     }
 
+    @CacheEvict(cacheNames = "Weapons", allEntries = true)
     @Override
     public void deleteWeaponById(Long weaponId) throws WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = getWeaponById(weaponId);
         optionalWeapons.ifPresent(weaponsRepository::delete);
     }
 
+    @CacheEvict(cacheNames = "Weapons", allEntries = true)
     @Override
     public Weapons addSoulToWeapon(Long weaponId, Long soulId) {
         Weapons weapons = weaponsRepository.findById(weaponId)
@@ -65,6 +77,7 @@ public class WeaponsServiceImpl implements WeaponsService{
         return weaponsRepository.save(weapons);
     }
 
+    @CacheEvict(cacheNames = "Weapons", allEntries = true)
     @Override
     public Weapons removeSoulFromWeapon(Long weaponId, Long soulId) {
         Weapons weapons = weaponsRepository.findById(weaponId)

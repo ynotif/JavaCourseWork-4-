@@ -5,8 +5,8 @@ import student.course.model.Bosses;
 
 @Data
 public class BosseSetter {
-    public void update(Bosses bosses, Bosses bossesUpdate) {
-        bosses.setBossId(bossesUpdate.getBossId());
+    public void update(Bosses bosses, Bosses bossesUpdate, Long id) {
+        bosses.setBossId(id);
         bosses.setBossName(bossesUpdate.getBossName());
         bosses.setBossHitPointsSum(bossesUpdate.getBossHitPointsSum());
         bosses.setBossPhysicalNormalDamageResistanceFP(bossesUpdate.getBossPhysicalNormalDamageResistanceFP());

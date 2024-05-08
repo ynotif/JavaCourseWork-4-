@@ -28,7 +28,7 @@ public class Weapons {
     @Column(name = "weaponSpellManaCost")
     private int weaponSpellManaCost;
 
-    @Column(name = "weaponSpe llDoes")
+    @Column(name = "weaponSpellDoes")
     private String weaponSpellDoes;
 
     @Column(name = "weaponPhysicalNormalDamage")

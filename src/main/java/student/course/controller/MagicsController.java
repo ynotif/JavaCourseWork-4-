@@ -27,7 +27,9 @@ public class MagicsController {
         Optional<Magics> optionalMagics = magicsService.getMagicById(id);
         if (optionalMagics.isPresent()) {
 
-            magicsService.updateMagic(updateMagic);
+            magicsService.updateMagic(updateMagic, id);
+
+            updateMagic.setMagicId(id);
 
             return ResponseEntity.ok(updateMagic);
         }

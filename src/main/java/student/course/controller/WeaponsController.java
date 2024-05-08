@@ -44,7 +44,7 @@ public class WeaponsController {
     public ResponseEntity<Weapons> updateWeapon(@RequestBody Weapons updateWeapon, @PathVariable Long id) throws WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(id);
         if(optionalWeapons.isPresent()){
-            weaponsService.updateWeapon(updateWeapon);
+            weaponsService.updateWeapon(updateWeapon, id);
             return ResponseEntity.ok(updateWeapon);
         }
         return ResponseEntity.notFound().build();

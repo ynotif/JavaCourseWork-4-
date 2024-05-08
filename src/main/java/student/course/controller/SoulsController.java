@@ -27,7 +27,7 @@ public class SoulsController {
     public ResponseEntity<Souls> updateSouls(@PathVariable Long id, @RequestBody Souls updatedSoul) throws SoulNotFoundException {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
-            soulsService.updateSoul(updatedSoul);
+            soulsService.updateSoul(updatedSoul, id);
             return ResponseEntity.ok(updatedSoul);
         }
         return ResponseEntity.notFound().build();

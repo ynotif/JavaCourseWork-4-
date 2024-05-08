@@ -1,7 +1,11 @@
 package student.course.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import student.course.bdsetters.SoulSetter;
+import student.course.bdsetters.UnitSetter;
 import student.course.exceptions.UnitNotFoundException;
 import student.course.model.Armors;
 import student.course.model.Souls;
@@ -24,11 +28,15 @@ public class UnitsServiceImpl implements UnitsService {
     private final WeaponsRepository weaponsRepository;
     private final SoulsRepository soulsRepository;
 
+    private final UnitSetter unitSetter = new UnitSetter();
+
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units createUnit(Units units) {
         return unitsRepository.save(units);
     }
 
+    @Cacheable(cacheNames = "Units")
     @Override
     public List<Units> getAllUnits() {
         return unitsRepository.findAll();
@@ -45,20 +53,25 @@ public class UnitsServiceImpl implements UnitsService {
         }
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
-    public void updateUnit(Units units) throws UnitNotFoundException {
-        Optional<Units> optionalUnits = getUnitById(units.getUnitId());
-        if (optionalUnits.isPresent()) {
-            unitsRepository.save(units);
-        }
+    public void updateUnit(Units updateUnit, Long id) throws UnitNotFoundException {
+        Units unit = unitsRepository.findById(id)
+                .orElseThrow(() -> new UnitNotFoundException(id));
+
+        unitSetter.update(unit, updateUnit, id);
+
+        unitsRepository.save(unit);
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public void deleteUnitById(Long id) throws UnitNotFoundException {
         Optional<Units> optionalUnits = getUnitById(id);
         optionalUnits.ifPresent(unitsRepository::delete);
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units addArmorToUnit(Long unitId, Long armorId) {
         Units units = unitsRepository.findById(unitId)
@@ -72,6 +85,7 @@ public class UnitsServiceImpl implements UnitsService {
         return unitsRepository.save(units);
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units removeArmorFromUnit(Long unitId, Long armorId) {
         Units units = unitsRepository.findById(unitId)
@@ -84,6 +98,7 @@ public class UnitsServiceImpl implements UnitsService {
         return unitsRepository.save(units);
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units addWeaponToUnit(Long unitId, Long weaponId) {
         Units units = unitsRepository.findById(unitId)
@@ -96,6 +111,7 @@ public class UnitsServiceImpl implements UnitsService {
         return unitsRepository.save(units);
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units removeWeaponFromUnit(Long unitId, Long weaponId) {
         Units units = unitsRepository.findById(unitId)
@@ -108,6 +124,7 @@ public class UnitsServiceImpl implements UnitsService {
         return unitsRepository.save(units);
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units addSoulToUnit(Long unitId, Long soulId) {
         Units units = unitsRepository.findById(unitId)
@@ -120,6 +137,7 @@ public class UnitsServiceImpl implements UnitsService {
         return unitsRepository.save(units);
     }
 
+    @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units removeSoulFromUnit(Long unitId, Long soulId) {
         Units units = unitsRepository.findById(unitId)

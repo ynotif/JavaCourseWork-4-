@@ -80,7 +80,7 @@ public class UnitsController {
     public ResponseEntity<Units> updateUnit(@PathVariable Long id, @RequestBody Units updateUnit) throws UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
         if (optionalUnits.isPresent()) {
-            unitsService.updateUnit(updateUnit);
+            unitsService.updateUnit(updateUnit, id);
             return ResponseEntity.ok(updateUnit);
         }
         return ResponseEntity.notFound().build();

@@ -117,7 +117,9 @@ public class LocationsController {
         Optional<Locations> optionalLocation = locationsService.getLocationById(id);
         if (optionalLocation.isPresent()) {
 
-            locationsService.updateLocation(updateLocation);
+            locationsService.updateLocation(updateLocation, id);
+
+            updateLocation.setLocationId(id);
 
             return ResponseEntity.ok(updateLocation);
         }

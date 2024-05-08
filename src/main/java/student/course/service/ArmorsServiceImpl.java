@@ -1,6 +1,9 @@
 package student.course.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import student.course.exceptions.ArmorNotFoundException;
 import student.course.model.Armors;
@@ -17,12 +20,15 @@ import java.util.Optional;
 public class ArmorsServiceImpl implements ArmorsService {
 
     private final ArmorsRepository armorsRepository;
+    private final ArmorSetter armorsSetter = new ArmorSetter();
 
+    @CacheEvict(cacheNames = "armors", allEntries = true)
     @Override
     public Armors createArmor(Armors armors) {
         return armorsRepository.save(armors);
     }
 
+    @Cacheable(cacheNames = "armors") // Обязательно включаем кэш в CourseApplication аннотацие EnableCaching
     @Override
     public List<Armors> getAllArmors() {
         return armorsRepository.findAll();
@@ -39,14 +45,16 @@ public class ArmorsServiceImpl implements ArmorsService {
         }
     }
 
+    @CacheEvict(cacheNames = "armors", allEntries = true)
     @Override
-    public void updateArmor(Armors armor) throws ArmorNotFoundException {
-        Optional<Armors> optionalArmors = getArmorById(armor.getArmorId());
-        if (optionalArmors.isPresent()) {
-            armorsRepository.save(armor);
-        }
+    public void updateArmor(Armors updateArmor, Long id) throws ArmorNotFoundException {
+        Armors armor = armorsRepository.findById(id)
+                .orElseThrow(() -> new ArmorNotFoundException(id));
+        armorsSetter.update(armor, updateArmor, id);
+        armorsRepository.save(armor);
     }
 
+    @CacheEvict(cacheNames = "armors", allEntries = true)
     @Override
     public void deleteArmorById(Long id) throws ArmorNotFoundException {
         Optional<Armors> existingArmor = getArmorById(id);

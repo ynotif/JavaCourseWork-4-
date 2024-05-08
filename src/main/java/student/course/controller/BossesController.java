@@ -83,7 +83,9 @@ public class BossesController {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(id);
 
         if (optionalBosses.isPresent()) {
-            bossesService.updateBosse(updateBosse);
+            bossesService.updateBosse(updateBosse, id);
+
+            updateBosse.setBossId(id);
 
             return ResponseEntity.ok(updateBosse);
         }

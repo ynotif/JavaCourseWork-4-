@@ -3,7 +3,8 @@ package student.course.bdsetters;
 import student.course.model.Weapons;
 
 public class WeaponSetter {
-    public void update(Weapons weapon, Weapons weaponUpdate) {
+    public void update(Weapons weapon, Weapons weaponUpdate, Long id) {
+        weapon.setWeaponId(id);
         weapon.setWeaponName(weaponUpdate.getWeaponName());
         weapon.setWeaponType(weaponUpdate.getWeaponType());
         weapon.setWeaponSpellManaCost(weaponUpdate.getWeaponSpellManaCost());

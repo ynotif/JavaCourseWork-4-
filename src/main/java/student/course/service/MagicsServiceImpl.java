@@ -1,9 +1,10 @@
 package student.course.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import student.course.exceptions.LocationNotFoundException;
+import student.course.bdsetters.MagicSetter;
 import student.course.exceptions.MagicNotFoundException;
 import student.course.model.Magics;
 import student.course.repository.MagicsRepository;
@@ -17,17 +18,21 @@ public class MagicsServiceImpl implements MagicsService {
 
     private final MagicsRepository magicsRepository;
 
+    private final MagicSetter magicSetter = new MagicSetter();
 
+    @CacheEvict(cacheNames = "Magics", allEntries = true)
     @Override
     public Magics createMagic(Magics magics) {
         return magicsRepository.save(magics);
     }
 
+    @Cacheable(cacheNames = "Magics")
     @Override
     public List<Magics> getAllMagics() {
         return magicsRepository.findAll();
     }
 
+    @CacheEvict(cacheNames = "Magics", allEntries = true)
     @Override
     public Optional<Magics> getMagicById(Long id) throws MagicNotFoundException {
         Optional<Magics> optionalMagic = magicsRepository.findById(id);
@@ -39,14 +44,18 @@ public class MagicsServiceImpl implements MagicsService {
         }
     }
 
+    @CacheEvict(cacheNames = "Magics", allEntries = true)
     @Override
-    public void updateMagic(Magics magics) throws MagicNotFoundException {
-        Optional<Magics> optionalMagics = getMagicById(magics.getMagicId());
-        if (optionalMagics.isPresent()) {
-            magicsRepository.save(magics);
-        }
+    public void updateMagic(Magics updateMagic, Long id) throws MagicNotFoundException {
+        Magics magic = magicsRepository.findById(id)
+                .orElseThrow(() -> new MagicNotFoundException(id));
+
+        magicSetter.update(magic, updateMagic, id);
+
+        magicsRepository.save(magic);
     }
 
+    @CacheEvict(cacheNames = "Magics", allEntries = true)
     @Override
     public void deleteMagicById(Long id) throws MagicNotFoundException {
         Optional<Magics> optionalMagics = getMagicById(id);

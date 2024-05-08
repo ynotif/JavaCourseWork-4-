@@ -5,7 +5,9 @@ import student.course.model.Armors;
 
 @Data
 public class ArmorSetter {
-    public void update(Armors armor, Armors armorUpdate) { // Сначала старую, потом новую
+    public void update(Armors armor, Armors armorUpdate, Long id) { // Сначала старую, потом новую
+        armor.setArmorId(id);
+        armor.setArmorName(armorUpdate.getArmorName());
         armor.setArmorPhysicalNormalDamageResistance(armorUpdate.getArmorPhysicalNormalDamageResistance());
         armor.setArmorPhysicalCrushingDamageResistance(armorUpdate.getArmorPhysicalCrushingDamageResistance());
         armor.setArmorPhysicalSlashingDamageResistance(armorUpdate.getArmorPhysicalSlashingDamageResistance());

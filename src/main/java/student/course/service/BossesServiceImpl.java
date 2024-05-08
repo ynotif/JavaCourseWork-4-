@@ -2,7 +2,10 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import student.course.bdsetters.BosseSetter;
 import student.course.exceptions.BosseNotFoundException;
 import student.course.model.Armors;
 import student.course.model.Bosses;
@@ -20,20 +23,24 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BossesServiceImpl implements BossesService {
 
-    @Autowired
-    private BossesRepository bossesRepository;
-    @Autowired
-    private ArmorsRepository armorsRepository;
-    @Autowired
-    private WeaponsRepository weaponsRepository;
-    @Autowired
-    private SoulsRepository soulsRepository;
 
+    private final BossesRepository bossesRepository;
+
+    private final ArmorsRepository armorsRepository;
+
+    private final WeaponsRepository weaponsRepository;
+
+    private final SoulsRepository soulsRepository;
+
+    private final BosseSetter bosseSetter = new BosseSetter();
+
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     @Override
     public Bosses createBosse(Bosses bosses) {
         return bossesRepository.save(bosses);
     }
 
+    @Cacheable(cacheNames = "Bosse")
     @Override
     public List<Bosses> getAllBosses() {
         return bossesRepository.findAll();
@@ -50,21 +57,26 @@ public class BossesServiceImpl implements BossesService {
         }
     }
 
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     @Override
-    public void updateBosse(Bosses bosses) throws BosseNotFoundException {
-        Optional<Bosses> optionalBosses = getBosseById(bosses.getBossId());
-        if (optionalBosses.isPresent()) {
-            bossesRepository.save(bosses);
-        }
+    public void updateBosse(Bosses updateBosse, Long id) throws BosseNotFoundException {
+        Bosses bosses = bossesRepository.findById(id)
+                .orElseThrow(() -> new BosseNotFoundException(id));
+
+        bosseSetter.update(bosses, updateBosse, id);
+
+        bossesRepository.save(bosses);
+
     }
 
-
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     @Override
     public void deleteBosseById(Long id) {
         Optional<Bosses> bosses = bossesRepository.findById(id);
         bosses.ifPresent(bossesRepository::delete);
     }
 
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     @Override
     public Bosses addArmorToBoss(Long bossId, Long armorId) {
         Bosses bosses = bossesRepository.findById(bossId)
@@ -75,6 +87,7 @@ public class BossesServiceImpl implements BossesService {
         return bossesRepository.save(bosses);
     }
 
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     @Override
     public Bosses removeArmorFromBoss(Long bossId, Long armorId) {
         Bosses bosses = bossesRepository.findById(bossId)
@@ -86,6 +99,7 @@ public class BossesServiceImpl implements BossesService {
         return bossesRepository.save(bosses);
     }
 
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     @Override
     public Bosses addWeaponToBoss(Long bossId, Long weaponId) {
         Bosses bosses = bossesRepository.findById(bossId)
@@ -97,6 +111,7 @@ public class BossesServiceImpl implements BossesService {
         return bossesRepository.save(bosses);
     }
 
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     @Override
     public Bosses removeWeaponFromBoss(Long bossId, Long weaponId) {
         Bosses bosses = bossesRepository.findById(bossId)
@@ -108,6 +123,7 @@ public class BossesServiceImpl implements BossesService {
         return bossesRepository.save(bosses);
     }
 
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     public Bosses addSoulToBoss(Long bossId, Long soulId){
         Bosses bosses = bossesRepository.findById(bossId)
                 .orElseThrow(() -> new RuntimeException("Bosses not found"));
@@ -118,6 +134,7 @@ public class BossesServiceImpl implements BossesService {
         return bossesRepository.save(bosses);
     }
 
+    @CacheEvict(cacheNames = "Bosse", allEntries = true)
     public Bosses removeSoulFromBoss(Long bossId, Long soulId){
         Bosses bosses = bossesRepository.findById(bossId)
                 .orElseThrow(() -> new RuntimeException("Bosses not found"));
