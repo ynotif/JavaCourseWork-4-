@@ -1,0 +1,29 @@
+package student.course.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.apache.catalina.User;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "userRoles")
+@Entity(name = "userRoles")
+@Setter
+@Getter
+public class UserRoles {
+
+    @Id
+    @GeneratedValue(generator = "userRole_id_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "userRole_id_seq", sequenceName = "userRole_id_seq", allocationSize = 1, initialValue = 1)
+    @Column(name = "userRoleId")
+    private Long userRoleId;
+
+    @Enumerated // помечаем т.к. enum
+    private UserAuthority userAuthority;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private Users users;
+
+}

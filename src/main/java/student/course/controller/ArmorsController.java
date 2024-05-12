@@ -22,15 +22,15 @@ public class ArmorsController {
         return ResponseEntity.ok(armorsService.createArmor(armor));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Armors> updateArmor(@RequestBody Armors armorUpdate, @PathVariable Long id) throws ArmorNotFoundException {
-        Optional<Armors> optionalArmors = armorsService.getArmorById(id);
+    @PutMapping("/{updateById}")
+    public ResponseEntity<Armors> updateArmor(@RequestBody Armors armorUpdate, @PathVariable Long updateById) throws ArmorNotFoundException {
+        Optional<Armors> optionalArmors = armorsService.getArmorById(updateById);
 
         if (optionalArmors.isPresent()) {
 
-            armorsService.updateArmor(armorUpdate, id);
+            armorsService.updateArmor(armorUpdate, updateById);
 
-            armorUpdate.setArmorId(id);
+            armorUpdate.setArmorId(updateById);
 
             return ResponseEntity.ok(armorUpdate);
         } else {
@@ -43,14 +43,14 @@ public class ArmorsController {
         return ResponseEntity.ok(armorsService.getAllArmors());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Armors>> getArmorById(@PathVariable Long id) throws ArmorNotFoundException {
-        return ResponseEntity.ok(armorsService.getArmorById(id));
+    @GetMapping("/{getById}")
+    public ResponseEntity<Optional<Armors>> getArmorById(@PathVariable Long getById) throws ArmorNotFoundException {
+        return ResponseEntity.ok(armorsService.getArmorById(getById));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteArmor(@PathVariable Long id) throws ArmorNotFoundException {
-        armorsService.deleteArmorById(id);
+    @DeleteMapping("/{DeleteById}")
+    public ResponseEntity<String> deleteArmor(@PathVariable Long DeleteById) throws ArmorNotFoundException {
+        armorsService.deleteArmorById(DeleteById);
         return ResponseEntity.ok("Armor deleted successfully!");
     }
 }
