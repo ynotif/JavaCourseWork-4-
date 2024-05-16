@@ -19,12 +19,12 @@ public class SoulsController {
 
 
     @PostMapping
-    public ResponseEntity<Souls> addSouls(@RequestBody Souls soul) {
+    ResponseEntity<Souls> addSouls(@RequestBody Souls soul) {
         return ResponseEntity.ok(soulsService.createSoul(soul));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Souls> updateSouls(@PathVariable Long id, @RequestBody Souls updatedSoul) throws SoulNotFoundException {
+    ResponseEntity<Souls> updateSouls(@PathVariable Long id, @RequestBody Souls updatedSoul) throws SoulNotFoundException {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
             soulsService.updateSoul(updatedSoul, id);
@@ -34,17 +34,17 @@ public class SoulsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Souls>> getAllSouls() {
+    ResponseEntity<List<Souls>> getAllSouls() {
         return ResponseEntity.ok(soulsService.getAllSouls());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Souls>> getSoulById(@PathVariable Long id) throws SoulNotFoundException {
+    ResponseEntity<Optional<Souls>> getSoulById(@PathVariable Long id) throws SoulNotFoundException {
         return ResponseEntity.ok(soulsService.getSoulById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSoulById(@PathVariable Long id) throws SoulNotFoundException {
+    ResponseEntity<String> deleteSoulById(@PathVariable Long id) throws SoulNotFoundException {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
             soulsService.deleteSoulById(id);

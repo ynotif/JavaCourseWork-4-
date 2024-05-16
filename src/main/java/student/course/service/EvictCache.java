@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EvictCache {
 
-    @CacheEvict(cacheNames = {"Armors", "Bosse", "Locations", "Magics", "NPC", "Souls", "Units", "Weapons"}, allEntries = true)
+    @CacheEvict(cacheNames = {"Armors", "Boss", "Locations", "Magics", "NPC", "Souls", "Units", "Weapons"}, allEntries = true)
     public void evictCache(){
 
     }

@@ -12,6 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode
 public class Armors {
     @Id
     @Column(name = "armorId")

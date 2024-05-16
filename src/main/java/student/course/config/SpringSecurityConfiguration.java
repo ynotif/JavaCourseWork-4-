@@ -26,7 +26,7 @@ public class SpringSecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/armors/**", "/bosses/**", "/locations/**", "/magics/**", "/npc/**",
                                         "/souls/**", "/units/**", "/weapons/**").hasAuthority(UserAuthority.CREATOR.getAuthority())
                                 .requestMatchers(HttpMethod.GET, "/armors/**", "/bosses/**", "/locations/**", "/magics/**", "/npc/**",
-                                        "/souls/**", "/units/**", "/weapons/**").authenticated() // Любой кто залогинился
+                                        "/souls/**", "/units/**", "/weapons/**", "/souls").authenticated() // Любой кто залогинился
                                 .requestMatchers(HttpMethod.DELETE, "/armors/**","/bosses/**", "/locations/**", "/magics/**", "/npc/**",
                                         "/souls/**", "/units/**", "/weapons/**").hasAuthority(UserAuthority.CREATOR.getAuthority())
                                 .requestMatchers(HttpMethod.PUT, "/armors/**","/bosses/**", "/locations/**", "/magics/**", "/npc/**",

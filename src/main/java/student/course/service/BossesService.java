@@ -17,7 +17,7 @@ public interface BossesService {
 
     void updateBosse(Bosses bosses, Long id) throws BosseNotFoundException;
 
-    void deleteBosseById(Long id);
+    void deleteBosseById(Long id) throws BosseNotFoundException;
 
     Bosses addArmorToBoss(Long bossId, Long armorId);
 

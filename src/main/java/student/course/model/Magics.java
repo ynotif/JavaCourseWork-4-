@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode
 public class Magics {
     @Id
     @Column(name = "magicId")

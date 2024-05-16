@@ -1,7 +1,6 @@
 package student.course.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -34,13 +33,13 @@ public class BossesServiceImpl implements BossesService {
 
     private final BosseSetter bosseSetter = new BosseSetter();
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
     public Bosses createBosse(Bosses bosses) {
         return bossesRepository.save(bosses);
     }
 
-    @Cacheable(cacheNames = "Bosse")
+    @Cacheable(cacheNames = "Boss")
     @Override
     public List<Bosses> getAllBosses() {
         return bossesRepository.findAll();
@@ -57,7 +56,7 @@ public class BossesServiceImpl implements BossesService {
         }
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
     public void updateBosse(Bosses updateBosse, Long id) throws BosseNotFoundException {
         Bosses bosses = bossesRepository.findById(id)
@@ -69,80 +68,80 @@ public class BossesServiceImpl implements BossesService {
 
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
-    public void deleteBosseById(Long id) {
+    public void deleteBosseById(Long id){
         Optional<Bosses> bosses = bossesRepository.findById(id);
         bosses.ifPresent(bossesRepository::delete);
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
     public Bosses addArmorToBoss(Long bossId, Long armorId) {
-        Bosses bosses = bossesRepository.findById(bossId)
-                .orElseThrow(() -> new RuntimeException("Bosses not found"));
-        Armors armors = armorsRepository.findById(armorId)
-                .orElseThrow(() -> new RuntimeException("Armors not found"));
-        bosses.getArmor().add(armors);
-        return bossesRepository.save(bosses);
+            Bosses bosses = bossesRepository.findById(bossId)
+                    .orElseThrow(() -> new RuntimeException("Bosses not found"));
+            Armors armors = armorsRepository.findById(armorId)
+                    .orElseThrow(() -> new RuntimeException("Armors not found"));
+            bosses.getArmor().add(armors);
+            return bossesRepository.save(bosses);
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
-    public Bosses removeArmorFromBoss(Long bossId, Long armorId) {
-        Bosses bosses = bossesRepository.findById(bossId)
-                .orElseThrow(() -> new RuntimeException("Bosses not found"));
-        Armors armors = armorsRepository.findById(armorId)
-                .orElseThrow(() -> new RuntimeException("Armors not found"));
+        public Bosses removeArmorFromBoss(Long bossId, Long armorId) {
+            Bosses bosses = bossesRepository.findById(bossId)
+                    .orElseThrow(() -> new RuntimeException("Bosses not found"));
+            Armors armors = armorsRepository.findById(armorId)
+                    .orElseThrow(() -> new RuntimeException("Armors not found"));
 
-        bosses.getArmor().remove(armors);
-        return bossesRepository.save(bosses);
+            bosses.getArmor().remove(armors);
+            return bossesRepository.save(bosses);
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
     public Bosses addWeaponToBoss(Long bossId, Long weaponId) {
-        Bosses bosses = bossesRepository.findById(bossId)
-                .orElseThrow(() -> new RuntimeException("Bosses not found"));
-        Weapons weapons = weaponsRepository.findById(weaponId)
-                .orElseThrow(() -> new RuntimeException("Weapons not found"));
+            Bosses bosses = bossesRepository.findById(bossId)
+                    .orElseThrow(() -> new RuntimeException("Bosses not found"));
+            Weapons weapons = weaponsRepository.findById(weaponId)
+                    .orElseThrow(() -> new RuntimeException("Weapons not found"));
 
-        bosses.getWeapon().add(weapons);
-        return bossesRepository.save(bosses);
+            bosses.getWeapon().add(weapons);
+            return bossesRepository.save(bosses);
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
     public Bosses removeWeaponFromBoss(Long bossId, Long weaponId) {
-        Bosses bosses = bossesRepository.findById(bossId)
-                .orElseThrow(() -> new RuntimeException("Bosses not found"));
-        Weapons weapons = weaponsRepository.findById(weaponId)
-                .orElseThrow(() -> new RuntimeException("Weapons not found"));
+            Bosses bosses = bossesRepository.findById(bossId)
+                    .orElseThrow(() -> new RuntimeException("Bosses not found"));
+            Weapons weapons = weaponsRepository.findById(weaponId)
+                    .orElseThrow(() -> new RuntimeException("Weapons not found"));
 
-        bosses.getWeapon().remove(weapons);
-        return bossesRepository.save(bosses);
+            bosses.getWeapon().remove(weapons);
+            return bossesRepository.save(bosses);
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     public Bosses addSoulToBoss(Long bossId, Long soulId){
-        Bosses bosses = bossesRepository.findById(bossId)
-                .orElseThrow(() -> new RuntimeException("Bosses not found"));
-        Souls souls = soulsRepository.findById(soulId)
-                .orElseThrow(() -> new RuntimeException("Souls not found"));
+            Bosses bosses = bossesRepository.findById(bossId)
+                    .orElseThrow(() -> new RuntimeException("Bosses not found"));
+            Souls souls = soulsRepository.findById(soulId)
+                    .orElseThrow(() -> new RuntimeException("Souls not found"));
 
-        bosses.getSoul().add(souls);
-        return bossesRepository.save(bosses);
+            bosses.getSoul().add(souls);
+            return bossesRepository.save(bosses);
     }
 
-    @CacheEvict(cacheNames = "Bosse", allEntries = true)
+    @CacheEvict(cacheNames = "Boss", allEntries = true)
     public Bosses removeSoulFromBoss(Long bossId, Long soulId){
-        Bosses bosses = bossesRepository.findById(bossId)
-                .orElseThrow(() -> new RuntimeException("Bosses not found"));
-        Souls souls = soulsRepository.findById(soulId)
-                .orElseThrow(() -> new RuntimeException("Souls not found"));
+            Bosses bosses = bossesRepository.findById(bossId)
+                    .orElseThrow(() -> new RuntimeException("Bosses not found"));
+            Souls souls = soulsRepository.findById(soulId)
+                    .orElseThrow(() -> new RuntimeException("Souls not found"));
 
-        bosses.getSoul().remove(souls);
-        return bossesRepository.save(bosses);
+            bosses.getSoul().remove(souls);
+            return bossesRepository.save(bosses);
     }
 
 }
