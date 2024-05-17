@@ -1,15 +1,18 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Table(name = "soul")
-@Entity(name = "soul")
+import java.util.Set;
+
+@Table(name = "souls")
+@Entity(name = "souls")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
+@EqualsAndHashCode
 public class Souls {
     @Id
     @Column(name = "soulId")
@@ -26,4 +29,19 @@ public class Souls {
     @Column(name = "soulSomeInformation")
     private String soulSomeInformation;
 
+    @ManyToMany
+    @JsonIgnore
+    private Set<Units> unit;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Bosses> bosses;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<NPC> npc;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Weapons> weapons;
 }

@@ -1,9 +1,12 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Table(name = "units")
 @Entity(name = "units")
@@ -16,10 +19,6 @@ public class Units {
     @GeneratedValue(generator = "unit_id_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "unit_id_seq", sequenceName = "unit_id_seq", allocationSize = 1, initialValue = 1)
     private Long unitId;
-
-    @ManyToOne
-    @JoinColumn(name = "locationId")
-    private Locations location;
 
     @Column(name = "unitHitPoints")
     private double unitHitPoints;
@@ -96,19 +95,35 @@ public class Units {
     @Column(name = "unitSoulsQuantity")
     private int unitSoulsQuantity;
 
-    //Для дропа
-    @JoinColumn(name = "armorId")
-    @ManyToOne
-    private Armors armor;
-
-    @JoinColumn(name = "weaponId")
-    @ManyToOne
-    private Weapons weapon;
-
-    @JoinColumn(name = "soulId")
-    @ManyToOne
-    private Souls soul;
-
     @Column(name = "unitSomeInformation")
     private String unitSomeInformation;
+
+    //Для дропа
+    @ManyToMany
+    @JoinTable(
+            name = "units_armors",
+            joinColumns = @JoinColumn(name = "unitId"),
+            inverseJoinColumns = @JoinColumn(name = "armorId")
+    )
+    private Set<Armors> armor;
+
+    @ManyToMany
+    @JoinTable(
+            name = "units_weapons",
+            joinColumns = @JoinColumn(name = "unitId"),
+            inverseJoinColumns = @JoinColumn(name = "weaponId")
+    )
+    private Set<Weapons> weapon;
+
+    @ManyToMany
+    @JoinTable(
+            name = "units_souls",
+            joinColumns = @JoinColumn(name = "unitId"),
+            inverseJoinColumns = @JoinColumn(name = "soulId")
+    )
+    private Set<Souls> soul;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Locations> locations;
 }

@@ -1,0 +1,2334 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1715369154794-1
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: armor_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-2
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: boss_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-3
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: location_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-4
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: magic_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-5
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: npc_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-6
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: soul_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-7
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: unit_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-8
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: user_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-9
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: user_role_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-10
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: weapon_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1715369154794-11
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor
+                  name: armor_id
+                  type: BIGINT
+              - column:
+                  name: armor_name
+                  type: VARCHAR(255)
+              - column:
+                  name: armor_physical_normal_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_physical_crushing_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_physical_slashing_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_physical_piercing_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_magical_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_fire_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_lightning_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_darkness_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: armor_type
+                  type: VARCHAR(255)
+              - column:
+                  name: armor_balance
+                  type: INT
+              - column:
+                  name: armor_weight
+                  type: INT
+              - column:
+                  name: armor_endurance
+                  type: INT
+              - column:
+                  name: armor_sale_cost
+                  type: INT
+              - column:
+                  name: armor_buy_cost
+                  type: INT
+              - column:
+                  name: armor_some_information
+                  type: VARCHAR(255)
+            tableName: armor
+  - changeSet:
+      id: 1715369154794-12
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_bosses
+                  name: armor_armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_bosses
+                  name: bosses_boss_id
+                  type: BIGINT
+            tableName: armor_bosses
+  - changeSet:
+      id: 1715369154794-13
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_locations
+                  name: armor_armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_locations
+                  name: locations_location_id
+                  type: BIGINT
+            tableName: armor_locations
+  - changeSet:
+      id: 1715369154794-14
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_npc
+                  name: armor_armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_npc
+                  name: npc_npc_id
+                  type: BIGINT
+            tableName: armor_npc
+  - changeSet:
+      id: 1715369154794-15
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_units
+                  name: armor_armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_armor_units
+                  name: units_unit_id
+                  type: BIGINT
+            tableName: armor_units
+  - changeSet:
+      id: 1715369154794-16
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses
+                  name: boss_id
+                  type: BIGINT
+              - column:
+                  name: boss_name
+                  type: VARCHAR(255)
+              - column:
+                  name: boss_hit_points_sum
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_normal_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_crushing_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_slashing_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_piercing_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_magical_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_fire_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_lightning_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_darkness_damage_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_bleeding_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_poison_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_frost_resistancefp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_normal_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_crushing_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_slashing_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_piercing_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_magical_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_fire_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_lightning_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_darkness_damagefp
+                  type: DOUBLE
+              - column:
+                  name: boss_bleeding_effectfp
+                  type: DOUBLE
+              - column:
+                  name: boss_poison_effectfp
+                  type: DOUBLE
+              - column:
+                  name: boss_frost_effectfp
+                  type: DOUBLE
+              - column:
+                  name: boss_hit_pointsfp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_normal_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_crushing_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_slashing_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_piercing_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_magical_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_fire_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_lightning_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_darkness_damage_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_bleeding_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_poison_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_frost_resistancesp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_normal_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_crushing_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_slashing_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_piercing_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_magical_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_fire_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_lightning_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_darkness_damagesp
+                  type: DOUBLE
+              - column:
+                  name: boss_bleeding_effectsp
+                  type: DOUBLE
+              - column:
+                  name: boss_poison_effectsp
+                  type: DOUBLE
+              - column:
+                  name: boss_frost_effectsp
+                  type: DOUBLE
+              - column:
+                  name: boss_hit_pointssp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_normal_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_crushing_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_slashing_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_piercing_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_magical_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_fire_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_lightning_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_darkness_damage_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_bleeding_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_poison_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_frost_resistancetp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_normal_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_crushing_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_slashing_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_physical_piercing_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_magical_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_fire_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_lightning_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_darkness_damagetp
+                  type: DOUBLE
+              - column:
+                  name: boss_bleeding_effecttp
+                  type: DOUBLE
+              - column:
+                  name: boss_poison_effecttp
+                  type: DOUBLE
+              - column:
+                  name: boss_frost_effecttp
+                  type: DOUBLE
+              - column:
+                  name: boss_hit_pointstp
+                  type: DOUBLE
+              - column:
+                  name: boss_souls_quantity
+                  type: INT
+              - column:
+                  name: boss_history
+                  type: VARCHAR(255)
+            tableName: bosses
+  - changeSet:
+      id: 1715369154794-17
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_armors
+                  name: armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_armors
+                  name: boss_id
+                  type: BIGINT
+            tableName: bosses_armors
+  - changeSet:
+      id: 1715369154794-18
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_locations
+                  name: bosses_boss_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_locations
+                  name: locations_location_id
+                  type: BIGINT
+            tableName: bosses_locations
+  - changeSet:
+      id: 1715369154794-19
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_souls
+                  name: boss_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_souls
+                  name: soul_id
+                  type: BIGINT
+            tableName: bosses_souls
+  - changeSet:
+      id: 1715369154794-20
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_weapons
+                  name: boss_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_bosses_weapons
+                  name: weapon_id
+                  type: BIGINT
+            tableName: bosses_weapons
+  - changeSet:
+      id: 1715369154794-21
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations
+                  name: location_id
+                  type: BIGINT
+              - column:
+                  name: location_name
+                  type: VARCHAR(255)
+              - column:
+                  name: location_estus_quantity
+                  type: INT
+              - column:
+                  name: location_unique_units_quantity
+                  type: INT
+              - column:
+                  name: location_new_magic
+                  type: INT
+              - column:
+                  name: location_unique_weapons_quantity
+                  type: INT
+              - column:
+                  name: locations_unique_bosses_quantity
+                  type: INT
+              - column:
+                  name: location_unique_armors_quantity
+                  type: INT
+              - column:
+                  name: location_bosse_quantity
+                  type: INT
+              - column:
+                  name: locationnpcquantity
+                  type: INT
+              - column:
+                  name: location_lizards_quantity
+                  type: INT
+              - column:
+                  name: location_some_information
+                  type: VARCHAR(255)
+            tableName: locations
+  - changeSet:
+      id: 1715369154794-22
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_armors
+                  name: armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_armors
+                  name: location_id
+                  type: BIGINT
+            tableName: locations_armors
+  - changeSet:
+      id: 1715369154794-23
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_bosses
+                  name: boss_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_bosses
+                  name: location_id
+                  type: BIGINT
+            tableName: locations_bosses
+  - changeSet:
+      id: 1715369154794-24
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_magics
+                  name: location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_magics
+                  name: magic_id
+                  type: BIGINT
+            tableName: locations_magics
+  - changeSet:
+      id: 1715369154794-25
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_npc
+                  name: location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_npc
+                  name: npc_id
+                  type: BIGINT
+            tableName: locations_npc
+  - changeSet:
+      id: 1715369154794-26
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_units
+                  name: location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_units
+                  name: unit_id
+                  type: BIGINT
+            tableName: locations_units
+  - changeSet:
+      id: 1715369154794-27
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_weapons
+                  name: location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_locations_weapons
+                  name: weapon_id
+                  type: BIGINT
+            tableName: locations_weapons
+  - changeSet:
+      id: 1715369154794-28
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_magics
+                  name: magic_id
+                  type: BIGINT
+              - column:
+                  name: magic_name
+                  type: VARCHAR(255)
+              - column:
+                  name: magic_mana_cost
+                  type: INT
+              - column:
+                  name: magic_magical_damage
+                  type: DOUBLE
+              - column:
+                  name: magic_physical_damage
+                  type: DOUBLE
+              - column:
+                  name: magic_fire_damage
+                  type: DOUBLE
+              - column:
+                  name: magic_lightning_damage
+                  type: DOUBLE
+              - column:
+                  name: magic_darkness_damage
+                  type: DOUBLE
+              - column:
+                  name: magic_heal
+                  type: DOUBLE
+              - column:
+                  name: magic_cast_time
+                  type: DOUBLE
+              - column:
+                  name: magic_cast_range
+                  type: DOUBLE
+              - column:
+                  name: magic_intellect_required
+                  type: INT
+              - column:
+                  name: magic_faith_required
+                  type: INT
+              - column:
+                  name: magic_number_cells
+                  type: INT
+              - column:
+                  name: magic_buy_cost
+                  type: INT
+              - column:
+                  name: magic_soul_craft
+                  type: VARCHAR(255)
+              - column:
+                  name: magic_some_information
+                  type: VARCHAR(255)
+            tableName: magics
+  - changeSet:
+      id: 1715369154794-29
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_magics_locations
+                  name: locations_location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_magics_locations
+                  name: magics_magic_id
+                  type: BIGINT
+            tableName: magics_locations
+  - changeSet:
+      id: 1715369154794-30
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_magics_npc
+                  name: magics_magic_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_magics_npc
+                  name: npc_npc_id
+                  type: BIGINT
+            tableName: magics_npc
+  - changeSet:
+      id: 1715369154794-31
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc
+                  name: npc_id
+                  type: BIGINT
+              - column:
+                  name: npc_name
+                  type: VARCHAR(255)
+              - column:
+                  name: npc_quest
+                  type: VARCHAR(255)
+              - column:
+                  name: npc_hit_points
+                  type: DOUBLE
+              - column:
+                  name: npc_meeting_quantity
+                  type: INT
+              - column:
+                  name: npc_souls_for_kill
+                  type: INT
+              - column:
+                  name: npc_estus_quantity
+                  type: INT
+              - column:
+                  name: npc_some_information
+                  type: VARCHAR(255)
+            tableName: npc
+  - changeSet:
+      id: 1715369154794-32
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_armors
+                  name: armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_armors
+                  name: npc_id
+                  type: BIGINT
+            tableName: npc_armors
+  - changeSet:
+      id: 1715369154794-33
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_locations
+                  name: locations_location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_locations
+                  name: npc_npc_id
+                  type: BIGINT
+            tableName: npc_locations
+  - changeSet:
+      id: 1715369154794-34
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_magics
+                  name: magic_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_magics
+                  name: npc_id
+                  type: BIGINT
+            tableName: npc_magics
+  - changeSet:
+      id: 1715369154794-35
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_souls
+                  name: npc_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_souls
+                  name: soul_id
+                  type: BIGINT
+            tableName: npc_souls
+  - changeSet:
+      id: 1715369154794-36
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_weapons
+                  name: npc_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_npc_weapons
+                  name: weapon_id
+                  type: BIGINT
+            tableName: npc_weapons
+  - changeSet:
+      id: 1715369154794-37
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls
+                  name: soul_id
+                  type: BIGINT
+              - column:
+                  name: soul_name
+                  type: VARCHAR(255)
+              - column:
+                  name: soul_equal_soul_currency
+                  type: INT
+              - column:
+                  name: soul_some_information
+                  type: VARCHAR(255)
+            tableName: souls
+  - changeSet:
+      id: 1715369154794-38
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_bosses
+                  name: bosses_boss_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_bosses
+                  name: souls_soul_id
+                  type: BIGINT
+            tableName: souls_bosses
+  - changeSet:
+      id: 1715369154794-39
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_npc
+                  name: npc_npc_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_npc
+                  name: souls_soul_id
+                  type: BIGINT
+            tableName: souls_npc
+  - changeSet:
+      id: 1715369154794-40
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_unit
+                  name: souls_soul_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_unit
+                  name: unit_unit_id
+                  type: BIGINT
+            tableName: souls_unit
+  - changeSet:
+      id: 1715369154794-41
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_weapons
+                  name: souls_soul_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_souls_weapons
+                  name: weapons_weapon_id
+                  type: BIGINT
+            tableName: souls_weapons
+  - changeSet:
+      id: 1715369154794-42
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units
+                  name: unit_id
+                  type: BIGINT
+              - column:
+                  name: unit_hit_points
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_normal_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_crushing_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_slashing_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_piercing_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_magical_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_fire_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_lightning_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_darkness_damage_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_bleeding_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_poison_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_frost_resistance
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_normal_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_crushing_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_slashing_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_physical_piercing_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_magical_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_fire_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_lightning_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_darkness_damage
+                  type: DOUBLE
+              - column:
+                  name: unit_bleeding_effect
+                  type: DOUBLE
+              - column:
+                  name: unit_poison_effect
+                  type: DOUBLE
+              - column:
+                  name: unit_frost_effect
+                  type: DOUBLE
+              - column:
+                  name: unit_curse_effect
+                  type: DOUBLE
+              - column:
+                  name: unit_souls_quantity
+                  type: INT
+              - column:
+                  name: unit_some_information
+                  type: VARCHAR(255)
+            tableName: units
+  - changeSet:
+      id: 1715369154794-43
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_armors
+                  name: armor_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_armors
+                  name: unit_id
+                  type: BIGINT
+            tableName: units_armors
+  - changeSet:
+      id: 1715369154794-44
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_locations
+                  name: locations_location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_locations
+                  name: units_unit_id
+                  type: BIGINT
+            tableName: units_locations
+  - changeSet:
+      id: 1715369154794-45
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_souls
+                  name: soul_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_souls
+                  name: unit_id
+                  type: BIGINT
+            tableName: units_souls
+  - changeSet:
+      id: 1715369154794-46
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_weapons
+                  name: unit_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_units_weapons
+                  name: weapon_id
+                  type: BIGINT
+            tableName: units_weapons
+  - changeSet:
+      id: 1715369154794-47
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_userroles
+                  name: user_role_id
+                  type: BIGINT
+              - column:
+                  name: user_authority
+                  type: SMALLINT
+              - column:
+                  name: user_id
+                  type: BIGINT
+            tableName: user_roles
+  - changeSet:
+      id: 1715369154794-48
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: user_name
+                  type: VARCHAR(255)
+              - column:
+                  name: user_password
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expired
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: locked
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enabled
+                  type: BOOLEAN
+            tableName: users
+  - changeSet:
+      id: 1715369154794-49
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons
+                  name: weapon_id
+                  type: BIGINT
+              - column:
+                  name: weapon_name
+                  type: VARCHAR(255)
+              - column:
+                  name: weapon_type
+                  type: VARCHAR(255)
+              - column:
+                  name: weapon_spell_mana_cost
+                  type: INT
+              - column:
+                  name: weapon_spell_does
+                  type: VARCHAR(255)
+              - column:
+                  name: weapon_physical_normal_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_physical_crushing_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_physical_slashing_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_physical_piercing_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_magical_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_fire_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_lightning_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_darkness_damage
+                  type: DOUBLE
+              - column:
+                  name: weapon_bleeding_effect
+                  type: DOUBLE
+              - column:
+                  name: weapon_poison_effect
+                  type: DOUBLE
+              - column:
+                  name: weapon_frost_effect
+                  type: DOUBLE
+              - column:
+                  name: weapon_critical_damage
+                  type: INT
+              - column:
+                  name: weapon_physica_damagel_block
+                  type: DOUBLE
+              - column:
+                  name: weapon_magical_damage_block
+                  type: DOUBLE
+              - column:
+                  name: weapon_fire_damage_block
+                  type: DOUBLE
+              - column:
+                  name: weapon_lighting_damagel_block
+                  type: DOUBLE
+              - column:
+                  name: weapon_darkness_damage_block
+                  type: DOUBLE
+              - column:
+                  name: weapon_balance
+                  type: INT
+              - column:
+                  name: weapon_strength_scaling
+                  type: VARCHAR(255)
+              - column:
+                  name: weapon_agility_scaling
+                  type: VARCHAR(255)
+              - column:
+                  name: weapon_intellect_scaling
+                  type: VARCHAR(255)
+              - column:
+                  name: weapon_faith_scaling
+                  type: VARCHAR(255)
+              - column:
+                  name: weapon_strength_required
+                  type: INT
+              - column:
+                  name: weapon_agility_required
+                  type: INT
+              - column:
+                  name: weapon_intellect_required
+                  type: INT
+              - column:
+                  name: weapon_faith_required
+                  type: INT
+              - column:
+                  name: weapon_endurance
+                  type: INT
+              - column:
+                  name: weapon_sale_cost
+                  type: INT
+              - column:
+                  name: weapon_buy_cost
+                  type: INT
+              - column:
+                  name: weapon_some_information
+                  type: VARCHAR(255)
+            tableName: weapons
+  - changeSet:
+      id: 1715369154794-50
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_bosses
+                  name: bosses_boss_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_bosses
+                  name: weapons_weapon_id
+                  type: BIGINT
+            tableName: weapons_bosses
+  - changeSet:
+      id: 1715369154794-51
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_locations
+                  name: locations_location_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_locations
+                  name: weapons_weapon_id
+                  type: BIGINT
+            tableName: weapons_locations
+  - changeSet:
+      id: 1715369154794-52
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_npc
+                  name: npc_npc_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_npc
+                  name: weapons_weapon_id
+                  type: BIGINT
+            tableName: weapons_npc
+  - changeSet:
+      id: 1715369154794-53
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_souls
+                  name: soul_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_souls
+                  name: weapon_id
+                  type: BIGINT
+            tableName: weapons_souls
+  - changeSet:
+      id: 1715369154794-54
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_units
+                  name: units_unit_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_weapons_units
+                  name: weapons_weapon_id
+                  type: BIGINT
+            tableName: weapons_units
+  - changeSet:
+      id: 1715369154794-55
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_roles
+            constraintName: FK_USERROLES_ON_USERID
+            referencedColumnNames: user_id
+            referencedTableName: users
+  - changeSet:
+      id: 1715369154794-56
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_armor_id
+            baseTableName: armor_bosses
+            constraintName: fk_armbos_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-57
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: bosses_boss_id
+            baseTableName: armor_bosses
+            constraintName: fk_armbos_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-58
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_armor_id
+            baseTableName: armor_locations
+            constraintName: fk_armloc_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-59
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: locations_location_id
+            baseTableName: armor_locations
+            constraintName: fk_armloc_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-60
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_armor_id
+            baseTableName: armor_npc
+            constraintName: fk_armor_npc_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-61
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_npc_id
+            baseTableName: armor_npc
+            constraintName: fk_armor_npc_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-62
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_armor_id
+            baseTableName: armor_units
+            constraintName: fk_armuni_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-63
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: units_unit_id
+            baseTableName: armor_units
+            constraintName: fk_armuni_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-64
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_id
+            baseTableName: bosses_armors
+            constraintName: fk_bosarm_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-65
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: boss_id
+            baseTableName: bosses_armors
+            constraintName: fk_bosarm_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-66
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: bosses_boss_id
+            baseTableName: bosses_locations
+            constraintName: fk_bosloc_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-67
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: locations_location_id
+            baseTableName: bosses_locations
+            constraintName: fk_bosloc_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-68
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: boss_id
+            baseTableName: bosses_souls
+            constraintName: fk_bossou_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-69
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: soul_id
+            baseTableName: bosses_souls
+            constraintName: fk_bossou_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-70
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: boss_id
+            baseTableName: bosses_weapons
+            constraintName: fk_boswea_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-71
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapon_id
+            baseTableName: bosses_weapons
+            constraintName: fk_boswea_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-72
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_id
+            baseTableName: locations_armors
+            constraintName: fk_locarm_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-73
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: locations_armors
+            constraintName: fk_locarm_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-74
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: boss_id
+            baseTableName: locations_bosses
+            constraintName: fk_locbos_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-75
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: locations_bosses
+            constraintName: fk_locbos_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-76
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: locations_magics
+            constraintName: fk_locmag_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-77
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: magic_id
+            baseTableName: locations_magics
+            constraintName: fk_locmag_on_magics
+            referencedColumnNames: magic_id
+            referencedTableName: magics
+  - changeSet:
+      id: 1715369154794-78
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: locations_npc
+            constraintName: fk_locnpc_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-79
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_id
+            baseTableName: locations_npc
+            constraintName: fk_locnpc_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-80
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: locations_units
+            constraintName: fk_locuni_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-81
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: unit_id
+            baseTableName: locations_units
+            constraintName: fk_locuni_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-82
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: locations_weapons
+            constraintName: fk_locwea_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-83
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapon_id
+            baseTableName: locations_weapons
+            constraintName: fk_locwea_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-84
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: locations_location_id
+            baseTableName: magics_locations
+            constraintName: fk_magloc_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-85
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: magics_magic_id
+            baseTableName: magics_locations
+            constraintName: fk_magloc_on_magics
+            referencedColumnNames: magic_id
+            referencedTableName: magics
+  - changeSet:
+      id: 1715369154794-86
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: magics_magic_id
+            baseTableName: magics_npc
+            constraintName: fk_magnpc_on_magics
+            referencedColumnNames: magic_id
+            referencedTableName: magics
+  - changeSet:
+      id: 1715369154794-87
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_npc_id
+            baseTableName: magics_npc
+            constraintName: fk_magnpc_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-88
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_id
+            baseTableName: npc_souls
+            constraintName: fk_npc_souls_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-89
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: soul_id
+            baseTableName: npc_souls
+            constraintName: fk_npc_souls_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-90
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_id
+            baseTableName: npc_armors
+            constraintName: fk_npcarm_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-91
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_id
+            baseTableName: npc_armors
+            constraintName: fk_npcarm_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-92
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: locations_location_id
+            baseTableName: npc_locations
+            constraintName: fk_npcloc_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-93
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_npc_id
+            baseTableName: npc_locations
+            constraintName: fk_npcloc_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-94
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: magic_id
+            baseTableName: npc_magics
+            constraintName: fk_npcmag_on_magics
+            referencedColumnNames: magic_id
+            referencedTableName: magics
+  - changeSet:
+      id: 1715369154794-95
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_id
+            baseTableName: npc_magics
+            constraintName: fk_npcmag_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-96
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_id
+            baseTableName: npc_weapons
+            constraintName: fk_npcwea_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-97
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapon_id
+            baseTableName: npc_weapons
+            constraintName: fk_npcwea_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-98
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: bosses_boss_id
+            baseTableName: souls_bosses
+            constraintName: fk_soubos_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-99
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: souls_soul_id
+            baseTableName: souls_bosses
+            constraintName: fk_soubos_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-100
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_npc_id
+            baseTableName: souls_npc
+            constraintName: fk_souls_npc_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-101
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: souls_soul_id
+            baseTableName: souls_npc
+            constraintName: fk_souls_npc_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-102
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: souls_soul_id
+            baseTableName: souls_unit
+            constraintName: fk_souuni_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-103
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: unit_unit_id
+            baseTableName: souls_unit
+            constraintName: fk_souuni_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-104
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: souls_soul_id
+            baseTableName: souls_weapons
+            constraintName: fk_souwea_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-105
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapons_weapon_id
+            baseTableName: souls_weapons
+            constraintName: fk_souwea_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-106
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: armor_id
+            baseTableName: units_armors
+            constraintName: fk_uniarm_on_armors
+            referencedColumnNames: armor_id
+            referencedTableName: armor
+  - changeSet:
+      id: 1715369154794-107
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: unit_id
+            baseTableName: units_armors
+            constraintName: fk_uniarm_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-108
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: locations_location_id
+            baseTableName: units_locations
+            constraintName: fk_uniloc_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-109
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: units_unit_id
+            baseTableName: units_locations
+            constraintName: fk_uniloc_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-110
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: soul_id
+            baseTableName: units_souls
+            constraintName: fk_unisou_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-111
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: unit_id
+            baseTableName: units_souls
+            constraintName: fk_unisou_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-112
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: unit_id
+            baseTableName: units_weapons
+            constraintName: fk_uniwea_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-113
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapon_id
+            baseTableName: units_weapons
+            constraintName: fk_uniwea_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-114
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: bosses_boss_id
+            baseTableName: weapons_bosses
+            constraintName: fk_weabos_on_bosses
+            referencedColumnNames: boss_id
+            referencedTableName: bosses
+  - changeSet:
+      id: 1715369154794-115
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapons_weapon_id
+            baseTableName: weapons_bosses
+            constraintName: fk_weabos_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-116
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: locations_location_id
+            baseTableName: weapons_locations
+            constraintName: fk_wealoc_on_locations
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 1715369154794-117
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapons_weapon_id
+            baseTableName: weapons_locations
+            constraintName: fk_wealoc_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-118
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: npc_npc_id
+            baseTableName: weapons_npc
+            constraintName: fk_weanpc_on_n_p_c
+            referencedColumnNames: npc_id
+            referencedTableName: npc
+  - changeSet:
+      id: 1715369154794-119
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapons_weapon_id
+            baseTableName: weapons_npc
+            constraintName: fk_weanpc_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-120
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: soul_id
+            baseTableName: weapons_souls
+            constraintName: fk_weasou_on_souls
+            referencedColumnNames: soul_id
+            referencedTableName: souls
+  - changeSet:
+      id: 1715369154794-121
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapon_id
+            baseTableName: weapons_souls
+            constraintName: fk_weasou_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+  - changeSet:
+      id: 1715369154794-122
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: units_unit_id
+            baseTableName: weapons_units
+            constraintName: fk_weauni_on_units
+            referencedColumnNames: unit_id
+            referencedTableName: units
+  - changeSet:
+      id: 1715369154794-123
+      author: whyno (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: weapons_weapon_id
+            baseTableName: weapons_units
+            constraintName: fk_weauni_on_weapons
+            referencedColumnNames: weapon_id
+            referencedTableName: weapons
+

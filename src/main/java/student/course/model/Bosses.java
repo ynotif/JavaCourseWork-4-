@@ -1,10 +1,10 @@
 package student.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity(name = "bosses")
 @Table(name = "bosses")
@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Bosses {
-
     @Id
     @Column(name = "bossId")
     @GeneratedValue(generator = "boss_id_seq", strategy = GenerationType.SEQUENCE)
@@ -239,20 +239,36 @@ public class Bosses {
     @Column(name = "bossSoulsQuantity")
     private int bossSoulsQuantity;
 
-    //Для дропа
-    @JoinColumn(name = "armorId")
-    @ManyToOne
-    private Armors armor;
-
-    @JoinColumn(name = "weaponId")
-    @ManyToOne
-    private Weapons weapon;
-
-    @JoinColumn(name = "soulId")
-    @ManyToOne
-    private Souls soul;
-
     @Column(name = "bossHistory")
     private String bossHistory;
+
+    //Для дропа
+    @ManyToMany
+    @JoinTable(
+            name = "bosses_armors",
+            joinColumns = @JoinColumn(name = "bossId"),
+            inverseJoinColumns = @JoinColumn(name = "armorId")
+    )
+    private Set<Armors> armor;
+
+    @ManyToMany
+    @JoinTable(
+            name = "bosses_weapons",
+            joinColumns = @JoinColumn(name = "bossId"),
+            inverseJoinColumns = @JoinColumn(name = "weaponId")
+    )
+    private Set<Weapons> weapon;
+
+    @ManyToMany
+    @JoinTable(
+            name = "bosses_souls",
+            joinColumns = @JoinColumn(name = "bossId"),
+            inverseJoinColumns = @JoinColumn(name = "soulId")
+    )
+    private Set<Souls> soul;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<Locations> locations;
 
 }

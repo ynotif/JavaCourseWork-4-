@@ -1,15 +1,17 @@
 package student.course.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
+import java.util.Set;
 
 @Table(name = "locations")
 @Entity(name = "locations")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 public class Locations {
     @Id
     @Column(name = "locationId")
@@ -26,49 +28,74 @@ public class Locations {
     @Column(name = "locationUniqueUnitsQuantity")
     private int locationUniqueUnitsQuantity; // Количество уникальных юнитов
 
-    @ManyToOne
-    @JoinColumn(name = "unitId")
-    private Units unit;
+    @ManyToMany
+    @JoinTable(
+            name = "locations_units",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "unitId")
+    )
+    private Set<Units> unit; //Сами юниты
 
     @Column(name = "locationNewMagic")
     private int locationNewMagic; // Количество новой магии
 
-    @ManyToOne
-    @JoinColumn(name = "magicId")
-    private Magics magic; // Сама магия
+    @ManyToMany
+    @JoinTable(
+            name = "locations_magics",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "magicId")
+    )
+    private Set<Magics> magic; // Сама магия
 
     @Column(name = "locationUniqueWeaponsQuantity")
     private int locationUniqueWeaponsQuantity; // Количество уникального оружия
 
-    @ManyToOne
-    @JoinColumn(name = "weaponId")
-    private Weapons weapon;
+    @ManyToMany
+    @JoinTable(
+            name = "locations_weapons",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "weaponId")
+    )
+    private Set<Weapons> weapon; // Само оружие
 
     @Column(name = "locationsUniqueBossesQuantity")
-    private int locationsUniqueBossesQuantity;
-    @ManyToOne
-    @JoinColumn(name = "bossId")
-    private Bosses boss;
+    private int locationsUniqueBossesQuantity; // Количество уникальный боссов
+
+    @ManyToMany
+    @JoinTable(
+            name = "locations_bosses",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "bossId")
+    )
+    private Set<Bosses> boss; // Сами боссы
 
     @Column(name = "locationUniqueArmorsQuantity")
-    private int locationUniqueArmorsQuantity;
+    private int locationUniqueArmorsQuantity; // Количество уникальной брони
 
-    @ManyToOne
-    @JoinColumn(name = "armorId")
-    private Armors armor;
+    @ManyToMany
+    @JoinTable(
+            name = "locations_armors",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "armorId")
+    )
+    private Set<Armors> armor; // Сама броня
 
     @Column(name = "locationBosseQuantity")
-    private int locationBosseQuantity;
+    private int locationBosseQuantity; // Количество всего боссов на локе
 
     @Column(name = "locationNPCQuantity")
-    private int locationNPCQuantity;
+    private int locationNPCQuantity; // Количество уникальный НПС
 
-    @ManyToOne
-    @JoinColumn(name = "npcId")
-    private NPC npc;
+    @ManyToMany
+    @JoinTable(
+            name = "locations_NPC",
+            joinColumns = @JoinColumn(name = "locationId"),
+            inverseJoinColumns = @JoinColumn(name = "npcId")
+    )
+    private Set<NPC> npc; // Сами НПС
 
     @Column(name = "locationLizardsQuantity")
-    private int locationLizardsQuantity;
+    private int locationLizardsQuantity; // Количество ящерок
 
     @Column(name = "locationSomeInformation")
     private String locationSomeInformation; // Некоторая информация о локе
