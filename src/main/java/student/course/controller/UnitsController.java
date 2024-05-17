@@ -1,6 +1,7 @@
 package student.course.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import student.course.exceptions.ArmorNotFoundException;
@@ -22,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/units")
+@Slf4j
 public class UnitsController {
 
     private final UnitsService unitsService;
@@ -31,6 +33,7 @@ public class UnitsController {
 
     @PostMapping
     public ResponseEntity<Units> addUnit(@RequestBody Units unit) {
+        log.info("HTTP: add unit");
         return ResponseEntity.ok(unitsService.createUnit(unit));
     }
 
@@ -41,10 +44,13 @@ public class UnitsController {
         if(optionalUnits.isPresent() && optionalArmors.isPresent()) {
             Units units = optionalUnits.get();
             if(!units.getArmor().contains(optionalArmors.get())){
+                log.info("HTTP: add armor to unit (unit id {}, armor id {})", unitId, armorId);
                 return ResponseEntity.ok(unitsService.addArmorToUnit(unitId, armorId));
             }
+            log.warn("HTTP: unit has this armor (unit id {}, armor id {})", unitId, armorId);
             return ResponseEntity.ok(units);
         }
+        log.error("HTTP: unit or armor not found for update (unit id {}, armor id {})", unitId, armorId);
         return ResponseEntity.notFound().build();
     }
 
@@ -55,10 +61,13 @@ public class UnitsController {
         if(optionalUnits.isPresent() && optionalWeapons.isPresent()) {
             Units units = optionalUnits.get();
             if(!units.getWeapon().contains(optionalWeapons.get())){
+                log.info("HTTP: add weapon to unit (unit id {}, weapon id {})", unitId, weaponId);
                 return ResponseEntity.ok(unitsService.addWeaponToUnit(unitId, weaponId));
             }
+            log.warn("HTTP: unit has this weapon (unit id {}, weapon id {})", unitId, weaponId);
             return ResponseEntity.ok(units);
         }
+        log.error("HTTP: unit or weapon not found for add (unit id {}, weapon id {})", weaponId, unitId);
         return ResponseEntity.notFound().build();
     }
 
@@ -69,10 +78,13 @@ public class UnitsController {
         if(optionalUnits.isPresent() && optionalSouls.isPresent()) {
             Units units = optionalUnits.get();
             if(!units.getSoul().contains(optionalSouls.get())){
+                log.info("HTTP: add soul to unit (unit id {}, soul id {})", unitId, soulId);
                 return ResponseEntity.ok(unitsService.addSoulToUnit(unitId, soulId));
             }
+            log.warn("HTTP: unit has this soul (unit id {}, soul id {})", unitId, soulId);
             return ResponseEntity.ok(units);
         }
+        log.error("HTTP: unit or soul not found for add (unit id {}, soul id {})", unitId, soulId);
         return ResponseEntity.notFound().build();
     }
 
@@ -81,19 +93,28 @@ public class UnitsController {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
         if (optionalUnits.isPresent()) {
             unitsService.updateUnit(updateUnit, id);
+            log.info("HTTP: update unit by id {}", id);
             return ResponseEntity.ok(updateUnit);
         }
+        log.error("HTTP: unit not found for update by id {}", id);
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping
     public ResponseEntity<List<Units>> getAllUnits() {
+        log.info("HTTP: get all units");
         return ResponseEntity.ok(unitsService.getAllUnits());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Units>> getUnitById(@PathVariable Long id) throws UnitNotFoundException {
-        return ResponseEntity.ok(unitsService.getUnitById(id));
+        Optional<Units> optionalUnits = unitsService.getUnitById(id);
+        if(optionalUnits.isPresent()) {
+            log.info("HTTP: get unit by id {}", id);
+            return ResponseEntity.ok(optionalUnits);
+        }
+        log.error("HTTP: unit not found for get by id {}", id);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{unitId}/armors/{armorId}")
@@ -103,9 +124,11 @@ public class UnitsController {
         if(optionalUnits.isPresent() && optionalArmors.isPresent()) {
             Units units = optionalUnits.get();
             if(units.getArmor().contains(optionalArmors.get())){
+                log.info("HTTP: remove armor from unit (unit id {}, armor id {})", unitId, armorId);
                 return ResponseEntity.ok(unitsService.removeArmorFromUnit(unitId, armorId));
             }
         }
+        log.error("HTTP: unit or armor not found for remove (unit id {}, armor id {})", unitId, armorId);
         return ResponseEntity.notFound().build();
     }
 
@@ -116,9 +139,11 @@ public class UnitsController {
         if(optionalUnits.isPresent() && optionalWeapons.isPresent()) {
             Units units = optionalUnits.get();
             if(units.getWeapon().contains(optionalWeapons.get())){
+                log.info("HTTP: remove weapon from unit (unit id {}, weapon id {})", unitId, weaponId);
                 return ResponseEntity.ok(unitsService.removeWeaponFromUnit(unitId, weaponId));
             }
         }
+        log.error("HTTP: unit or weapon not found for remove (unit id {}, weapon id {}", unitId, weaponId);
         return ResponseEntity.notFound().build();
     }
 
@@ -129,9 +154,11 @@ public class UnitsController {
         if(optionalUnits.isPresent() && optionalSouls.isPresent()) {
             Units units = optionalUnits.get();
             if(units.getSoul().contains(optionalSouls.get())){
+                log.info("HTTP: remove soul from unit (unit id {}, soul id {})", unitId, soulId);
                 return ResponseEntity.ok(unitsService.removeSoulFromUnit(unitId, soulId));
             }
         }
+        log.error("HTTP: unit or soul not found for remove (unit id {}, soul id {}", unitId, soulId);
         return ResponseEntity.notFound().build();
     }
 
@@ -140,8 +167,10 @@ public class UnitsController {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
         if(optionalUnits.isPresent()) {
             unitsService.deleteUnitById(id);
+            log.info("HTTP: delete unit by id {}", id);
             return ResponseEntity.ok("Unit deleted successfully!");
         }
+        log.error("HTTP: unit not found for delete by id {}", id);
         return ResponseEntity.notFound().build();
     }
 

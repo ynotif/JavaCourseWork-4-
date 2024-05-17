@@ -1,6 +1,7 @@
 package student.course.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import student.course.bdsetters.BosseSetter;
@@ -23,9 +24,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/bosses")
+@Slf4j
 public class BossesController {
 
-    private final BosseSetter bosseSetter = new BosseSetter();
     private final BossesService bossesService;
     private final ArmorsService armorsService;
     private final WeaponsService weaponsService;
@@ -33,6 +34,7 @@ public class BossesController {
 
     @PostMapping
     public ResponseEntity<Bosses> addBoss(@RequestBody Bosses bosse) {
+        log.info("HTTP: Add boss: {}", bosse);
         return ResponseEntity.ok(bossesService.createBosse(bosse));
     }
 
@@ -43,10 +45,13 @@ public class BossesController {
         if (optionalBosses.isPresent() && optionalArmors.isPresent()) {
             Bosses bosses = optionalBosses.get();
             if(!bosses.getArmor().contains(optionalArmors.get())) {
+                log.info("HTTP: Add armor to boss (boss id {} armor id {})", bossId, armorId);
                 return ResponseEntity.ok(bossesService.addArmorToBoss(bossId, armorId));
             }
+            log.warn("HTTP: Boss has this armor (boss id {} armor id {})", bossId, armorId);
             return ResponseEntity.ok(bosses);
         }
+        log.error("HTTP: Error with add armor to boss");
         return ResponseEntity.notFound().build();
     }
 
@@ -57,10 +62,13 @@ public class BossesController {
         if (optionalBosses.isPresent() && optionalWeapons.isPresent()) {
             Bosses bosses = optionalBosses.get();
             if(!bosses.getWeapon().contains(optionalWeapons.get())) {
+                log.info("HTTP: Add weapon to boss (boss id {} weapon id {})", bossId, weaponId);
                 return ResponseEntity.ok(bossesService.addWeaponToBoss(bossId, weaponId));
             }
+            log.warn("HTTP: Boss had this weapon (boss id {} weapon id {})", bossId, weaponId);
             return ResponseEntity.ok(bosses);
         }
+        log.error("HTTP: Error with add weapon to boss");
         return ResponseEntity.notFound().build();
     }
 
@@ -71,10 +79,13 @@ public class BossesController {
         if(optionalBosses.isPresent() && optionalSouls.isPresent()) {
             Bosses bosses = optionalBosses.get();
             if(!bosses.getSoul().contains(optionalSouls.get())) {
+                log.info("HTTP: Add soul to boss (boss id {} soul id {})", bossId, soulId);
                 return ResponseEntity.ok(bossesService.addSoulToBoss(bossId, soulId));
             }
+            log.warn("HTTP: Boss has this soul (boss id {} soul id {})", bossId, soulId);
             return ResponseEntity.ok(bosses);
         }
+        log.error("HTTP: Error with add soul to boss");
         return ResponseEntity.notFound().build();
     }
 
@@ -87,15 +98,18 @@ public class BossesController {
 
             updateBosse.setBossId(id);
 
+            log.info("HTTP: Boss was updated: {}", updateBosse);
             return ResponseEntity.ok(updateBosse);
         }
         else {
+            log.error("HTTP: Boss not found for update by id: {}", id);
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping
     public ResponseEntity<List<Bosses>> getAllBosses() {
+        log.info("HTTP: getAllBosses");
         return ResponseEntity.ok(bossesService.getAllBosses());
     }
 
@@ -103,9 +117,11 @@ public class BossesController {
     public ResponseEntity<Optional<Bosses>> getBossById(@PathVariable Long id) throws BosseNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(id);
         if (optionalBosses.isPresent()) {
+            log.info("HTTP: get boss by id: {}", id);
             return ResponseEntity.ok(bossesService.getBosseById(id));
         }
         else {
+            log.error("HTTP: boss not found with id: {}", id);
             return ResponseEntity.notFound().build();
         }
     }
@@ -117,9 +133,11 @@ public class BossesController {
         if (optionalBosses.isPresent() && optionalArmors.isPresent()) {
             Bosses bosses = optionalBosses.get();
             if (bosses.getArmor().contains(optionalArmors.get())) {
+                log.info("HTTP: remove armor from boss (boss id {} armor id {})", bossId, armorId);
                 return ResponseEntity.ok(bossesService.removeArmorFromBoss(bossId, armorId));
             }
         }
+        log.error("HTTP: error with remove armor from boss (boss id {} armor id {})", bossId, armorId);
         return ResponseEntity.notFound().build();
     }
 
@@ -130,9 +148,11 @@ public class BossesController {
         if(optionalBosses.isPresent() && optionalWeapons.isPresent()){
             Bosses bosses = optionalBosses.get();
             if(bosses.getWeapon().contains(optionalWeapons.get())){
+                log.info("HTTP: remove weapon from boss (boss id {} weapon id {})", bossId, weaponId);
                 return ResponseEntity.ok(bossesService.removeWeaponFromBoss(bossId, weaponId));
             }
         }
+        log.error("HTTP: error with remove weapon from boss (boss id {} weapon id {})", bossId, weaponId);
         return ResponseEntity.notFound().build();
     }
 
@@ -154,9 +174,11 @@ public class BossesController {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(id);
         if (optionalBosses.isPresent()) {
             bossesService.deleteBosseById(id);
+            log.info("HTTP: delete boss: {}", id);
             return ResponseEntity.ok("Bosse deleted successfully!");
         }
         else {
+            log.error("HTTP: boss not found for delete with id: {}", id);
             return ResponseEntity.notFound().build();
         }
     }

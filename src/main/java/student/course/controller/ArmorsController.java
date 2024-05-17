@@ -1,6 +1,7 @@
 package student.course.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import student.course.exceptions.ArmorNotFoundException;
@@ -13,12 +14,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/armors")
 @RestController
+@Slf4j
 public class ArmorsController {
 
     private final ArmorsService armorsService;
 
     @PostMapping
     public ResponseEntity<Armors> addArmor(@RequestBody Armors armor) {
+        log.info("HTTP: Add armor: {}", armor);
         return ResponseEntity.ok(armorsService.createArmor(armor));
     }
 
@@ -32,25 +35,30 @@ public class ArmorsController {
 
             armorUpdate.setArmorId(updateById);
 
+            log.info("HTTP: update armor: {}", armorUpdate);
             return ResponseEntity.ok(armorUpdate);
         } else {
+            log.error("HTTP: armor with id {} not found", updateById);
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping
     public ResponseEntity<List<Armors>> getAllArmors() {
+        log.info("HTTP: getAllArmors");
         return ResponseEntity.ok(armorsService.getAllArmors());
     }
 
     @GetMapping("/{getById}")
     public ResponseEntity<Optional<Armors>> getArmorById(@PathVariable Long getById) throws ArmorNotFoundException {
+        log.info("HTTP: getArmorById: {}", getById);
         return ResponseEntity.ok(armorsService.getArmorById(getById));
     }
 
-    @DeleteMapping("/{DeleteById}")
-    public ResponseEntity<String> deleteArmor(@PathVariable Long DeleteById) throws ArmorNotFoundException {
-        armorsService.deleteArmorById(DeleteById);
+    @DeleteMapping("/{deleteById}")
+    public ResponseEntity<String> deleteArmor(@PathVariable Long deleteById) throws ArmorNotFoundException {
+        armorsService.deleteArmorById(deleteById);
+        log.info("HTTP: delete armor: {}", deleteById);
         return ResponseEntity.ok("Armor deleted successfully!");
     }
 }

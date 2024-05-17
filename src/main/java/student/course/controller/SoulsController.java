@@ -1,6 +1,7 @@
 package student.course.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import student.course.exceptions.SoulNotFoundException;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/souls")
 @RestController
+@Slf4j
 public class SoulsController {
 
     private final SoulsService soulsService;
@@ -20,6 +22,7 @@ public class SoulsController {
 
     @PostMapping
     ResponseEntity<Souls> addSouls(@RequestBody Souls soul) {
+        log.info("HTTP: add soul");
         return ResponseEntity.ok(soulsService.createSoul(soul));
     }
 
@@ -27,20 +30,29 @@ public class SoulsController {
     ResponseEntity<Souls> updateSouls(@PathVariable Long id, @RequestBody Souls updatedSoul) throws SoulNotFoundException {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
+            log.info("HTTP: update soul by id: {}", id);
             soulsService.updateSoul(updatedSoul, id);
             return ResponseEntity.ok(updatedSoul);
         }
+        log.error("HTTP: soul not found for update by id: {}", id);
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping
     ResponseEntity<List<Souls>> getAllSouls() {
+        log.info("HTTP: get all souls");
         return ResponseEntity.ok(soulsService.getAllSouls());
     }
 
     @GetMapping("/{id}")
     ResponseEntity<Optional<Souls>> getSoulById(@PathVariable Long id) throws SoulNotFoundException {
-        return ResponseEntity.ok(soulsService.getSoulById(id));
+        Optional<Souls> souls = soulsService.getSoulById(id);
+        if (souls.isPresent()) {
+            log.info("HTTP: get soul by id: {}", id);
+            return ResponseEntity.ok(souls);
+        }
+        log.error("HTTP: soul not found for get by id: {}", id);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
@@ -48,8 +60,10 @@ public class SoulsController {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
             soulsService.deleteSoulById(id);
+            log.info("HTTP: delete soul by id: {}", id);
             return ResponseEntity.ok("Soul deleted successfully!");
         }
+        log.error("HTTP: soul not found for delete by id: {}", id);
         return ResponseEntity.notFound().build();
     }
 
