@@ -3,7 +3,7 @@ package student.course.bdsetters;
 import student.course.model.Magics;
 
 public class MagicSetter {
-    public void update(Magics magic, Magics magicUpdate, Long id) {
+    public static void update(Magics magic, Magics magicUpdate, Long id) {
         magic.setMagicId(id);
         magic.setMagicName(magicUpdate.getMagicName());
         magic.setMagicManaCost(magicUpdate.getMagicManaCost());

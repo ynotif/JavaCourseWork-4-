@@ -5,7 +5,7 @@ import student.course.model.Bosses;
 
 @Data
 public class BosseSetter {
-    public void update(Bosses bosses, Bosses bossesUpdate, Long id) {
+    public static void update(Bosses bosses, Bosses bossesUpdate, Long id) {
         bosses.setBossId(id);
         bosses.setBossName(bossesUpdate.getBossName());
         bosses.setBossHitPointsSum(bossesUpdate.getBossHitPointsSum());

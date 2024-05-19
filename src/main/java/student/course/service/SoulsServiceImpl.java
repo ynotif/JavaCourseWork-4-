@@ -18,8 +18,6 @@ public class SoulsServiceImpl implements SoulsService {
 
     private final SoulsRepository soulsRepository;
 
-    private final SoulSetter soulSetter = new SoulSetter();
-
     @CacheEvict(cacheNames = "Souls", allEntries = true)
     @Override
     public Souls createSoul(Souls souls) {
@@ -49,7 +47,7 @@ public class SoulsServiceImpl implements SoulsService {
         Souls soul = soulsRepository.findById(id)
                 .orElseThrow(() -> new SoulNotFoundException(id));
 
-        soulSetter.update(soul, updateSoul, id);
+        SoulSetter.update(soul, updateSoul, id);
 
         soulsRepository.save(soul);
     }

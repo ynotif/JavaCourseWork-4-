@@ -18,8 +18,6 @@ public class MagicsServiceImpl implements MagicsService {
 
     private final MagicsRepository magicsRepository;
 
-    private final MagicSetter magicSetter = new MagicSetter();
-
     @CacheEvict(cacheNames = "Magics", allEntries = true)
     @Override
     public Magics createMagic(Magics magics) {
@@ -50,7 +48,7 @@ public class MagicsServiceImpl implements MagicsService {
         Magics magic = magicsRepository.findById(id)
                 .orElseThrow(() -> new MagicNotFoundException(id));
 
-        magicSetter.update(magic, updateMagic, id);
+        MagicSetter.update(magic, updateMagic, id);
 
         magicsRepository.save(magic);
     }

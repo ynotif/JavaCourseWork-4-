@@ -31,8 +31,6 @@ public class BossesServiceImpl implements BossesService {
 
     private final SoulsRepository soulsRepository;
 
-    private final BosseSetter bosseSetter = new BosseSetter();
-
     @CacheEvict(cacheNames = "Boss", allEntries = true)
     @Override
     public Bosses createBosse(Bosses bosses) {
@@ -62,7 +60,7 @@ public class BossesServiceImpl implements BossesService {
         Bosses bosses = bossesRepository.findById(id)
                 .orElseThrow(() -> new BosseNotFoundException(id));
 
-        bosseSetter.update(bosses, updateBosse, id);
+        BosseSetter.update(bosses, updateBosse, id);
 
         bossesRepository.save(bosses);
 

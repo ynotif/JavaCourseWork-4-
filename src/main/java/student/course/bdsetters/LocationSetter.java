@@ -5,7 +5,7 @@ import student.course.model.Locations;
 
 @Data
 public class LocationSetter {
-    public void update(Locations location, Locations locationUpdate, Long id) {
+    public static void update(Locations location, Locations locationUpdate, Long id) {
         location.setLocationId(id);
         location.setLocationName(locationUpdate.getLocationName());
         location.setLocationEstusQuantity(locationUpdate.getLocationEstusQuantity());

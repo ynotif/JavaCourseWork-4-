@@ -23,7 +23,6 @@ public class LocationsServiceImpl implements LocationsService {
     private final MagicsRepository magicsRepository;
     private final NPCRepository npcRepository;
     private final WeaponsRepository weaponsRepository;
-    private final LocationSetter locationSetter = new LocationSetter();
 
     @CacheEvict(cacheNames = "Locations", allEntries = true)
     @Override
@@ -54,7 +53,7 @@ public class LocationsServiceImpl implements LocationsService {
         Locations locations = locationsRepository.findById(id)
                 .orElseThrow(() -> new LocationNotFoundException(id));
 
-        locationSetter.update(locations, updateLocation, id);
+        LocationSetter.update(locations, updateLocation, id);
 
         locationsRepository.save(locations);
     }

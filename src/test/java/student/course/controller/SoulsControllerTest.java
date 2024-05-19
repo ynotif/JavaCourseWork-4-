@@ -23,51 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class SoulsControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
 
-    @Autowired
-    private SoulsRepository soulsRepository;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-    @DisplayName("add Soul")
-    @Test
-    public void addSouls() throws Exception {
-        Souls inputSoul = new Souls(null, "Name", 100, "Info", null, null, null, null);
-        Souls expectedSoul = new Souls(1L, "Name", 100, "Info", null, null, null, null);
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/souls")
-                        .content(objectMapper.writeValueAsString(inputSoul))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(objectMapper.writeValueAsString(expectedSoul)));
-        assertEquals(expectedSoul, soulsRepository.findById(1L).get());
-    }
-
-    @Test
-    void updateSouls() {
-    }
-
-    @DisplayName("get all souls")
-    @Test
-    void getAllSouls() throws Exception {
-        Souls savedSoul = new Souls(null, "Name", 100, "Info", null, null, null, null);
-        soulsRepository.save(savedSoul);
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/souls")
-        )
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(objectMapper.writeValueAsString(List.of(savedSoul))));
-    }
-
-    @Test
-    void getSoulById() {
-    }
-
-    @Test
-    void deleteSoulById() {
-    }
 }

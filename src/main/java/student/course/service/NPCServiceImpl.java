@@ -22,8 +22,6 @@ public class NPCServiceImpl implements NPCService {
     private final MagicsRepository magicsRepository;
     private final SoulsRepository soulsRepository;
 
-    private final NPCSetter npcSetter = new NPCSetter();
-
     @CacheEvict(cacheNames = "NPC", allEntries = true)
     @Override
     public NPC createNPC(NPC npc) {
@@ -53,7 +51,7 @@ public class NPCServiceImpl implements NPCService {
         NPC npc = npcRepository.findById(id)
                 .orElseThrow(() -> new NPCNotFoundException(id));
 
-        npcSetter.update(npc, updateNPC, id);
+        NPCSetter.update(npc, updateNPC, id);
 
         npcRepository.save(npc);
     }

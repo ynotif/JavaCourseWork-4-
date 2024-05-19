@@ -28,8 +28,6 @@ public class UnitsServiceImpl implements UnitsService {
     private final WeaponsRepository weaponsRepository;
     private final SoulsRepository soulsRepository;
 
-    private final UnitSetter unitSetter = new UnitSetter();
-
     @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
     public Units createUnit(Units units) {
@@ -59,7 +57,7 @@ public class UnitsServiceImpl implements UnitsService {
         Units unit = unitsRepository.findById(id)
                 .orElseThrow(() -> new UnitNotFoundException(id));
 
-        unitSetter.update(unit, updateUnit, id);
+        UnitSetter.update(unit, updateUnit, id);
 
         unitsRepository.save(unit);
     }

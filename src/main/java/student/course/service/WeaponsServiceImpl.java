@@ -21,8 +21,6 @@ public class WeaponsServiceImpl implements WeaponsService{
     private final WeaponsRepository weaponsRepository;
     private final SoulsRepository soulsRepository;
 
-    private final WeaponSetter weaponSetter = new WeaponSetter();
-
     @CacheEvict(cacheNames = "Weapons", allEntries = true)
     @Override
     public Weapons createWeapon(Weapons weapons) {
@@ -52,7 +50,7 @@ public class WeaponsServiceImpl implements WeaponsService{
         Weapons weapon = weaponsRepository.findById(id)
                 .orElseThrow(() -> new WeaponNotFoundException(id));
 
-        weaponSetter.update(weapon, updateWeapon, id);
+        WeaponSetter.update(weapon, updateWeapon, id);
 
         weaponsRepository.save(weapon);
     }

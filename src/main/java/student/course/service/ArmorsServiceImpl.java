@@ -20,7 +20,6 @@ import java.util.Optional;
 public class ArmorsServiceImpl implements ArmorsService {
 
     private final ArmorsRepository armorsRepository;
-    private final ArmorSetter armorsSetter = new ArmorSetter();
 
     @CacheEvict(cacheNames = "armors", allEntries = true)
     @Override
@@ -50,7 +49,7 @@ public class ArmorsServiceImpl implements ArmorsService {
     public void updateArmor(Armors updateArmor, Long id) throws ArmorNotFoundException {
         Armors armor = armorsRepository.findById(id)
                 .orElseThrow(() -> new ArmorNotFoundException(id));
-        armorsSetter.update(armor, updateArmor, id);
+        ArmorSetter.update(armor, updateArmor, id);
         armorsRepository.save(armor);
     }
 

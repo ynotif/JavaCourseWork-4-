@@ -3,7 +3,7 @@ package student.course.bdsetters;
 import student.course.model.Units;
 
 public class UnitSetter {
-    public void update(Units unit, Units unitUpdate, Long id) {
+    public static void update(Units unit, Units unitUpdate, Long id) {
         unit.setUnitId(id);
         unit.setUnitHitPoints(unitUpdate.getUnitHitPoints());
         unit.setUnitPhysicalNormalDamageResistance(unitUpdate.getUnitPhysicalNormalDamageResistance());

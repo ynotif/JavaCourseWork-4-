@@ -3,7 +3,7 @@ package student.course.bdsetters;
 import student.course.model.NPC;
 
 public class NPCSetter {
-    public void update(NPC npc, NPC npcUpdate, Long id) {
+    public static void update(NPC npc, NPC npcUpdate, Long id) {
         npc.setNpcId(id);
         npc.setNpcName(npcUpdate.getNpcName());
         npc.setNpcQuest(npcUpdate.getNpcQuest());
