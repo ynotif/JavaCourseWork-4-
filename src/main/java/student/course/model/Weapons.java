@@ -2,8 +2,13 @@ package student.course.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.proxy.HibernateProxy;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Table(name = "weapons")
@@ -144,4 +149,58 @@ public class Weapons {
     @ManyToMany
     @JsonIgnore
     private Set<NPC> npc;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Weapons weapons = (Weapons) o;
+        return Double.compare(weapons.weaponPhysicalNormalDamage, weaponPhysicalNormalDamage) == 0 &&
+                Double.compare(weapons.weaponPhysicalCrushingDamage, weaponPhysicalCrushingDamage) == 0 &&
+                Double.compare(weapons.weaponPhysicalSlashingDamage, weaponPhysicalSlashingDamage) == 0 &&
+                Double.compare(weapons.weaponPhysicalPiercingDamage, weaponPhysicalPiercingDamage) == 0 &&
+                Double.compare(weapons.weaponMagicalDamage, weaponMagicalDamage) == 0 &&
+                Double.compare(weapons.weaponFireDamage, weaponFireDamage) == 0 &&
+                Double.compare(weapons.weaponLightningDamage, weaponLightningDamage) == 0 &&
+                Double.compare(weapons.weaponDarknessDamage, weaponDarknessDamage) == 0 &&
+                Double.compare(weapons.weaponBleedingEffect, weaponBleedingEffect) == 0 &&
+                Double.compare(weapons.weaponPoisonEffect, weaponPoisonEffect) == 0 &&
+                Double.compare(weapons.weaponFrostEffect, weaponFrostEffect) == 0 &&
+                weaponCriticalDamage == weapons.weaponCriticalDamage &&
+                Double.compare(weapons.weaponPhysicalDamageBlock, weaponPhysicalDamageBlock) == 0 &&
+                Double.compare(weapons.weaponMagicalDamageBlock, weaponMagicalDamageBlock) == 0 &&
+                Double.compare(weapons.weaponFireDamageBlock, weaponFireDamageBlock) == 0 &&
+                Double.compare(weapons.weaponLightingDamageBlock, weaponLightingDamageBlock) == 0 &&
+                Double.compare(weapons.weaponDarknessDamageBlock, weaponDarknessDamageBlock) == 0 &&
+                weaponBalance == weapons.weaponBalance &&
+                weaponStrengthRequired == weapons.weaponStrengthRequired &&
+                weaponAgilityRequired == weapons.weaponAgilityRequired &&
+                weaponIntellectRequired == weapons.weaponIntellectRequired &&
+                weaponFaithRequired == weapons.weaponFaithRequired &&
+                weaponEndurance == weapons.weaponEndurance &&
+                weaponSaleCost == weapons.weaponSaleCost &&
+                weaponBuyCost == weapons.weaponBuyCost &&
+                Objects.equals(weaponName, weapons.weaponName) &&
+                Objects.equals(weaponType, weapons.weaponType) &&
+                Objects.equals(weaponSpellManaCost, weapons.weaponSpellManaCost) &&
+                Objects.equals(weaponSpellDoes, weapons.weaponSpellDoes) &&
+                Objects.equals(weaponStrengthScaling, weapons.weaponStrengthScaling) &&
+                Objects.equals(weaponAgilityScaling, weapons.weaponAgilityScaling) &&
+                Objects.equals(weaponIntellectScaling, weapons.weaponIntellectScaling) &&
+                Objects.equals(weaponFaithScaling, weapons.weaponFaithScaling) &&
+                Objects.equals(weaponSomeInformation, weapons.weaponSomeInformation) &&
+                Objects.equals(soul, weapons.soul) &&
+                Objects.equals(units, weapons.units) &&
+                Objects.equals(locations, weapons.locations) &&
+                Objects.equals(bosses, weapons.bosses) &&
+                Objects.equals(npc, weapons.npc);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(weaponId, weaponName, weaponType, weaponSpellManaCost
+                , weaponSpellDoes, weaponPhysicalNormalDamage, weaponPhysicalCrushingDamage
+                , weaponPhysicalSlashingDamage, weaponPhysicalPiercingDamage, weaponMagicalDamage, weaponFireDamage, weaponLightningDamage, weaponDarknessDamage, weaponBleedingEffect, weaponPoisonEffect, weaponFrostEffect, weaponCriticalDamage, weaponPhysicalDamageBlock, weaponMagicalDamageBlock, weaponFireDamageBlock, weaponLightingDamageBlock, weaponDarknessDamageBlock, weaponBalance, weaponStrengthScaling, weaponAgilityScaling, weaponIntellectScaling, weaponFaithScaling, weaponStrengthRequired, weaponAgilityRequired, weaponIntellectRequired, weaponFaithRequired, weaponEndurance, weaponSaleCost, weaponBuyCost, weaponSomeInformation, soul, units, locations, bosses, npc);
+    }
+
 }

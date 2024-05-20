@@ -93,8 +93,11 @@ public class UnitsController {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
         if (optionalUnits.isPresent()) {
             unitsService.updateUnit(updateUnit, id);
+            Optional<Units> optionalUnit = unitsService.getUnitById(id);
             log.info("HTTP: update unit by id {}", id);
-            return ResponseEntity.ok(updateUnit);
+            if(optionalUnit.isPresent()) {
+                return ResponseEntity.ok(optionalUnit.get());
+            }
         }
         log.error("HTTP: unit not found for update by id {}", id);
         return ResponseEntity.notFound().build();

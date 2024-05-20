@@ -30,9 +30,12 @@ public class SoulsController {
     ResponseEntity<Souls> updateSouls(@PathVariable Long id, @RequestBody Souls updatedSoul) throws SoulNotFoundException {
         Optional<Souls> souls = soulsService.getSoulById(id);
         if (souls.isPresent()) {
-            log.info("HTTP: update soul by id: {}", id);
             soulsService.updateSoul(updatedSoul, id);
-            return ResponseEntity.ok(updatedSoul);
+            Optional<Souls> optionalSouls = soulsService.getSoulById(id);
+            if (optionalSouls.isPresent()) {
+                log.info("HTTP: update soul by id: {}", id);
+                return ResponseEntity.ok(optionalSouls.get());
+            }
         }
         log.error("HTTP: soul not found for update by id: {}", id);
         return ResponseEntity.notFound().build();

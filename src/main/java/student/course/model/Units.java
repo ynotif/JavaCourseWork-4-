@@ -2,9 +2,7 @@ package student.course.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -12,13 +10,18 @@ import java.util.Set;
 @Entity(name = "units")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Units {
     @Id
     @Column(name = "unitId")
     @GeneratedValue(generator = "unit_id_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "unit_id_seq", sequenceName = "unit_id_seq", allocationSize = 1, initialValue = 1)
     private Long unitId;
+
+    @Column(name = "unitName")
+    private String unitName;
 
     @Column(name = "unitHitPoints")
     private double unitHitPoints;

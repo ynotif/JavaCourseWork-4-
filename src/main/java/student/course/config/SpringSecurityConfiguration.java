@@ -23,7 +23,7 @@ public class SpringSecurityConfiguration {
         http.authorizeHttpRequests(expressionInterceptUrlRegistry ->
                         expressionInterceptUrlRegistry
                                 .requestMatchers("/registration", "/login").permitAll() // Доступно всем
-                                .requestMatchers(HttpMethod.POST, "/armors/**", "/bosses/**", "/locations/**", "/magics/**", "/npc/**",
+                                .requestMatchers(HttpMethod.POST,"/armors", "/armors/**", "/bosses/**", "/locations/**", "/magics/**", "/npc/**",
                                         "/souls/**", "/units/**", "/weapons/**").hasAuthority(UserAuthority.CREATOR.getAuthority())
                                 .requestMatchers(HttpMethod.GET, "/armors/**", "/bosses/**", "/locations/**", "/magics/**", "/npc/**",
                                         "/souls/**", "/units/**", "/weapons/**", "/souls").authenticated() // Любой кто залогинился

@@ -3,8 +3,6 @@ package student.course.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import student.course.bdsetters.WeaponSetter;
-import student.course.exceptions.BosseNotFoundException;
 import student.course.exceptions.WeaponNotFoundException;
 import student.course.model.Souls;
 import student.course.model.Weapons;

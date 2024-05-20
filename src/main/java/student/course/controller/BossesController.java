@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import student.course.bdsetters.BosseSetter;
 import student.course.exceptions.ArmorNotFoundException;
 import student.course.exceptions.BosseNotFoundException;
 import student.course.exceptions.SoulNotFoundException;
@@ -175,7 +174,7 @@ public class BossesController {
         if (optionalBosses.isPresent()) {
             bossesService.deleteBosseById(id);
             log.info("HTTP: delete boss: {}", id);
-            return ResponseEntity.ok("Bosse deleted successfully!");
+            return ResponseEntity.ok("Boss deleted successfully!");
         }
         else {
             log.error("HTTP: boss not found for delete with id: {}", id);

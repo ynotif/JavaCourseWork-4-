@@ -67,7 +67,7 @@ public class MagicsController {
         if (optionalMagics.isPresent()) {
             magicsService.deleteMagicById(id);
             log.info("HTTP: delete magic by id: {}", id);
-            return ResponseEntity.ok("Magics deleted.");
+            return ResponseEntity.ok("Magic deleted successfully!");
         }
         log.error("HTTP: error delete magic by id: {}", id);
         return ResponseEntity.notFound().build();

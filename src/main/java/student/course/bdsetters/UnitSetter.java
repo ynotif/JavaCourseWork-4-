@@ -5,6 +5,7 @@ import student.course.model.Units;
 public class UnitSetter {
     public static void update(Units unit, Units unitUpdate, Long id) {
         unit.setUnitId(id);
+        unit.setUnitName(unitUpdate.getUnitName());
         unit.setUnitHitPoints(unitUpdate.getUnitHitPoints());
         unit.setUnitPhysicalNormalDamageResistance(unitUpdate.getUnitPhysicalNormalDamageResistance());
         unit.setUnitPhysicalCrushingDamageResistance(unitUpdate.getUnitPhysicalCrushingDamageResistance());

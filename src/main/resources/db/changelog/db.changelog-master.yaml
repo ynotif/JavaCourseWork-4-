@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/2024/05/11-01-changelog.yaml #В некст проекте просто в логах удаляй все старое и сюда пиши
+      file: db/changelog/2024/05/20-01-changelog.yaml #В некст проекте просто в логах удаляй все старое и сюда пиши
 #      -include: file: *новый файл как сверху*

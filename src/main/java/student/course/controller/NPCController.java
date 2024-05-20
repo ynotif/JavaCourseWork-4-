@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import student.course.exceptions.*;
 import student.course.model.*;
-import student.course.repository.NPCRepository;
 import student.course.service.*;
 
 import java.util.List;

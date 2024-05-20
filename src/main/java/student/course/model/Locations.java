@@ -3,7 +3,6 @@ package student.course.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Table(name = "locations")
@@ -12,6 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode
 public class Locations {
     @Id
     @Column(name = "locationId")
