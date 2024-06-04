@@ -1,9 +1,11 @@
 package student.course.bdsetters;
 
+import lombok.experimental.UtilityClass;
 import student.course.model.Units;
 
+@UtilityClass
 public class UnitSetter {
-    public static void update(Units unit, Units unitUpdate, Long id) {
+    public void update(Units unit, Units unitUpdate, Long id) {
         unit.setUnitId(id);
         unit.setUnitName(unitUpdate.getUnitName());
         unit.setUnitHitPoints(unitUpdate.getUnitHitPoints());

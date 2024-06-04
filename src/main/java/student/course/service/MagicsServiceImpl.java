@@ -34,23 +34,23 @@ public class MagicsServiceImpl implements MagicsService {
     @Override
     public Optional<Magics> getMagicById(Long id) throws MagicNotFoundException {
         Optional<Magics> optionalMagic = magicsRepository.findById(id);
-        if (optionalMagic.isPresent()){
+        if (optionalMagic.isPresent()) {
             return optionalMagic;
-        }
-        else{
+        } else {
             throw new MagicNotFoundException(id);
         }
     }
 
     @CacheEvict(cacheNames = "Magics", allEntries = true)
     @Override
-    public void updateMagic(Magics updateMagic, Long id) throws MagicNotFoundException {
+    public Magics updateMagic(Magics updateMagic, Long id) throws MagicNotFoundException {
         Magics magic = magicsRepository.findById(id)
                 .orElseThrow(() -> new MagicNotFoundException(id));
 
         MagicSetter.update(magic, updateMagic, id);
 
         magicsRepository.save(magic);
+        return magic;
     }
 
     @CacheEvict(cacheNames = "Magics", allEntries = true)

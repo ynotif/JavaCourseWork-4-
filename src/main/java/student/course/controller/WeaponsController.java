@@ -33,9 +33,9 @@ public class WeaponsController {
     public ResponseEntity<Weapons> addSoulToWeapon(@PathVariable Long weaponId, @PathVariable Long soulId) throws SoulNotFoundException, WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalWeapons.isPresent() && optionalSouls.isPresent()){
+        if (optionalWeapons.isPresent() && optionalSouls.isPresent()) {
             Weapons weapons = optionalWeapons.get();
-            if(!weapons.getSoul().contains(optionalSouls.get())){
+            if (!weapons.getSoul().contains(optionalSouls.get())) {
                 log.info("HTTP: Add Soul to Weapons (weapon id {}, soul id {})", weaponId, soulId);
                 return ResponseEntity.ok(weaponsService.addSoulToWeapon(weaponId, soulId));
             }
@@ -49,10 +49,9 @@ public class WeaponsController {
     @PutMapping("/{id}")
     public ResponseEntity<Weapons> updateWeapon(@RequestBody Weapons updateWeapon, @PathVariable Long id) throws WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(id);
-        if(optionalWeapons.isPresent()){
-            weaponsService.updateWeapon(updateWeapon, id);
+        if (optionalWeapons.isPresent()) {
             log.info("HTTP: Update Weapons by id {}", id);
-            return ResponseEntity.ok(updateWeapon);
+            return ResponseEntity.ok(weaponsService.updateWeapon(updateWeapon, id));
         }
         log.error("HTTP: weapon not found for update by id {}", id);
         return ResponseEntity.notFound().build();
@@ -61,13 +60,13 @@ public class WeaponsController {
     @GetMapping
     public ResponseEntity<List<Weapons>> getAllWeapons() {
         log.info("HTTP: Get All Weapons");
-       return ResponseEntity.ok(weaponsService.getAllWeapons());
+        return ResponseEntity.ok(weaponsService.getAllWeapons());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Weapons>> getWeaponById(@PathVariable Long id) throws WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(id);
-        if(optionalWeapons.isPresent()){
+        if (optionalWeapons.isPresent()) {
             log.info("HTTP: Get Weapons by id {}", id);
             return ResponseEntity.ok(optionalWeapons);
         }
@@ -79,9 +78,9 @@ public class WeaponsController {
     public ResponseEntity<Weapons> removeSoulFromWeapon(@PathVariable Long weaponId, @PathVariable Long soulId) throws SoulNotFoundException, WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalWeapons.isPresent() && optionalSouls.isPresent()){
+        if (optionalWeapons.isPresent() && optionalSouls.isPresent()) {
             Weapons weapons = optionalWeapons.get();
-            if(weapons.getSoul().contains(optionalSouls.get())){
+            if (weapons.getSoul().contains(optionalSouls.get())) {
                 log.info("HTTP: remove soul from weapon (weapon id {}, soul id {})", weaponId, soulId);
                 return ResponseEntity.ok(weaponsService.removeSoulFromWeapon(weaponId, soulId));
             }
@@ -93,7 +92,7 @@ public class WeaponsController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteWeaponById(@PathVariable Long id) throws WeaponNotFoundException {
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(id);
-        if(optionalWeapons.isPresent()){
+        if (optionalWeapons.isPresent()) {
             weaponsService.deleteWeaponById(id);
             log.info("HTTP: Delete Weapons by id {}", id);
             return ResponseEntity.ok("Weapon deleted successfully!");

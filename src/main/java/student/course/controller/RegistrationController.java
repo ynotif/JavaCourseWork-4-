@@ -16,9 +16,7 @@ public class RegistrationController {
     private final UsersService usersService;
 
     @PostMapping
-    public ResponseEntity<Void> registration(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password){
+    public ResponseEntity<Void> registration(@RequestParam("username") String username, @RequestParam("password") String password) {
         usersService.registration(username, password);
         return ResponseEntity.ok().build();
     }

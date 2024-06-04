@@ -15,7 +15,7 @@ public interface BossesService {
 
     Optional<Bosses> getBosseById(Long id) throws BosseNotFoundException;
 
-    void updateBosse(Bosses bosses, Long id) throws BosseNotFoundException;
+    Bosses updateBosse(Bosses bosses, Long id) throws BosseNotFoundException;
 
     void deleteBosseById(Long id) throws BosseNotFoundException;
 

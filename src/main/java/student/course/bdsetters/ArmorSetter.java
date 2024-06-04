@@ -1,11 +1,11 @@
 package student.course.bdsetters;
 
-import lombok.Data;
+import lombok.experimental.UtilityClass;
 import student.course.model.Armors;
 
-@Data
+@UtilityClass // Либо так, либо static можно
 public class ArmorSetter {
-    public static void update(Armors armor, Armors armorUpdate, Long id) { // Сначала старую, потом новую
+    public void update(Armors armor, Armors armorUpdate, Long id) { // Сначала старую, потом новую
         armor.setArmorId(id);
         armor.setArmorName(armorUpdate.getArmorName());
         armor.setArmorPhysicalNormalDamageResistance(armorUpdate.getArmorPhysicalNormalDamageResistance());

@@ -38,23 +38,23 @@ public class LocationsServiceImpl implements LocationsService {
     @Override
     public Optional<Locations> getLocationById(Long id) throws LocationNotFoundException {
         Optional<Locations> optionalLocation = locationsRepository.findById(id);
-        if(optionalLocation.isPresent()) {
+        if (optionalLocation.isPresent()) {
             return optionalLocation;
-        }
-        else{
+        } else {
             throw new LocationNotFoundException(id);
         }
     }
 
     @CacheEvict(cacheNames = "Locations", allEntries = true)
     @Override
-    public void updateLocation(Locations updateLocation, Long id) throws LocationNotFoundException {
+    public Locations updateLocation(Locations updateLocation, Long id) throws LocationNotFoundException {
         Locations locations = locationsRepository.findById(id)
                 .orElseThrow(() -> new LocationNotFoundException(id));
 
         LocationSetter.update(locations, updateLocation, id);
 
         locationsRepository.save(locations);
+        return locations;
     }
 
     @CacheEvict(cacheNames = "Locations", allEntries = true)

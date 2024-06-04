@@ -30,12 +30,8 @@ public class MagicsController {
         Optional<Magics> optionalMagics = magicsService.getMagicById(id);
         if (optionalMagics.isPresent()) {
 
-            magicsService.updateMagic(updateMagic, id);
-
-            updateMagic.setMagicId(id);
-
             log.info("HTTP: update magic by id: {}", id);
-            return ResponseEntity.ok(updateMagic);
+            return ResponseEntity.ok(magicsService.updateMagic(updateMagic, id));
         }
 
         log.error("HTTP: error update magic by id: {}", id);
@@ -54,8 +50,7 @@ public class MagicsController {
         if (optionalMagics.isPresent()) {
             log.info("HTTP: get magic by id: {}", id);
             return ResponseEntity.ok(optionalMagics);
-        }
-        else{
+        } else {
             log.error("HTTP: error get magic by id: {}", id);
             return ResponseEntity.notFound().build();
         }

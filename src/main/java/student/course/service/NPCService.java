@@ -14,7 +14,7 @@ public interface NPCService {
 
     Optional<NPC> getNPCById(Long id) throws NPCNotFoundException;
 
-    void updateNPC(NPC npc, Long id) throws NPCNotFoundException;
+    NPC updateNPC(NPC npc, Long id) throws NPCNotFoundException;
 
     void deleteNPCById(Long id) throws NPCNotFoundException;
 

@@ -1,9 +1,11 @@
 package student.course.bdsetters;
 
+import lombok.experimental.UtilityClass;
 import student.course.model.NPC;
 
+@UtilityClass
 public class NPCSetter {
-    public static void update(NPC npc, NPC npcUpdate, Long id) {
+    public void update(NPC npc, NPC npcUpdate, Long id) {
         npc.setNpcId(id);
         npc.setNpcName(npcUpdate.getNpcName());
         npc.setNpcQuest(npcUpdate.getNpcQuest());

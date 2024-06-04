@@ -41,9 +41,9 @@ public class UnitsController {
     public ResponseEntity<Units> addArmorToUnit(@PathVariable Long unitId, @PathVariable Long armorId) throws ArmorNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
-        if(optionalUnits.isPresent() && optionalArmors.isPresent()) {
+        if (optionalUnits.isPresent() && optionalArmors.isPresent()) {
             Units units = optionalUnits.get();
-            if(!units.getArmor().contains(optionalArmors.get())){
+            if (!units.getArmor().contains(optionalArmors.get())) {
                 log.info("HTTP: add armor to unit (unit id {}, armor id {})", unitId, armorId);
                 return ResponseEntity.ok(unitsService.addArmorToUnit(unitId, armorId));
             }
@@ -58,9 +58,9 @@ public class UnitsController {
     public ResponseEntity<Units> addWeaponToUnit(@PathVariable Long unitId, @PathVariable Long weaponId) throws UnitNotFoundException, WeaponNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
-        if(optionalUnits.isPresent() && optionalWeapons.isPresent()) {
+        if (optionalUnits.isPresent() && optionalWeapons.isPresent()) {
             Units units = optionalUnits.get();
-            if(!units.getWeapon().contains(optionalWeapons.get())){
+            if (!units.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: add weapon to unit (unit id {}, weapon id {})", unitId, weaponId);
                 return ResponseEntity.ok(unitsService.addWeaponToUnit(unitId, weaponId));
             }
@@ -75,9 +75,9 @@ public class UnitsController {
     public ResponseEntity<Units> addSoulToUnit(@PathVariable Long unitId, @PathVariable Long soulId) throws SoulNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalUnits.isPresent() && optionalSouls.isPresent()) {
+        if (optionalUnits.isPresent() && optionalSouls.isPresent()) {
             Units units = optionalUnits.get();
-            if(!units.getSoul().contains(optionalSouls.get())){
+            if (!units.getSoul().contains(optionalSouls.get())) {
                 log.info("HTTP: add soul to unit (unit id {}, soul id {})", unitId, soulId);
                 return ResponseEntity.ok(unitsService.addSoulToUnit(unitId, soulId));
             }
@@ -92,12 +92,9 @@ public class UnitsController {
     public ResponseEntity<Units> updateUnit(@PathVariable Long id, @RequestBody Units updateUnit) throws UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
         if (optionalUnits.isPresent()) {
-            unitsService.updateUnit(updateUnit, id);
-            Optional<Units> optionalUnit = unitsService.getUnitById(id);
+
             log.info("HTTP: update unit by id {}", id);
-            if(optionalUnit.isPresent()) {
-                return ResponseEntity.ok(optionalUnit.get());
-            }
+            return ResponseEntity.ok(unitsService.updateUnit(updateUnit, id));
         }
         log.error("HTTP: unit not found for update by id {}", id);
         return ResponseEntity.notFound().build();
@@ -112,7 +109,7 @@ public class UnitsController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Units>> getUnitById(@PathVariable Long id) throws UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
-        if(optionalUnits.isPresent()) {
+        if (optionalUnits.isPresent()) {
             log.info("HTTP: get unit by id {}", id);
             return ResponseEntity.ok(optionalUnits);
         }
@@ -124,9 +121,9 @@ public class UnitsController {
     public ResponseEntity<Units> removeArmorFromUnit(@PathVariable Long unitId, @PathVariable Long armorId) throws ArmorNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
-        if(optionalUnits.isPresent() && optionalArmors.isPresent()) {
+        if (optionalUnits.isPresent() && optionalArmors.isPresent()) {
             Units units = optionalUnits.get();
-            if(units.getArmor().contains(optionalArmors.get())){
+            if (units.getArmor().contains(optionalArmors.get())) {
                 log.info("HTTP: remove armor from unit (unit id {}, armor id {})", unitId, armorId);
                 return ResponseEntity.ok(unitsService.removeArmorFromUnit(unitId, armorId));
             }
@@ -139,9 +136,9 @@ public class UnitsController {
     public ResponseEntity<Units> removeWeaponFromUnit(@PathVariable Long unitId, @PathVariable Long weaponId) throws UnitNotFoundException, WeaponNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
-        if(optionalUnits.isPresent() && optionalWeapons.isPresent()) {
+        if (optionalUnits.isPresent() && optionalWeapons.isPresent()) {
             Units units = optionalUnits.get();
-            if(units.getWeapon().contains(optionalWeapons.get())){
+            if (units.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: remove weapon from unit (unit id {}, weapon id {})", unitId, weaponId);
                 return ResponseEntity.ok(unitsService.removeWeaponFromUnit(unitId, weaponId));
             }
@@ -154,9 +151,9 @@ public class UnitsController {
     public ResponseEntity<Units> removeSoulFromUnit(@PathVariable Long unitId, @PathVariable Long soulId) throws SoulNotFoundException, UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalUnits.isPresent() && optionalSouls.isPresent()) {
+        if (optionalUnits.isPresent() && optionalSouls.isPresent()) {
             Units units = optionalUnits.get();
-            if(units.getSoul().contains(optionalSouls.get())){
+            if (units.getSoul().contains(optionalSouls.get())) {
                 log.info("HTTP: remove soul from unit (unit id {}, soul id {})", unitId, soulId);
                 return ResponseEntity.ok(unitsService.removeSoulFromUnit(unitId, soulId));
             }
@@ -168,7 +165,7 @@ public class UnitsController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUnitById(@PathVariable Long id) throws UnitNotFoundException {
         Optional<Units> optionalUnits = unitsService.getUnitById(id);
-        if(optionalUnits.isPresent()) {
+        if (optionalUnits.isPresent()) {
             unitsService.deleteUnitById(id);
             log.info("HTTP: delete unit by id {}", id);
             return ResponseEntity.ok("Unit deleted successfully!");

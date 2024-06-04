@@ -30,13 +30,8 @@ public class ArmorsController {
         Optional<Armors> optionalArmors = armorsService.getArmorById(updateById);
 
         if (optionalArmors.isPresent()) {
-
-            armorsService.updateArmor(armorUpdate, updateById);
-
-            armorUpdate.setArmorId(updateById);
-
             log.info("HTTP: update armor: {}", armorUpdate);
-            return ResponseEntity.ok(armorUpdate);
+            return ResponseEntity.ok(armorsService.updateArmor(armorUpdate, updateById));
         } else {
             log.error("HTTP: armor with id {} not found", updateById);
             return ResponseEntity.notFound().build();

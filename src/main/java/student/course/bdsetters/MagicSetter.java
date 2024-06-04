@@ -1,9 +1,11 @@
 package student.course.bdsetters;
 
+import lombok.experimental.UtilityClass;
 import student.course.model.Magics;
 
+@UtilityClass
 public class MagicSetter {
-    public static void update(Magics magic, Magics magicUpdate, Long id) {
+    public void update(Magics magic, Magics magicUpdate, Long id) {
         magic.setMagicId(id);
         magic.setMagicName(magicUpdate.getMagicName());
         magic.setMagicManaCost(magicUpdate.getMagicManaCost());
@@ -21,7 +23,5 @@ public class MagicSetter {
         magic.setMagicBuyCost(magicUpdate.getMagicBuyCost());
         magic.setMagicSoulCraft(magicUpdate.getMagicSoulCraft());
         magic.setMagicSomeInformation(magicUpdate.getMagicSomeInformation());
-        magic.setNpc(magicUpdate.getNpc());
-        magic.setLocations(magicUpdate.getLocations());
     }
 }

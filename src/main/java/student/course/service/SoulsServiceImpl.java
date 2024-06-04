@@ -43,13 +43,14 @@ public class SoulsServiceImpl implements SoulsService {
 
     @CacheEvict(cacheNames = "Souls", allEntries = true)
     @Override
-    public void updateSoul(Souls updateSoul, Long id) throws SoulNotFoundException {
+    public Souls updateSoul(Souls updateSoul, Long id) throws SoulNotFoundException {
         Souls soul = soulsRepository.findById(id)
                 .orElseThrow(() -> new SoulNotFoundException(id));
 
         SoulSetter.update(soul, updateSoul, id);
 
         soulsRepository.save(soul);
+        return soul;
     }
 
     @CacheEvict(cacheNames = "Souls", allEntries = true)

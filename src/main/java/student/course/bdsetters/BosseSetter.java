@@ -1,11 +1,12 @@
 package student.course.bdsetters;
 
 import lombok.Data;
+import lombok.experimental.UtilityClass;
 import student.course.model.Bosses;
 
-@Data
+@UtilityClass
 public class BosseSetter {
-    public static void update(Bosses bosses, Bosses bossesUpdate, Long id) {
+    public void update(Bosses bosses, Bosses bossesUpdate, Long id) {
         bosses.setBossId(id);
         bosses.setBossName(bossesUpdate.getBossName());
         bosses.setBossHitPointsSum(bossesUpdate.getBossHitPointsSum());
@@ -79,9 +80,6 @@ public class BosseSetter {
         bosses.setBossFrostEffectTP(bossesUpdate.getBossFrostEffectTP());
         bosses.setBossHitPointsTP(bossesUpdate.getBossHitPointsTP());
         bosses.setBossSoulsQuantity(bossesUpdate.getBossSoulsQuantity());
-        bosses.setArmor(bossesUpdate.getArmor());
-        bosses.setWeapon(bossesUpdate.getWeapon());
-        bosses.setSoul(bossesUpdate.getSoul());
         bosses.setBossHistory(bossesUpdate.getBossHistory());
     }
 }

@@ -33,9 +33,9 @@ public class NPCController {
     public ResponseEntity<NPC> addWeaponToNPC(@PathVariable Long npcId, @PathVariable Long weaponId) throws NPCNotFoundException, WeaponNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
-        if(optionalNPC.isPresent() && optionalWeapons.isPresent()){
+        if (optionalNPC.isPresent() && optionalWeapons.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(!npc.getWeapon().contains(optionalWeapons.get())){
+            if (!npc.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: add weapon to npc (npc id {} weapon id {})", npcId, weaponId);
                 return ResponseEntity.ok(npcService.addWeaponToNPC(npcId, weaponId));
             }
@@ -50,9 +50,9 @@ public class NPCController {
     public ResponseEntity<NPC> addArmorToNPC(@PathVariable Long npcId, @PathVariable Long armorId) throws ArmorNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
-        if(optionalNPC.isPresent() && optionalArmors.isPresent()){
+        if (optionalNPC.isPresent() && optionalArmors.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(!npc.getArmor().contains(optionalArmors.get())){
+            if (!npc.getArmor().contains(optionalArmors.get())) {
                 log.info("HTTP: add armor to npc (npc id {} armor id {})", npcId, armorId);
                 return ResponseEntity.ok(npcService.addArmorToNPC(npcId, armorId));
             }
@@ -67,9 +67,9 @@ public class NPCController {
     public ResponseEntity<NPC> addMagicToNPC(@PathVariable Long npcId, @PathVariable Long magicId) throws MagicNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
-        if(optionalNPC.isPresent() && optionalMagics.isPresent()){
+        if (optionalNPC.isPresent() && optionalMagics.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(!npc.getMagic().contains(optionalMagics.get())){
+            if (!npc.getMagic().contains(optionalMagics.get())) {
                 log.info("HTTP: add magic to npc (npc id {} magic id {})", npcId, magicId);
                 return ResponseEntity.ok(npcService.addMagicToNPC(npcId, magicId));
             }
@@ -84,9 +84,9 @@ public class NPCController {
     public ResponseEntity<NPC> addSoulToNPC(@PathVariable Long npcId, @PathVariable Long soulId) throws NPCNotFoundException, SoulNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalNPC.isPresent() && optionalSouls.isPresent()){
+        if (optionalNPC.isPresent() && optionalSouls.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(!npc.getSoul().contains(optionalSouls.get())){
+            if (!npc.getSoul().contains(optionalSouls.get())) {
                 log.info("HTTP: add soul to npc (npc id {} soul id {})", npcId, soulId);
                 return ResponseEntity.ok(npcService.addSoulToNPC(npcId, soulId));
             }
@@ -101,10 +101,9 @@ public class NPCController {
     public ResponseEntity<NPC> updateNPC(@PathVariable Long id, @RequestBody NPC updateNPC) throws NPCNotFoundException {
         Optional<NPC> npc = npcService.getNPCById(id);
         if (npc.isPresent()) {
-            npcService.updateNPC(updateNPC, id);
 
             log.info("HTTP: update npc by id {}", id);
-            return ResponseEntity.ok(npc.get());
+            return ResponseEntity.ok(npcService.updateNPC(updateNPC, id));
         }
         log.error("HTTP: npc not found for update by id: {}", id);
         return ResponseEntity.notFound().build();
@@ -119,7 +118,7 @@ public class NPCController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<NPC>> getNPC(@PathVariable Long id) throws NPCNotFoundException {
         Optional<NPC> npc = npcService.getNPCById(id);
-        if(npc.isPresent()){
+        if (npc.isPresent()) {
             log.info("HTTP: get npc by id {}", id);
             return ResponseEntity.ok(npc);
         }
@@ -131,9 +130,9 @@ public class NPCController {
     public ResponseEntity<NPC> removeWeaponFromNPC(@PathVariable Long npcId, @PathVariable Long weaponId) throws NPCNotFoundException, WeaponNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
-        if(optionalNPC.isPresent() && optionalWeapons.isPresent()){
+        if (optionalNPC.isPresent() && optionalWeapons.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(npc.getWeapon().contains(optionalWeapons.get())){
+            if (npc.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: remove weapon from npc (npc id {} weapon id {})", npcId, weaponId);
                 return ResponseEntity.ok(npcService.removeWeaponFromNPC(npcId, weaponId));
             }
@@ -146,9 +145,9 @@ public class NPCController {
     public ResponseEntity<NPC> removeArmorFromNPC(@PathVariable Long npcId, @PathVariable Long armorId) throws ArmorNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
-        if(optionalNPC.isPresent() && optionalArmors.isPresent()){
+        if (optionalNPC.isPresent() && optionalArmors.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(npc.getArmor().contains(optionalArmors.get())){
+            if (npc.getArmor().contains(optionalArmors.get())) {
                 log.info("HTTP: remove armor from npc (npc id {} armor id {})", npcId, armorId);
                 return ResponseEntity.ok(npcService.removeArmorFromNPC(npcId, armorId));
             }
@@ -161,9 +160,9 @@ public class NPCController {
     public ResponseEntity<NPC> removeMagicFromNPC(@PathVariable Long npcId, @PathVariable Long magicId) throws MagicNotFoundException, NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
-        if(optionalNPC.isPresent() && optionalMagics.isPresent()){
+        if (optionalNPC.isPresent() && optionalMagics.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(npc.getMagic().contains(optionalMagics.get())){
+            if (npc.getMagic().contains(optionalMagics.get())) {
                 log.info("HTTP: remove magic from npc (npc id {} magic id {})", npcId, magicId);
                 return ResponseEntity.ok(npcService.removeMagicFromNPC(npcId, magicId));
             }
@@ -176,9 +175,9 @@ public class NPCController {
     public ResponseEntity<NPC> removeSoulFromNPC(@PathVariable Long npcId, @PathVariable Long soulId) throws NPCNotFoundException, SoulNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalNPC.isPresent() && optionalSouls.isPresent()){
+        if (optionalNPC.isPresent() && optionalSouls.isPresent()) {
             NPC npc = optionalNPC.get();
-            if(npc.getSoul().contains(optionalSouls.get())){
+            if (npc.getSoul().contains(optionalSouls.get())) {
                 log.info("HTTP: remove soul from npc (npc id {} soul id {})", npcId, soulId);
                 return ResponseEntity.ok(npcService.removeSoulFromNPC(npcId, soulId));
             }
@@ -190,7 +189,7 @@ public class NPCController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteNPCById(@PathVariable Long id) throws NPCNotFoundException {
         Optional<NPC> optionalNPC = npcService.getNPCById(id);
-        if(optionalNPC.isPresent()){
+        if (optionalNPC.isPresent()) {
             npcService.deleteNPCById(id);
             log.info("HTTP: npc deleted (id {})", id);
             return ResponseEntity.ok("NPC deleted successfully!");

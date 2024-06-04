@@ -35,9 +35,9 @@ public class LocationsController {
     public ResponseEntity<Locations> addUnitToLocation(@PathVariable Long locationId, @PathVariable Long unitId) throws LocationNotFoundException, UnitNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
-        if(optionalLocations.isPresent() && optionalUnits.isPresent()) {
+        if (optionalLocations.isPresent() && optionalUnits.isPresent()) {
             Locations location = optionalLocations.get();
-            if(!location.getUnit().contains(optionalUnits.get())) {
+            if (!location.getUnit().contains(optionalUnits.get())) {
                 log.info("HTTP: Add unit to location (location id {} unit id {})", locationId, unitId);
                 return ResponseEntity.ok(locationsService.addUnitToLocation(locationId, unitId));
             }
@@ -52,9 +52,9 @@ public class LocationsController {
     public ResponseEntity<Locations> addMagicToLocation(@PathVariable Long locationId, @PathVariable Long magicId) throws LocationNotFoundException, MagicNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
-        if(optionalLocations.isPresent() && optionalMagics.isPresent()) {
+        if (optionalLocations.isPresent() && optionalMagics.isPresent()) {
             Locations location = optionalLocations.get();
-            if(!location.getMagic().contains(optionalMagics.get())) {
+            if (!location.getMagic().contains(optionalMagics.get())) {
                 log.info("HTTP: Add magic to location (location id {} magic id {})", locationId, magicId);
                 return ResponseEntity.ok(locationsService.addMagicToLocation(locationId, magicId));
             }
@@ -69,9 +69,9 @@ public class LocationsController {
     public ResponseEntity<Locations> addWeaponToLocation(@PathVariable Long locationId, @PathVariable Long weaponId) throws LocationNotFoundException, WeaponNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
-        if(optionalLocations.isPresent() && optionalWeapons.isPresent()) {
+        if (optionalLocations.isPresent() && optionalWeapons.isPresent()) {
             Locations location = optionalLocations.get();
-            if(!location.getWeapon().contains(optionalWeapons.get())) {
+            if (!location.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: add weapon to location (location id {} weapon id {})", locationId, weaponId);
                 return ResponseEntity.ok(locationsService.addWeaponToLocation(locationId, weaponId));
             }
@@ -88,7 +88,7 @@ public class LocationsController {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bosseId);
         if (optionalLocation.isPresent() && optionalBosses.isPresent()) {
             Locations location = optionalLocation.get();
-            if(!location.getBoss().contains(optionalBosses.get())) {
+            if (!location.getBoss().contains(optionalBosses.get())) {
                 log.info("HTTP: add boss to location (location id {} boss id {})", locationId, bosseId);
                 return ResponseEntity.ok(locationsService.addBossToLocation(locationId, bosseId));
             }
@@ -105,7 +105,7 @@ public class LocationsController {
         Optional<Locations> optionalLocation = locationsService.getLocationById(locationId);
         if (optionalArmor.isPresent() && optionalLocation.isPresent()) {
             Locations location = optionalLocation.get();
-            if(!location.getArmor().contains(optionalArmor.get())) {
+            if (!location.getArmor().contains(optionalArmor.get())) {
                 log.info("HTTP: add armor to location (location id {} armor id {})", locationId, armorId);
                 return ResponseEntity.ok(locationsService.addArmorToLocation(locationId, armorId));
             }
@@ -116,13 +116,13 @@ public class LocationsController {
         return ResponseEntity.notFound().build();
     }
 
-   @PostMapping("/{locationId}/npc/{npcId}")
-   public ResponseEntity<Locations> addNPCToLocation(@PathVariable Long locationId, @PathVariable Long npcId) throws LocationNotFoundException, NPCNotFoundException {
+    @PostMapping("/{locationId}/npc/{npcId}")
+    public ResponseEntity<Locations> addNPCToLocation(@PathVariable Long locationId, @PathVariable Long npcId) throws LocationNotFoundException, NPCNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(locationId);
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         if (optionalLocation.isPresent() && optionalNPC.isPresent()) {
             Locations location = optionalLocation.get();
-            if(!location.getNpc().contains(optionalNPC.get())) {
+            if (!location.getNpc().contains(optionalNPC.get())) {
                 log.info("HTTP: add npc to location (location id {} npc id {})", locationId, npcId);
                 return ResponseEntity.ok(locationsService.addNPCToLocation(locationId, npcId));
             }
@@ -131,40 +131,33 @@ public class LocationsController {
         }
         log.error("HTTP: error with add npc to location");
         return ResponseEntity.notFound().build();
-   }
+    }
 
-   @PutMapping("/{id}")
-   public ResponseEntity<Locations> updateLocation(@PathVariable Long id, @RequestBody Locations updateLocation) throws LocationNotFoundException {
+    @PutMapping("/{id}")
+    public ResponseEntity<Locations> updateLocation(@PathVariable Long id, @RequestBody Locations updateLocation) throws LocationNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(id);
         if (optionalLocation.isPresent()) {
-
-            locationsService.updateLocation(updateLocation, id);
-
-            updateLocation.setLocationId(id);
-
             log.info("HTTP: update location: {}", updateLocation);
-            return ResponseEntity.ok(updateLocation);
-        }
-        else{
+            return ResponseEntity.ok(locationsService.updateLocation(updateLocation, id));
+        } else {
             log.error("HTTP: error with update location by id: {}", id);
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<Locations>> getAllLocations(){
+    public ResponseEntity<List<Locations>> getAllLocations() {
         log.info("HTTP: get all locations");
         return ResponseEntity.ok(locationsService.getAllLocations());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Locations>> findLocationById(@PathVariable Long id) throws LocationNotFoundException{
+    public ResponseEntity<Optional<Locations>> findLocationById(@PathVariable Long id) throws LocationNotFoundException {
         Optional<Locations> optionalLocation = locationsService.getLocationById(id);
         if (optionalLocation.isPresent()) {
             log.info("HTTP: find location by id {}", id);
             return ResponseEntity.ok(optionalLocation);
-        }
-        else{
+        } else {
             log.error("HTTP: error with find location by id: {}", id);
             return ResponseEntity.notFound().build();
         }
@@ -177,19 +170,19 @@ public class LocationsController {
             log.info("HTTP: delete location by id {}", id);
             locationsService.deleteLocationById(id);
             return ResponseEntity.ok("Location deleted successfully!");
-        }
-        else {
+        } else {
             log.error("HTTP: error with delete location by id: {}", id);
             return ResponseEntity.notFound().build();
         }
     }
+
     @DeleteMapping("/{locationId}/units/{unitId}")
     public ResponseEntity<Locations> removeUnitFromLocation(@PathVariable Long locationId, @PathVariable Long unitId) throws LocationNotFoundException, UnitNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Units> optionalUnits = unitsService.getUnitById(unitId);
-        if(optionalLocations.isPresent() && optionalUnits.isPresent()) {
+        if (optionalLocations.isPresent() && optionalUnits.isPresent()) {
             Locations locations = optionalLocations.get();
-            if(locations.getUnit().contains(optionalUnits.get())) {
+            if (locations.getUnit().contains(optionalUnits.get())) {
                 log.info("HTTP: remove unit from location (location id {} unit id {})", locationId, unitId);
                 return ResponseEntity.ok(locationsService.removeUnitFromLocation(locationId, unitId));
             }
@@ -202,9 +195,9 @@ public class LocationsController {
     public ResponseEntity<Locations> removeMagicFromLocation(@PathVariable Long locationId, @PathVariable Long magicId) throws LocationNotFoundException, MagicNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Magics> optionalMagics = magicsService.getMagicById(magicId);
-        if(optionalLocations.isPresent() && optionalMagics.isPresent()) {
+        if (optionalLocations.isPresent() && optionalMagics.isPresent()) {
             Locations locations = optionalLocations.get();
-            if(locations.getMagic().contains(optionalMagics.get())) {
+            if (locations.getMagic().contains(optionalMagics.get())) {
                 log.info("HTTP: remove magic from location (location id {} magic id {})", locationId, magicId);
                 return ResponseEntity.ok(locationsService.removeMagicFromLocation(locationId, magicId));
             }
@@ -217,9 +210,9 @@ public class LocationsController {
     public ResponseEntity<Locations> removeWeaponFromLocation(@PathVariable Long locationId, @PathVariable Long weaponId) throws LocationNotFoundException, WeaponNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
-        if(optionalLocations.isPresent() && optionalWeapons.isPresent()) {
+        if (optionalLocations.isPresent() && optionalWeapons.isPresent()) {
             Locations locations = optionalLocations.get();
-            if(locations.getWeapon().contains(optionalWeapons.get())) {
+            if (locations.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: remove weapon from location (location id {} weapon id {})", locationId, weaponId);
                 return ResponseEntity.ok(locationsService.removeWeaponFromLocation(locationId, weaponId));
             }
@@ -232,9 +225,9 @@ public class LocationsController {
     public ResponseEntity<Locations> removeBossFromLocation(@PathVariable Long locationId, @PathVariable Long bosseId) throws BosseNotFoundException, LocationNotFoundException {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bosseId);
-        if(optionalLocations.isPresent() && optionalBosses.isPresent()) {
+        if (optionalLocations.isPresent() && optionalBosses.isPresent()) {
             Locations locations = optionalLocations.get();
-            if(locations.getBoss().contains(optionalBosses.get())){
+            if (locations.getBoss().contains(optionalBosses.get())) {
                 log.info("HTTP: remove boss from location (location id {} bosse id {})", locationId, bosseId);
                 return ResponseEntity.ok(locationsService.removeBossFromLocation(locationId, bosseId));
             }
@@ -249,7 +242,7 @@ public class LocationsController {
         Optional<Locations> optionalLocations = locationsService.getLocationById(locationId);
         if (optionalArmors.isPresent() && optionalLocations.isPresent()) {
             Locations location = optionalLocations.get();
-            if(location.getArmor().equals(optionalArmors.get())){
+            if (location.getArmor().equals(optionalArmors.get())) {
                 log.info("HTTP: remove armor from location (location id {} armor id {})", locationId, armorId);
                 return ResponseEntity.ok(locationsService.removeArmorFromLocation(locationId, armorId));
             }
@@ -264,7 +257,7 @@ public class LocationsController {
         Optional<NPC> optionalNPC = npcService.getNPCById(npcId);
         if (optionalLocation.isPresent() && optionalNPC.isPresent()) {
             Locations location = optionalLocation.get();
-            if(location.getNpc().contains(optionalNPC.get())) {
+            if (location.getNpc().contains(optionalNPC.get())) {
                 log.info("HTTP: remove npc from location (location id {} npc id {})", locationId, npcId);
                 return ResponseEntity.ok(locationsService.removeNPCFromLocation(locationId, npcId));
             }

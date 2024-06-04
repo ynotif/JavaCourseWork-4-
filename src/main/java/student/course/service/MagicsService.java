@@ -13,7 +13,7 @@ public interface MagicsService {
 
     Optional<Magics> getMagicById(Long id) throws MagicNotFoundException;
 
-    void updateMagic(Magics magics, Long id) throws MagicNotFoundException;
+    Magics updateMagic(Magics magics, Long id) throws MagicNotFoundException;
 
     void deleteMagicById(Long id) throws MagicNotFoundException;
 }

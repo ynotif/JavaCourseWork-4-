@@ -2,7 +2,6 @@ package student.course.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
 
 @Data
 @AllArgsConstructor

@@ -42,23 +42,23 @@ public class UnitsServiceImpl implements UnitsService {
     @Override
     public Optional<Units> getUnitById(Long id) throws UnitNotFoundException {
         Optional<Units> unitsOptional = unitsRepository.findById(id);
-        if(unitsOptional.isPresent()) {
+        if (unitsOptional.isPresent()) {
             return unitsOptional;
-        }
-        else{
+        } else {
             throw new UnitNotFoundException(id);
         }
     }
 
     @CacheEvict(cacheNames = "Units", allEntries = true)
     @Override
-    public void updateUnit(Units updateUnit, Long id) throws UnitNotFoundException {
+    public Units updateUnit(Units updateUnit, Long id) throws UnitNotFoundException {
         Units unit = unitsRepository.findById(id)
                 .orElseThrow(() -> new UnitNotFoundException(id));
 
         UnitSetter.update(unit, updateUnit, id);
 
         unitsRepository.save(unit);
+        return unit;
     }
 
     @CacheEvict(cacheNames = "Units", allEntries = true)
@@ -138,7 +138,7 @@ public class UnitsServiceImpl implements UnitsService {
     @Override
     public Units removeSoulFromUnit(Long unitId, Long soulId) {
         Units units = unitsRepository.findById(unitId)
-                .orElseThrow(()-> new RuntimeException("Unit not found"));
+                .orElseThrow(() -> new RuntimeException("Unit not found"));
 
         Souls souls = soulsRepository.findById(soulId)
                 .orElseThrow(() -> new RuntimeException("Soul not found"));

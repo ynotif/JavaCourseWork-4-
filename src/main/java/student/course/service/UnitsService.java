@@ -14,7 +14,7 @@ public interface UnitsService {
 
     Optional<Units> getUnitById(Long id) throws UnitNotFoundException;
 
-    void updateUnit(Units units, Long id) throws UnitNotFoundException;
+    Units updateUnit(Units units, Long id) throws UnitNotFoundException;
 
     void deleteUnitById(Long id) throws UnitNotFoundException;
 

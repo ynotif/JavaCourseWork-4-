@@ -36,8 +36,8 @@ public class Locations {
     )
     private Set<Units> unit; //Сами юниты
 
-    @Column(name = "locationNewMagic")
-    private int locationNewMagic; // Количество новой магии
+    @Column(name = "locationNewMagicQuantity")
+    private int locationNewMagicQuantity; // Количество новой магии
 
     @ManyToMany
     @JoinTable(
@@ -83,7 +83,7 @@ public class Locations {
     @Column(name = "locationBosseQuantity")
     private int locationBosseQuantity; // Количество всего боссов на локе
 
-    @Column(name = "locationNPCQuantity")
+    @Column(name = "locationNpcQuantity")
     private int locationNPCQuantity; // Количество уникальный НПС
 
     @ManyToMany

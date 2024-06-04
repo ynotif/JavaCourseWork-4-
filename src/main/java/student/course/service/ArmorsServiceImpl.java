@@ -2,15 +2,12 @@ package student.course.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import student.course.exceptions.ArmorNotFoundException;
 import student.course.model.Armors;
 import student.course.bdsetters.ArmorSetter;
-import student.course.model.Locations;
 import student.course.repository.ArmorsRepository;
-import student.course.repository.LocationsRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,19 +35,19 @@ public class ArmorsServiceImpl implements ArmorsService {
         Optional<Armors> armor = armorsRepository.findById(id);
         if (armor.isPresent()) {
             return armor;
-        }
-        else {
+        } else {
             throw new ArmorNotFoundException(id);
         }
     }
 
     @CacheEvict(cacheNames = "armors", allEntries = true)
     @Override
-    public void updateArmor(Armors updateArmor, Long id) throws ArmorNotFoundException {
+    public Armors updateArmor(Armors updateArmor, Long id) throws ArmorNotFoundException {
         Armors armor = armorsRepository.findById(id)
                 .orElseThrow(() -> new ArmorNotFoundException(id));
         ArmorSetter.update(armor, updateArmor, id);
         armorsRepository.save(armor);
+        return armor;
     }
 
     @CacheEvict(cacheNames = "armors", allEntries = true)

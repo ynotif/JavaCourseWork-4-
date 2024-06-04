@@ -17,6 +17,4 @@ public class CacheScheduler {
         evictCache.evictCache();
         log.info("cache cleaned");
     }
-
-
 }

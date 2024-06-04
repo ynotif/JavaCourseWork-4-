@@ -37,23 +37,23 @@ public class NPCServiceImpl implements NPCService {
     @Override
     public Optional<NPC> getNPCById(Long id) throws NPCNotFoundException {
         Optional<NPC> npcOptional = npcRepository.findById(id);
-        if(npcOptional.isPresent()){
+        if (npcOptional.isPresent()) {
             return npcOptional;
-        }
-        else{
+        } else {
             throw new NPCNotFoundException(id);
         }
     }
 
     @CacheEvict(cacheNames = "NPC", allEntries = true)
     @Override
-    public void updateNPC(NPC updateNPC, Long id) throws NPCNotFoundException {
+    public NPC updateNPC(NPC updateNPC, Long id) throws NPCNotFoundException {
         NPC npc = npcRepository.findById(id)
                 .orElseThrow(() -> new NPCNotFoundException(id));
 
         NPCSetter.update(npc, updateNPC, id);
 
         npcRepository.save(npc);
+        return npc;
     }
 
     @CacheEvict(cacheNames = "NPC", allEntries = true)

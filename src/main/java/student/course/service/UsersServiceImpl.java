@@ -36,8 +36,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
                             .setEnabled(true)
             );
             usersRolesRepository.save(new UserRoles(null, UserAuthority.USER, users));
-        }
-        else{
+        } else {
             throw new UserNameAlreadyExistsException();
         }
     }

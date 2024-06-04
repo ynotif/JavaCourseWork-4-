@@ -14,7 +14,7 @@ public interface ArmorsService {
 
     Optional<Armors> getArmorById(Long id) throws ArmorNotFoundException;
 
-    void updateArmor(Armors armors, Long id) throws ArmorNotFoundException;
+    Armors updateArmor(Armors armors, Long id) throws ArmorNotFoundException;
 
     void deleteArmorById(Long id) throws ArmorNotFoundException;
 }

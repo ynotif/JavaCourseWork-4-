@@ -1,9 +1,11 @@
 package student.course.bdsetters;
 
+import lombok.experimental.UtilityClass;
 import student.course.model.Weapons;
 
+@UtilityClass
 public class WeaponSetter {
-    public static void update(Weapons weapon, Weapons weaponUpdate, Long id) {
+    public void update(Weapons weapon, Weapons weaponUpdate, Long id) {
         weapon.setWeaponId(id);
         weapon.setWeaponName(weaponUpdate.getWeaponName());
         weapon.setWeaponType(weaponUpdate.getWeaponType());

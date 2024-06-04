@@ -43,7 +43,7 @@ public class BossesController {
         Optional<Armors> optionalArmors = armorsService.getArmorById(armorId);
         if (optionalBosses.isPresent() && optionalArmors.isPresent()) {
             Bosses bosses = optionalBosses.get();
-            if(!bosses.getArmor().contains(optionalArmors.get())) {
+            if (!bosses.getArmor().contains(optionalArmors.get())) {
                 log.info("HTTP: Add armor to boss (boss id {} armor id {})", bossId, armorId);
                 return ResponseEntity.ok(bossesService.addArmorToBoss(bossId, armorId));
             }
@@ -60,7 +60,7 @@ public class BossesController {
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
         if (optionalBosses.isPresent() && optionalWeapons.isPresent()) {
             Bosses bosses = optionalBosses.get();
-            if(!bosses.getWeapon().contains(optionalWeapons.get())) {
+            if (!bosses.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: Add weapon to boss (boss id {} weapon id {})", bossId, weaponId);
                 return ResponseEntity.ok(bossesService.addWeaponToBoss(bossId, weaponId));
             }
@@ -75,9 +75,9 @@ public class BossesController {
     public ResponseEntity<Bosses> addSoulToBoss(@PathVariable Long bossId, @PathVariable Long soulId) throws BosseNotFoundException, SoulNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalBosses.isPresent() && optionalSouls.isPresent()) {
+        if (optionalBosses.isPresent() && optionalSouls.isPresent()) {
             Bosses bosses = optionalBosses.get();
-            if(!bosses.getSoul().contains(optionalSouls.get())) {
+            if (!bosses.getSoul().contains(optionalSouls.get())) {
                 log.info("HTTP: Add soul to boss (boss id {} soul id {})", bossId, soulId);
                 return ResponseEntity.ok(bossesService.addSoulToBoss(bossId, soulId));
             }
@@ -93,14 +93,9 @@ public class BossesController {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(id);
 
         if (optionalBosses.isPresent()) {
-            bossesService.updateBosse(updateBosse, id);
-
-            updateBosse.setBossId(id);
-
             log.info("HTTP: Boss was updated: {}", updateBosse);
-            return ResponseEntity.ok(updateBosse);
-        }
-        else {
+            return ResponseEntity.ok(bossesService.updateBosse(updateBosse, id));
+        } else {
             log.error("HTTP: Boss not found for update by id: {}", id);
             return ResponseEntity.notFound().build();
         }
@@ -118,8 +113,7 @@ public class BossesController {
         if (optionalBosses.isPresent()) {
             log.info("HTTP: get boss by id: {}", id);
             return ResponseEntity.ok(bossesService.getBosseById(id));
-        }
-        else {
+        } else {
             log.error("HTTP: boss not found with id: {}", id);
             return ResponseEntity.notFound().build();
         }
@@ -144,9 +138,9 @@ public class BossesController {
     public ResponseEntity<Bosses> removeWeaponFromBoss(@PathVariable Long bossId, @PathVariable Long weaponId) throws BosseNotFoundException, WeaponNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Weapons> optionalWeapons = weaponsService.getWeaponById(weaponId);
-        if(optionalBosses.isPresent() && optionalWeapons.isPresent()){
+        if (optionalBosses.isPresent() && optionalWeapons.isPresent()) {
             Bosses bosses = optionalBosses.get();
-            if(bosses.getWeapon().contains(optionalWeapons.get())){
+            if (bosses.getWeapon().contains(optionalWeapons.get())) {
                 log.info("HTTP: remove weapon from boss (boss id {} weapon id {})", bossId, weaponId);
                 return ResponseEntity.ok(bossesService.removeWeaponFromBoss(bossId, weaponId));
             }
@@ -159,9 +153,9 @@ public class BossesController {
     public ResponseEntity<Bosses> removeSoulFromBoss(@PathVariable Long bossId, @PathVariable Long soulId) throws BosseNotFoundException, SoulNotFoundException {
         Optional<Bosses> optionalBosses = bossesService.getBosseById(bossId);
         Optional<Souls> optionalSouls = soulsService.getSoulById(soulId);
-        if(optionalBosses.isPresent() && optionalSouls.isPresent()){
+        if (optionalBosses.isPresent() && optionalSouls.isPresent()) {
             Bosses bosses = optionalBosses.get();
-            if(bosses.getSoul().contains(optionalSouls.get())){
+            if (bosses.getSoul().contains(optionalSouls.get())) {
                 return ResponseEntity.ok(bossesService.removeSoulFromBoss(bossId, soulId));
             }
         }
@@ -175,8 +169,7 @@ public class BossesController {
             bossesService.deleteBosseById(id);
             log.info("HTTP: delete boss: {}", id);
             return ResponseEntity.ok("Boss deleted successfully!");
-        }
-        else {
+        } else {
             log.error("HTTP: boss not found for delete with id: {}", id);
             return ResponseEntity.notFound().build();
         }
